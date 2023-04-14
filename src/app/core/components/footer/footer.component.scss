@@ -1,0 +1,32 @@
+.footer {
+  height: 92px;
+  width: 100%;
+  flex: 0 0 auto;
+  border-top: 1px solid #D0D9DF;
+  display: flex;
+  justify-content: center;
+  background-color: #F5F5F5;
+}
+
+.footer__container {
+  width: 1040px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  .footer_copyright {
+    color: #11397E;
+  }
+
+  .footer__payment {
+    display: flex;
+    gap: 24px;
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+  }
+}
