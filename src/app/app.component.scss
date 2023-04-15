@@ -1,0 +1,28 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+
+  // background и line перенести в мейн пейдж ---->
+  .background {
+    width: 100%;
+    flex: 1 0 auto;
+    background-image: url("../assets/background-main.png");
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .line {
+    flex: 0 0 auto;
+    min-height: 77px;
+  }
+  // <-----
+}
