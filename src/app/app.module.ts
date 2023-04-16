@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { NgModule } from "@angular/core";
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
@@ -9,23 +8,20 @@ import {
   TUI_SANITIZER,
 } from "@taiga-ui/core";
 import { BrowserModule } from "@angular/platform-browser";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatSelectModule } from "@angular/material/select";
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     CoreModule,
-    FormsModule,
-    ReactiveFormsModule,
+    SharedModule,
     BrowserAnimationsModule,
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
-    MatSelectModule,
   ],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   bootstrap: [AppComponent],

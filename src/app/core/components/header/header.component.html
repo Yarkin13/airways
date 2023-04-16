@@ -1,13 +1,23 @@
 <header class="header">
   <div class="header__container">
-    <img src="assets/logo.svg" alt="">
+    <a href="/home"><img src="assets/logo.svg" alt="airways logo" /></a>
     <div class="menu">
-      <!-- <app-date-selector></app-date-selector> -->
+      <p class="menu__text">Book flights</p>
+      <app-date-selector></app-date-selector>
+      <app-currency-selector></app-currency-selector>
       <div class="user">
-        <button class="user__sign-in">
-          <img src="assets/sign-in.svg" alt="sign in icon">
-          Sign in</button>
-        <img src="assets/cart.svg" alt="shopping cart" class="user__cart">
+        <button mat-flat-button class="user__sign-in">
+          <mat-icon>perm_identity</mat-icon>
+          Sign in
+        </button>
+        <div
+          matBadge="3"
+          matBadgeSize="small"
+          [matBadgeHidden]="badgeHidden"
+          (click)="toggleBadgeVisibility()"
+        >
+          <img src="assets/cart.svg" alt="shopping cart" class="user__cart" />
+        </div>
       </div>
     </div>
   </div>

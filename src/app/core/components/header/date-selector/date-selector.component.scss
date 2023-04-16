@@ -1,0 +1,44 @@
+@use "src/styles.scss" as *;
+
+.form-field-date {
+  width: 162px;
+  height: 40px;
+  background-color: $neutral90;
+  border: 0.5px solid $neutral60;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+  .select-date {
+    @extend %label-large;
+    padding-top: 9px;
+  }
+
+  .mat-mdc-select-value-text,
+  .mat-mdc-select-arrow {
+    color: $neutral100;
+    @extend %label-large;
+  }
+
+  .mat-mdc-form-field-subscript-wrapper,
+  .mdc-line-ripple {
+    display: none;
+  }
+
+  .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    color: $neutral100;
+    background: $neutral90;
+  }
+
+  .mat-mdc-form-field-flex,
+  .mat-mdc-form-field-infix {
+    height: 40px;
+  }
+
+  .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
+      .mdc-text-field--textarea
+    )
+    .mat-mdc-form-field-infix {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
