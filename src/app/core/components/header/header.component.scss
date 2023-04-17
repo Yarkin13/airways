@@ -1,12 +1,15 @@
+@use "src/styles.scss" as *;
+
 .header {
   height: 88px;
   width: 100%;
   position: fixed;
   top: 0;
-  background: rgba(116, 118, 122, 0.2);
+  background: $neutral70;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .header__container {
@@ -21,33 +24,35 @@
   display: flex;
   align-items: center;
   gap: 40px;
-}
 
-.user {
-  display: flex;
-  gap: 32px;
-
-  .user__sign-in {
-    background: rgba(241, 243, 246, 0.15);
-    border: 0.5px solid #cecece;
-    border-radius: 4px;
-    width: 114px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 16px;
-    gap: 13px;
-    color: #ffffff;
-    font-family: "Roboto";
-    font-style: normal;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 0.1px;
-    cursor: pointer;
+  .menu__text {
+    color: $neutral100;
+    @extend %body-large;
+    margin: 0;
+    user-select: none;
   }
 
-  .user__cart {
-    cursor: pointer;
+  .user {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+
+    .user__sign-in {
+      background: $neutral90;
+      border: 0.5px solid $neutral60;
+      width: 114px;
+      height: 40px;
+      gap: 3px;
+      color: $neutral100;
+      @extend %button;
+    }
+
+    .user__cart {
+      cursor: pointer;
+    }
+
+    .mat-badge-small.mat-badge-overlap.mat-badge-after .mat-badge-content {
+      background-color: $error;
+    }
   }
 }
