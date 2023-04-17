@@ -1,5 +1,9 @@
 <mat-form-field class="form-field-currency">
-  <mat-select class="select-currency" [(value)]="selected">
+  <mat-select
+    class="select-currency"
+    [value]="currencySelected$ | async"
+    (selectionChange)="handleCurrencyChange($event)"
+  >
     <mat-option value="option1">EUR</mat-option>
     <mat-option value="option2">USA</mat-option>
     <mat-option value="option3">RUB</mat-option>

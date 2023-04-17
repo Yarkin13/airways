@@ -8,9 +8,13 @@ import {
   TUI_SANITIZER,
 } from "@taiga-ui/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { StoreModule } from "@ngrx/store";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreRouterConnectingModule } from "@ngrx/router-store";
 import { AppComponent } from "./app.component";
 import { CoreModule } from "./core/core.module";
 import { SharedModule } from "./shared/shared.module";
+import { headerDataReducer } from "./redux/reducers/header-data.reducer";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +26,9 @@ import { SharedModule } from "./shared/shared.module";
     TuiRootModule,
     TuiDialogModule,
     TuiAlertModule,
+    StoreModule.forRoot({ headerData: headerDataReducer }),
+    EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [{ provide: TUI_SANITIZER, useClass: NgDompurifySanitizer }],
   bootstrap: [AppComponent],
