@@ -1,12 +1,12 @@
-import { Component, ViewEncapsulation } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { HeaderDataActions } from "src/app/redux/actions/header-data.actions";
-import { selectHeaderDate } from "src/app/redux/selectors/header-data.selectors";
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { HeaderDataActions } from 'src/app/redux/actions/header-data.actions';
+import { selectHeaderDate } from 'src/app/redux/selectors/header-data.selectors';
 
 @Component({
-  selector: "app-date-selector",
-  templateUrl: "./date-selector.component.html",
-  styleUrls: ["./date-selector.component.scss"],
+  selector: 'app-date-selector',
+  templateUrl: './date-selector.component.html',
+  styleUrls: ['./date-selector.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class DateSelectorComponent {

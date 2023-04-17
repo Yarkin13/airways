@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DateSelectorComponent } from "./date-selector.component";
+import { DateSelectorComponent } from './date-selector.component';
 
-describe("DateSelectorComponent", () => {
+describe('DateSelectorComponent', () => {
   let component: DateSelectorComponent;
   let fixture: ComponentFixture<DateSelectorComponent>;
 
@@ -17,7 +17,7 @@ describe("DateSelectorComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

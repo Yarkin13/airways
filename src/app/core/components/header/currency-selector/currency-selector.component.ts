@@ -1,12 +1,12 @@
-import { Component, ViewEncapsulation } from "@angular/core";
-import { Store } from "@ngrx/store";
-import { HeaderDataActions } from "src/app/redux/actions/header-data.actions";
-import { selectHeaderCurrency } from "src/app/redux/selectors/header-data.selectors";
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { HeaderDataActions } from 'src/app/redux/actions/header-data.actions';
+import { selectHeaderCurrency } from 'src/app/redux/selectors/header-data.selectors';
 
 @Component({
-  selector: "app-currency-selector",
-  templateUrl: "./currency-selector.component.html",
-  styleUrls: ["./currency-selector.component.scss"],
+  selector: 'app-currency-selector',
+  templateUrl: './currency-selector.component.html',
+  styleUrls: ['./currency-selector.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class CurrencySelectorComponent {

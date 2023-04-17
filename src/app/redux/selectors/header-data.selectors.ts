@@ -1,7 +1,7 @@
-import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { HeaderData } from "../state.models";
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { HeaderData } from '../state.models';
 
-const selectHeaderData = createFeatureSelector<HeaderData>("headerData");
+const selectHeaderData = createFeatureSelector<HeaderData>('headerData');
 
 export const selectHeaderDate = createSelector(
   selectHeaderData,
