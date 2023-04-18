@@ -1,6 +1,6 @@
 // Usage example:
 // 1. Make use/import to your scss file: @use 'src/styles.scss' as *;
-// 2. Use as: 
+// 2. Use as:
 // .form__error {
 //   @extend %label-small;
 //   color: $error;
@@ -61,6 +61,12 @@ $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
   font-weight: 400;
 }
 
+%roboto-medium {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+}
+
 // title
 %title-large {
   @extend %roboto-normal;
@@ -117,7 +123,7 @@ $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 %label-medium {
-  @extend %roboto-normal;
+  @extend %roboto-medium;
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.1px;
@@ -167,7 +173,7 @@ $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 
 // button
 %button {
-  @extend %roboto-normal;
+  @extend %roboto-medium;
   font-size: 16px;
   line-height: 20px;
   letter-spacing: 0.1px;

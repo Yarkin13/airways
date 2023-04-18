@@ -5,6 +5,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { DateSelectorComponent } from './components/header/date-selector/date-selector.component';
 import { SharedModule } from '../shared/shared.module';
 import { CurrencySelectorComponent } from './components/header/currency-selector/currency-selector.component';
+import { MaterialModule } from '../material/material.module';
+import { AuthComponent } from './components/auth/auth.component';
+import { SingUpFormComponent } from './components/auth/sing-up-form/sing-up-form.component';
+import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.component';
 
 @NgModule({
   declarations: [
@@ -12,8 +16,11 @@ import { CurrencySelectorComponent } from './components/header/currency-selector
     FooterComponent,
     DateSelectorComponent,
     CurrencySelectorComponent,
+    AuthComponent,
+    SingUpFormComponent,
+    LogInFormComponent,
   ],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, MaterialModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}

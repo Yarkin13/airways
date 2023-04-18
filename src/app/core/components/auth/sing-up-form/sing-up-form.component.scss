@@ -1,0 +1,126 @@
+@use "src/styles.scss" as *;
+
+.signup__layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup__form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 16px;
+}
+
+.signup__input {
+  width: 100%;
+
+  ::ng-deep .mdc-line-ripple::before,
+  ::ng-deep .mdc-line-ripple::after {
+    content: none !important; // disable default border to inputs
+  }
+
+  ::ng-deep .mdc-text-field {
+    border-radius: 4px !important;
+    border: 0.5px solid $neutral60;
+    background: $secondary90;
+  }
+}
+
+.signup__input--error {
+  ::ng-deep .mdc-text-field {
+    border: 0.5px solid $error;
+  }
+}
+
+.hideTipWrapper {
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}
+
+.signup__submit-btn {
+  @extend %button;
+
+  width: 100%;
+  height: 44px;
+  background: $primary;
+  border-radius: 4px;
+  color: $neutral100;
+  cursor: pointer;
+}
+
+.signup__tabs {
+  width: 100%;
+
+  ::ng-deep .mat-mdc-tab-labels {
+    border: 1px solid $neutral30;
+    margin-right: 0;
+  }
+
+  ::ng-deep .mdc-tab--active {
+    &:first-child,
+    &:last-child {
+      border: none !important;
+    }
+  }
+
+  ::ng-deep .mat-mdc-tab {
+    height: 40px;
+    width: 50%;
+
+    &:first-child {
+      border-right: 1px solid $neutral30 !important;
+      border-radius: 4px 0 0 4px;
+    }
+  }
+
+  ::ng-deep .mat-icon {
+    margin-right: 8px;
+  }
+
+  ::ng-deep .mdc-tab-indicator__content--underline {
+    border: none;
+  }
+}
+
+.signup__flex-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 16px;
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  @media (min-width: $mobile-xl) {
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 8px;
+  }
+}
+
+.signup__checkbox-field {
+  display: flex;
+  width: 100%;
+
+  ::ng-deep .mat-mdc-checkbox label {
+    @extend %label-medium;
+  }
+}
+
+.signup__checkbox-wrapper {
+  width: 100%;
+}
+
+.signup__checkbox-link {
+  color: $primary;
+  text-decoration: none;
+}
+
+.signup__checkbox-error {
+  @extend %label-small;
+  margin-left: 10px;
+}
