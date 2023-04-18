@@ -11,6 +11,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { SingUpFormComponent } from './components/auth/sing-up-form/sing-up-form.component';
 import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.component';
 import { StepperComponent } from './components/header/stepper/stepper.component';
+import { PageSwapComponent } from './components/footer/TO-BE-DELETED/page-swap.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { StepperComponent } from './components/header/stepper/stepper.component'
     SingUpFormComponent,
     LogInFormComponent,
     StepperComponent,
+    PageSwapComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule, MaterialModule],
   exports: [HeaderComponent, FooterComponent],

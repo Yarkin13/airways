@@ -32,6 +32,5 @@ export class StepperComponent implements OnChanges {
       this.isPassengers = false;
       this.isReview = true;
     }
-    console.log(this.currentPage);
   }
 }
