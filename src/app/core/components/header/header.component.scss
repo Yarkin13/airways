@@ -12,6 +12,10 @@
   z-index: 2;
 }
 
+.backgroundWhite {
+  background: $neutral100;
+}
+
 .header__container {
   width: 1128px;
   height: 100%;
@@ -47,12 +51,24 @@
       @extend %button;
     }
 
+    .colorDark {
+      color: $neutral10;
+    }
+
     .user__cart {
       cursor: pointer;
+    }
+
+    .backgroundDark {
+      filter: invert(70%);
     }
 
     .mat-badge-small.mat-badge-overlap.mat-badge-after .mat-badge-content {
       background-color: $error;
     }
   }
+}
+
+.smallGap {
+  gap: 16px;
 }

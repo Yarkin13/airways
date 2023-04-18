@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HeaderDataActions } from 'src/app/redux/actions/header-data.actions';
 import { selectHeaderCurrency } from 'src/app/redux/selectors/header-data.selectors';
@@ -10,6 +10,8 @@ import { selectHeaderCurrency } from 'src/app/redux/selectors/header-data.select
   encapsulation: ViewEncapsulation.None,
 })
 export class CurrencySelectorComponent {
+  @Input() isMainPage!: boolean;
+
   currencySelected$;
 
   constructor(private store: Store) {

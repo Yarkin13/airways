@@ -1,12 +1,19 @@
-<header class="header">
+<header class="header" [ngClass]="isMainPage ? '' : 'backgroundWhite'">
   <div class="header__container">
-    <a href="/home"><img src="assets/logo.svg" alt="airways logo" /></a>
-    <div class="menu">
-      <p class="menu__text">Book flights</p>
-      <app-date-selector></app-date-selector>
-      <app-currency-selector></app-currency-selector>
+    <a routerLink="/booking/main"
+      ><img src="assets/logo.svg" alt="airways logo"
+    /></a>
+    <div class="menu" [ngClass]="isMainPage ? '' : 'smallGap'">
+      <p class="menu__text" *ngIf="isMainPage">Book flights</p>
+      <app-date-selector [isMainPage]="isMainPage"></app-date-selector>
+      <app-currency-selector [isMainPage]="isMainPage"></app-currency-selector>
       <div class="user">
-        <button mat-flat-button class="user__sign-in" (click)="openAuthModal()">
+        <button
+          mat-flat-button
+          class="user__sign-in"
+          [ngClass]="isMainPage ? '' : 'colorDark'"
+          (click)="openAuthModal()"
+        >
           <mat-icon>perm_identity</mat-icon>
           Sign in
         </button>
@@ -16,7 +23,12 @@
           [matBadgeHidden]="badgeHidden"
           (click)="toggleBadgeVisibility()"
         >
-          <img src="assets/cart.svg" alt="shopping cart" class="user__cart" />
+          <img
+            src="assets/cart.svg"
+            alt="shopping cart"
+            class="user__cart"
+            [ngClass]="isMainPage ? '' : 'backgroundDark'"
+          />
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DateSelectorComponent } from './components/header/date-selector/date-selector.component';
@@ -20,7 +21,7 @@ import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.co
     SingUpFormComponent,
     LogInFormComponent,
   ],
-  imports: [CommonModule, SharedModule, MaterialModule],
+  imports: [CommonModule, SharedModule, RouterModule, MaterialModule],
   exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}
