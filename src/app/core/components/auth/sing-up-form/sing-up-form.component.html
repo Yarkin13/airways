@@ -1,0 +1,202 @@
+<div class="signup__layout">
+  <form class="signup__form" [formGroup]="signUpForm" (submit)="onSubmit()">
+    <mat-form-field
+      class="signup__input"
+      [ngClass]="{
+        'signup__input--error': !login?.valid && login?.touched,
+        hideTipWrapper: login?.valid || !login?.touched
+      }"
+    >
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="login" />
+      <mat-error *ngIf="login?.invalid">{{ getErrorMessageLogin() }}</mat-error>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-form-field
+      class="signup__input"
+      [ngClass]="{
+        'signup__input--error': !password?.valid && password?.touched,
+        hideTipWrapper: password?.valid || !password?.touched
+      }"
+    >
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hidePassword"
+        type="button"
+      >
+        <mat-icon
+          [color]="!password?.valid && password?.touched ? 'warn' : ''"
+          >{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon
+        >
+      </button>
+      <mat-error *ngIf="password?.invalid">{{
+        getErrorMessagePassword()
+      }}</mat-error>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-form-field
+      class="signup__input"
+      [ngClass]="{
+        'signup__input--error': !firstName?.valid && firstName?.touched,
+        hideTipWrapper: firstName?.valid || !firstName?.touched
+      }"
+    >
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName" />
+      <mat-error *ngIf="firstName?.invalid">{{
+        getErrorMessageFirstName()
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field
+      class="signup__input"
+      [ngClass]="{
+        'signup__input--error': !lastName?.valid && lastName?.touched,
+        hideTipWrapper: lastName?.valid || !lastName?.touched
+      }"
+    >
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName" />
+      <mat-error *ngIf="lastName?.invalid">{{
+        getErrorMessageLastName()
+      }}</mat-error>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-form-field
+      class="signup__input"
+      [ngClass]="{
+        'signup__input--error': !dateBirthDay?.valid && dateBirthDay?.touched,
+        hideTipWrapper: dateBirthDay?.valid || !dateBirthDay?.touched
+      }"
+    >
+      <mat-label>Date of birth</mat-label>
+      <input
+        formControlName="dateBirthDay"
+        matInput
+        [matDatepicker]="picker"
+        [max]="maxDate"
+        [min]="minDate"
+      />
+      <mat-error *ngIf="dateBirthDay?.invalid">
+        {{ getErrorMessageBirthday() }}
+      </mat-error>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-tab-group
+      animationDuration="0ms"
+      class="signup__tabs"
+      (selectedTabChange)="selectedTabChangeGender($event)"
+    >
+      <mat-tab label="Male"
+        ><ng-template mat-tab-label>
+          <mat-icon>{{ gender === 'Male' ? 'done' : '' }}</mat-icon>
+          Male
+        </ng-template></mat-tab
+      >
+      <mat-tab label="Female"
+        ><ng-template mat-tab-label>
+          <mat-icon>{{ gender === 'Female' ? 'done' : '' }}</mat-icon>
+          Female
+        </ng-template></mat-tab
+      >
+    </mat-tab-group>
+
+    <!--  -->
+
+    <div class="signup__flex-container">
+      <mat-form-field
+        class="signup__input"
+        [ngClass]="{
+          'signup__input--error': !countryCode?.valid && countryCode?.touched,
+          hideTipWrapper: countryCode?.valid || !countryCode?.touched
+        }"
+      >
+        <mat-label>Country code</mat-label>
+        <mat-select formControlName="countryCode">
+          <mat-option *ngFor="let item of countryCodes" [value]="item.code">{{
+            item.name + ' (' + item.dial_code + ')'
+          }}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="countryCode?.invalid"
+          >Please select a country code</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field
+        class="signup__input"
+        [ngClass]="{
+          'signup__input--error': !phone?.valid && phone?.touched,
+          hideTipWrapper: phone?.valid || !phone?.touched
+        }"
+      >
+        <mat-label>Mobile phone number</mat-label>
+        <input matInput formControlName="phone" type="number" />
+        <mat-error *ngIf="phone?.invalid">{{
+          getErrorMessagePhone()
+        }}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--  -->
+
+    <mat-form-field
+      class="signup__input"
+      [ngClass]="{
+        'signup__input--error': !citizenship?.valid && citizenship?.touched,
+        hideTipWrapper: citizenship?.valid || !citizenship?.touched
+      }"
+    >
+      <mat-label>Citizenship</mat-label>
+      <mat-select formControlName="citizenship">
+        <mat-option *ngFor="let item of citizenshipArray" [value]="item">{{
+          item
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="citizenship?.invalid"
+        >Please select a citizenship</mat-error
+      >
+    </mat-form-field>
+
+    <!--  -->
+
+    <div class="signup__checkbox-wrapper">
+      <div class="signup__checkbox-field">
+        <mat-checkbox color="primary" formControlName="agreement">
+          <!-- TODO WHERE GO LINK -->
+          I agree to Airway's
+          <a href="./" class="signup__checkbox-link">Privacy Policy</a> and
+          <a href="./" class="signup__checkbox-link"
+            >Terms of Use</a
+          ></mat-checkbox
+        >
+      </div>
+      <mat-error
+        *ngIf="!agreement?.value && agreement?.touched"
+        class="signup__checkbox-error"
+        >Please confirm Airway's Privacy Policy and Terms of Use
+      </mat-error>
+    </div>
+
+    <button class="signup__submit-btn" type="submit">Sign up</button>
+  </form>
+</div>
