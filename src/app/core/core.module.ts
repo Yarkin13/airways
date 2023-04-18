@@ -10,6 +10,7 @@ import { MaterialModule } from '../material/material.module';
 import { AuthComponent } from './components/auth/auth.component';
 import { SingUpFormComponent } from './components/auth/sing-up-form/sing-up-form.component';
 import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.component';
+import { StepperComponent } from './components/header/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.co
     AuthComponent,
     SingUpFormComponent,
     LogInFormComponent,
+    StepperComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule, MaterialModule],
   exports: [HeaderComponent, FooterComponent],

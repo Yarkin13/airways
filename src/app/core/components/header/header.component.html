@@ -1,12 +1,18 @@
-<header class="header" [ngClass]="isMainPage ? '' : 'backgroundWhite'">
+<header class="header" [ngClass]="isMainPage ? '' : 'light'">
   <div class="header__container">
-    <a routerLink="/booking/main"
-      ><img src="assets/logo.svg" alt="airways logo"
+    <a routerLink="/booking/main" class="logo-link"
+      ><img src="assets/header/logo.svg" alt="airways logo"
     /></a>
-    <div class="menu" [ngClass]="isMainPage ? '' : 'smallGap'">
+    <div class="menu" [ngClass]="!isMainPage && !isUserPage ? 'smallGap' : ''">
       <p class="menu__text" *ngIf="isMainPage">Book flights</p>
+
+      <app-stepper
+        *ngIf="!isMainPage && !isUserPage"
+        [currentPage]="currentPage"
+      ></app-stepper>
       <app-date-selector [isMainPage]="isMainPage"></app-date-selector>
       <app-currency-selector [isMainPage]="isMainPage"></app-currency-selector>
+
       <div class="user">
         <button
           mat-flat-button
@@ -24,10 +30,9 @@
           (click)="toggleBadgeVisibility()"
         >
           <img
-            src="assets/cart.svg"
+            src="assets/header/cart.svg"
             alt="shopping cart"
             class="user__cart"
-            [ngClass]="isMainPage ? '' : 'backgroundDark'"
           />
         </div>
       </div>

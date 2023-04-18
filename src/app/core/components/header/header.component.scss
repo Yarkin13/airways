@@ -12,22 +12,22 @@
   z-index: 2;
 }
 
-.backgroundWhite {
-  background: $neutral100;
-}
-
 .header__container {
   width: 1128px;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .logo-link {
+    height: 40px;
+  }
 }
 
 .menu {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 41px;
 
   .menu__text {
     color: $neutral100;
@@ -40,6 +40,7 @@
     display: flex;
     gap: 32px;
     align-items: center;
+    padding-right: 22px;
 
     .user__sign-in {
       background: $neutral90;
@@ -51,20 +52,26 @@
       @extend %button;
     }
 
-    .colorDark {
-      color: $neutral10;
-    }
-
     .user__cart {
       cursor: pointer;
     }
 
-    .backgroundDark {
-      filter: invert(70%);
-    }
-
     .mat-badge-small.mat-badge-overlap.mat-badge-after .mat-badge-content {
       background-color: $error;
+    }
+  }
+}
+
+.light {
+  background: $neutral100;
+
+  .menu {
+    .user__sign-in {
+      color: $neutral10;
+    }
+
+    .user__cart {
+      filter: invert(70%);
     }
   }
 }

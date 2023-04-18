@@ -1,0 +1,48 @@
+@use "src/styles.scss" as *;
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-right: 16px;
+
+  p {
+    margin: 0;
+    @extend %label-medium;
+    color: $neutral30;
+  }
+}
+
+.step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  .badge {
+    width: 16px;
+    height: 16px;
+    background-color: $secondary0;
+    border-radius: 100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 2px;
+    box-sizing: border-box;
+  }
+
+  .gray {
+    background-color: $neutral30;
+    justify-content: center;
+    align-items: center;
+    color: $neutral100;
+    @extend %badge-label;
+  }
+
+  .line {
+    border-bottom: 1px solid $neutral40;
+    width: 80px;
+    height: 0px;
+  }
+}

@@ -18,13 +18,22 @@ export class HeaderComponent {
 
   isMainPage = true;
 
+  isUserPage = false;
+
+  currentPage = '';
+
   constructor(private store: Store, public dialog: MatDialog) {
     this.path$ = this.store.select(selectUrl);
     this.path$.pipe(untilDestroyed(this)).subscribe((value) => {
       if (value === '/booking/main') {
         this.isMainPage = true;
+      } else if (value === '/user') {
+        this.isMainPage = false;
+        this.isUserPage = true;
       } else {
         this.isMainPage = false;
+        this.isUserPage = false;
+        this.currentPage = value;
       }
     });
   }

@@ -1,0 +1,24 @@
+<div class="step">
+  <div class="badge">
+    <img src="assets/header/pen.svg" alt="pen" *ngIf="isFlights" />
+    <img src="assets/header/check.svg" alt="pen" *ngIf="!isFlights" />
+  </div>
+  <p>Flights</p>
+  <div class="line"></div>
+</div>
+<div class="step">
+  <div class="badge" [ngClass]="isFlights ? 'gray' : ''">
+    {{ isFlights ? 2 : "" }}
+    <img src="assets/header/pen.svg" alt="pen" *ngIf="isPassengers" />
+    <img src="assets/header/check.svg" alt="pen" *ngIf="isReview" />
+  </div>
+  <p>Passengers</p>
+  <div class="line"></div>
+</div>
+<div class="step">
+  <div class="badge" [ngClass]="isFlights || isPassengers ? 'gray' : ''">
+    {{ isFlights || isPassengers ? 3 : "" }}
+    <img src="assets/header/pen.svg" alt="pen" *ngIf="isReview" />
+  </div>
+  <p>Review & Payment</p>
+</div>
