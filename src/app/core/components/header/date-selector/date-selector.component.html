@@ -3,7 +3,7 @@
     class="select-date"
     [value]="dateSelected$ | async"
     (selectionChange)="handleDateChange($event)"
-    [ngClass]="isMainPage ? '' : 'colorDark'"
+    [ngClass]="{ colorDark: !isMainPage }"
   >
     <mat-option value="option1">MM/DD/YYYY</mat-option>
     <mat-option value="option2">DD/MM/YYYY</mat-option>

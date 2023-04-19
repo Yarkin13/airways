@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin-right: 16px;
+  width: 532px;
 
   p {
     margin: 0;
@@ -32,7 +32,16 @@
     box-sizing: border-box;
   }
 
-  .gray {
+  .line {
+    border-bottom: 1px solid $neutral40;
+    width: 80px;
+    height: 0px;
+  }
+}
+
+.gray {
+  .badge {
+    display: flex;
     background-color: $neutral30;
     justify-content: center;
     align-items: center;
@@ -40,9 +49,13 @@
     @extend %badge-label;
   }
 
-  .line {
-    border-bottom: 1px solid $neutral40;
-    width: 80px;
-    height: 0px;
+  .textTwo::before {
+    content: "2";
+    display: inline-block;
+  }
+
+  .textThree::before {
+    content: "3";
+    display: inline-block;
   }
 }

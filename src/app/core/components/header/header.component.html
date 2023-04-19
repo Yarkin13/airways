@@ -1,14 +1,14 @@
-<header class="header" [ngClass]="isMainPage ? '' : 'light'">
+<header class="header" [ngClass]="{ light: !isMainPage }">
   <div class="header__container">
     <a routerLink="/booking/main" class="logo-link"
       ><img src="assets/header/logo.svg" alt="airways logo"
     /></a>
-    <div class="menu" [ngClass]="!isMainPage && !isUserPage ? 'smallGap' : ''">
+    <div class="menu" [ngClass]="{ smallGap: !isMainPage && !isUserPage }">
       <p class="menu__text" *ngIf="isMainPage">Book flights</p>
 
       <app-stepper
-        *ngIf="!isMainPage && !isUserPage"
-        [currentPage]="currentPage"
+        *ngIf="!isMainPage && !isUserPage "
+        [currentStep]="currentStep"
       ></app-stepper>
       <app-date-selector [isMainPage]="isMainPage"></app-date-selector>
       <app-currency-selector [isMainPage]="isMainPage"></app-currency-selector>
@@ -17,7 +17,7 @@
         <button
           mat-flat-button
           class="user__sign-in"
-          [ngClass]="isMainPage ? '' : 'colorDark'"
+          [ngClass]="{ colorDark: !isMainPage }"
           (click)="openAuthModal()"
         >
           <mat-icon>perm_identity</mat-icon>
