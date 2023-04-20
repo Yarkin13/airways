@@ -3,7 +3,7 @@
     class="select-currency"
     [value]="currencySelected$ | async"
     (selectionChange)="handleCurrencyChange($event)"
-    [ngClass]="{ colorDark: !isMainPage }"
+    [ngClass]="{ colorDark: !isMainPage || isOpaque }"
   >
     <mat-option value="option1">EUR</mat-option>
     <mat-option value="option2">USA</mat-option>

@@ -12,6 +12,8 @@ import { selectHeaderCurrency } from 'src/app/redux/selectors/header-data.select
 export class CurrencySelectorComponent {
   @Input() isMainPage!: boolean;
 
+  @Input() isOpaque!: boolean;
+
   currencySelected$;
 
   constructor(private store: Store) {

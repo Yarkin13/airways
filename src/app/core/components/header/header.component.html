@@ -1,4 +1,4 @@
-<header class="header" [ngClass]="{ light: !isMainPage }">
+<header class="header" [ngClass]="{ light: !isMainPage || isOpaque }">
   <div
     class="header__container"
     [ngClass]="{ media: !isMainPage && !isUserPage }"
@@ -13,8 +13,8 @@
         *ngIf="!isMainPage && !isUserPage"
         [currentStep]="currentStep"
       ></app-stepper>
-      <app-date-selector [isMainPage]="isMainPage"></app-date-selector>
-      <app-currency-selector [isMainPage]="isMainPage"></app-currency-selector>
+      <app-date-selector [isMainPage]="isMainPage" [isOpaque]="isOpaque"></app-date-selector>
+      <app-currency-selector [isMainPage]="isMainPage" [isOpaque]="isOpaque"></app-currency-selector>
 
       <div class="user">
         <button

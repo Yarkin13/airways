@@ -12,6 +12,8 @@ import { selectHeaderDate } from 'src/app/redux/selectors/header-data.selectors'
 export class DateSelectorComponent {
   @Input() isMainPage!: boolean;
 
+  @Input() isOpaque!: boolean;
+
   dateSelected$;
 
   constructor(private store: Store) {

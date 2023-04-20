@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { selectUrl } from 'src/app/redux/selectors/router.selectors';
@@ -12,7 +12,6 @@ import { AuthComponent } from '../auth/auth.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-
 export class HeaderComponent {
   badgeHidden = true;
 
@@ -23,6 +22,8 @@ export class HeaderComponent {
   isUserPage = false;
 
   currentStep: Array<boolean> = [false, false, false];
+
+  isOpaque = false;
 
   constructor(private store: Store, public dialog: MatDialog) {
     this.path$ = this.store.select(selectUrl);
@@ -47,5 +48,18 @@ export class HeaderComponent {
 
   toggleBadgeVisibility() {
     this.badgeHidden = !this.badgeHidden;
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const offset = window.pageYOffset
+      || document.documentElement.scrollTop
+      || document.body.scrollTop
+      || 0;
+    if (offset > 10) {
+      this.isOpaque = true;
+    } else {
+      this.isOpaque = false;
+    }
   }
 }
