@@ -1,18 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig(.app|.spec).json",
-          "tsconfig.json"
-        ]
+        "project": ["tsconfig(.app|.spec).json", "tsconfig.json"]
       },
       "extends": [
         "eslint:recommended",
@@ -31,14 +24,6 @@
             "style": "camelCase"
           }
         ],
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
-        ],
         "@typescript-eslint/quotes": [
           "error",
           "single",
@@ -48,25 +33,20 @@
         ],
         "no-console": "off",
         "import/prefer-default-export": "off",
-        "import/no-extraneous-dependencies": "off" 
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/comma-dangle": 0,
+        "@typescript-eslint/lines-between-class-members": 0,
+        "linebreak-style": 0
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     },
     {
-      "files": [
-        "*.ts"
-      ],
-      "extends": [
-        "plugin:@ngrx/recommended"
-      ]
+      "files": ["*.ts"],
+      "extends": ["plugin:@ngrx/recommended"]
     }
   ]
 }

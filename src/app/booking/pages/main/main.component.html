@@ -1,5 +1,35 @@
-<div class="background"></div>
-
 <div class="container">
-  <p>main works!</p>
+  <div class="flight-search">
+    <flight-type (flightType)="changeFlightType($event)"></flight-type>
+    <form [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()">
+      <div class="direction__container">
+        <direction-input
+          [formName]="flightSearchForm"
+          label="From"
+          controlName="from"
+          placeholder="Choose departure point"
+          [airports]="airports"
+        ></direction-input>
+        <direction-input
+          [formName]="flightSearchForm"
+          label="Destination"
+          controlName="destination"
+          placeholder="Choose your destination"
+          [airports]="airports"
+        ></direction-input>
+        <reverses-button></reverses-button>
+      </div>
+      <div class="dates-container">
+        <dates
+          [formName]="flightSearchForm"
+          [controlName]="'dates'"
+          [flightType]="flightType"
+        ></dates>
+        <passengers [formName]="flightSearchForm"></passengers>
+      </div>
+      <button type="submit" mat-flat-button color="primary" class="flight-btn">
+        Search
+      </button>
+    </form>
+  </div>
 </div>
