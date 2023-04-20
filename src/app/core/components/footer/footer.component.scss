@@ -14,6 +14,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap-reverse;
+
+  @media (max-width: $desktop-s) {
+    padding: 0 10px;
+  }
+
+  @media (max-width: 646px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 413px) {
+    flex-direction: column-reverse;
+    row-gap: 16px;
+  }
 
   .copyright {
     color: $primary;
@@ -30,6 +44,10 @@
       margin: 0;
       @extend %body-medium;
       color: $black;
+
+      @media (max-width: 413px) {
+        display: none;
+      }
     }
 
     .payment__icons {

@@ -1,0 +1,28 @@
+<div class="step">
+  <div class="badge">
+    <img
+      src="assets/header/pen.svg"
+      alt="pen"
+      *ngIf="currentStep[0]; else notFlight"
+    />
+    <ng-template #notFlight>
+      <img src="assets/header/check.svg" alt="pen" />
+    </ng-template>
+  </div>
+  <p>Flights</p>
+  <div class="line"></div>
+</div>
+<div class="step" [ngClass]="{ gray: currentStep[0] }">
+  <div class="badge textTwo">
+    <img src="assets/header/pen.svg" alt="pen" *ngIf="currentStep[1]" />
+    <img src="assets/header/check.svg" alt="check" *ngIf="currentStep[2]" />
+  </div>
+  <p>Passengers</p>
+  <div class="line"></div>
+</div>
+<div class="step" [ngClass]="{ gray: currentStep[0] || currentStep[1] }">
+  <div class="badge textThree">
+    <img src="assets/header/pen.svg" alt="pen" *ngIf="currentStep[2]" />
+  </div>
+  <p>Review & Payment</p>
+</div>

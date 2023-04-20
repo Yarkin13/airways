@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HeaderDataActions } from 'src/app/redux/actions/header-data.actions';
 import { selectHeaderDate } from 'src/app/redux/selectors/header-data.selectors';
@@ -10,13 +10,17 @@ import { selectHeaderDate } from 'src/app/redux/selectors/header-data.selectors'
   encapsulation: ViewEncapsulation.None,
 })
 export class DateSelectorComponent {
+  @Input() isMainPage!: boolean;
+
+  @Input() isOpaque!: boolean;
+
   dateSelected$;
 
   constructor(private store: Store) {
     this.dateSelected$ = this.store.select(selectHeaderDate);
   }
 
-  handleDateChange(ob: { value: string }) {
-    this.store.dispatch(HeaderDataActions.setDate({ dateValue: ob.value }));
+  handleDateChange({ value }: { value: string }) {
+    this.store.dispatch(HeaderDataActions.setDate({ dateValue: value }));
   }
 }
