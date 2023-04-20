@@ -1,4 +1,4 @@
-@use "src/styles.scss" as *;
+@use 'src/styles.scss' as *;
 
 .signup__layout {
   display: flex;
@@ -123,4 +123,15 @@
 .signup__checkbox-error {
   @extend %label-small;
   margin-left: 10px;
+}
+
+::ng-deep .mdc-tooltip__surface {
+  background: $neutral100 !important;
+  box-shadow: $shadow !important;
+  border-radius: 8px;
+  color: $black !important;
+  white-space: break-spaces;
+  text-align: left;
+  padding: 16px 24px !important;
+  @extend %label-small;
 }

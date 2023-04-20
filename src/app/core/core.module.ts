@@ -9,6 +9,7 @@ import { MaterialModule } from '../material/material.module';
 import { AuthComponent } from './components/auth/auth.component';
 import { SingUpFormComponent } from './components/auth/sing-up-form/sing-up-form.component';
 import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.component';
+import { TooltipListPipe } from './pipes/tooltip-list.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.co
     AuthComponent,
     SingUpFormComponent,
     LogInFormComponent,
+    TooltipListPipe,
   ],
   imports: [CommonModule, SharedModule, MaterialModule],
   exports: [HeaderComponent, FooterComponent],
