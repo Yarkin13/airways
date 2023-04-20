@@ -7,7 +7,7 @@ import { SummaryComponent } from './pages/summary/summary.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
-  { path: 'flight-selection', component: FlightSelectionComponent },
+  { path: 'flights', component: FlightSelectionComponent },
   { path: 'booking', component: BookingComponent },
   { path: 'summary', component: SummaryComponent },
   { path: '', redirectTo: 'main', pathMatch: 'full' },

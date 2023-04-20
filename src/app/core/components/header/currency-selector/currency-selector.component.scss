@@ -44,4 +44,15 @@
     padding-top: 0;
     padding-bottom: 0;
   }
+
+  .colorDark {
+    .mat-mdc-select-value-text,
+    .mat-mdc-select-arrow {
+      color: $neutral10;
+    }
+
+    .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+      color: $neutral10;
+    }
+  }
 }

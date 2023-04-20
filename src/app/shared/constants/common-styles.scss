@@ -136,6 +136,13 @@ $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
   letter-spacing: 0.4px;
 }
 
+%badge-label {
+  @extend %roboto-medium;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
 // body
 %body-xlarge {
   @extend %roboto-normal;
