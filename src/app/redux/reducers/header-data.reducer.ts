@@ -3,8 +3,8 @@ import { HeaderDataActions } from '../actions/header-data.actions';
 import { HeaderData } from '../state.models';
 
 export const initialState = {
-  dateValue: 'option1',
-  currencyValue: 'option1',
+  dateValue: 'MM/DD/YYYY',
+  currencyValue: 'EUR',
 };
 
 export const headerDataReducer = createReducer(
