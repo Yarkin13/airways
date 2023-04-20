@@ -1,5 +1,8 @@
 <header class="header" [ngClass]="{ light: !isMainPage }">
-  <div class="header__container">
+  <div
+    class="header__container"
+    [ngClass]="{ media: !isMainPage && !isUserPage }"
+  >
     <a routerLink="/booking/main" class="logo-link"
       ><img src="assets/header/logo.svg" alt="airways logo"
     /></a>
@@ -7,7 +10,7 @@
       <p class="menu__text" *ngIf="isMainPage">Book flights</p>
 
       <app-stepper
-        *ngIf="!isMainPage && !isUserPage "
+        *ngIf="!isMainPage && !isUserPage"
         [currentStep]="currentStep"
       ></app-stepper>
       <app-date-selector [isMainPage]="isMainPage"></app-date-selector>

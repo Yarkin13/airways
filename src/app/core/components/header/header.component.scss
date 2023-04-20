@@ -1,7 +1,7 @@
 @use "src/styles.scss" as *;
 
 .header {
-  height: 88px;
+  min-height: 88px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -10,14 +10,27 @@
   justify-content: center;
   align-items: center;
   z-index: 2;
+  box-sizing: border-box;
 }
 
 .header__container {
-  width: 1128px;
+  width: 1150px;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 22px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  row-gap: 16px;
+
+  @media (max-width: $desktop-s) {
+    padding: 10px;
+  }
+
+  @media (max-width: 557px) {
+    justify-content: center;
+  }
 
   .logo-link {
     height: 40px;
@@ -29,18 +42,35 @@
   align-items: center;
   gap: 41px;
 
+  @media (max-width: $desktop-s) {
+    justify-content: center;
+    flex-wrap: wrap-reverse;
+    row-gap: 16px;
+  }
+
+  @media (max-width: $mobile-xl) {
+    column-gap: 20px;
+  }
+
   .menu__text {
     color: $neutral100;
     @extend %body-large;
     margin: 0;
     user-select: none;
+
+    @media (max-width: 690px) {
+      display: none;
+    }
   }
 
   .user {
     display: flex;
     gap: 32px;
     align-items: center;
-    padding-right: 22px;
+
+    @media (max-width: $mobile-xl) {
+      gap: 20px;
+    }
 
     .user__sign-in {
       background: $neutral90;
@@ -78,4 +108,10 @@
 
 .smallGap {
   gap: 16px;
+}
+
+.media {
+    @media (max-width: 1058px) {
+      justify-content: center;
+    }
 }
