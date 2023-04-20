@@ -1,0 +1,72 @@
+@use "src/styles.scss" as *;
+
+.passengers__input {
+  display: block;
+  background: $secondary90;
+}
+
+.passengers__input .mat-mdc-text-field-wrapper {
+  border-radius: 4px;
+  border: 0.5px solid rgba(116, 118, 122, 0.6);
+}
+
+.passengers__input .mdc-text-field--focused {
+  border: 0.5px solid $primary;
+}
+
+.passengers__input .mdc-line-ripple {
+  display: none;
+}
+
+.passengers__options {
+  display: flex;
+  padding: 14px 16px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.passengers__detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.passengers__title {
+  margin: 0 !important; //angular material style
+  font-size: 16px;
+  color: $primary;
+}
+
+.passengers__subtitle {
+  font-size: 14px;
+  color: $neutral30;
+}
+
+.passengers__count {
+  display: flex;
+  align-items: center;
+}
+
+.passengers__count-btn {
+  width: min-content;
+  height: min-content;
+  padding: 5px;
+  font-size: 16px;
+  color: $neutral30;
+  cursor: pointer;
+}
+
+.passengers__count-input {
+  width: 20px;
+  outline: none;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  color: $primary;
+  cursor: default;
+}
+
+.none-option {
+  height: 0;
+  min-height: 0;
+}

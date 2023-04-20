@@ -1,0 +1,22 @@
+<mat-form-field
+  appearance="fill"
+  class="direction__input"
+  [formGroup]="formName"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    matInput
+    formControlName="{{ controlName }}"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete #auto="matAutocomplete" class="direction__options">
+    <mat-option
+      *ngFor="let airport of filteredAirports | async"
+      [value]="airport.airport + ' ' + airport.cod"
+    >
+      <p class="direction__title">{{ airport.airport }} ({{ airport.cod }})</p>
+      <span class="direction__subtitle">{{ airport.city }}</span>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

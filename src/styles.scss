@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import './app/shared/constants/common-styles.scss';
+@import "./app/shared/constants/common-styles.scss";
 
 html,
 body {
@@ -12,6 +12,13 @@ body {
   flex-direction: column;
   background-color: $neutral80;
 }
+
+.container {
+  max-width: 1130px;
+  margin: 0 auto;
+  padding: 0 11px;
+}
+
 button {
   border: none;
 }

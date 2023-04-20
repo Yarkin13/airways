@@ -1,0 +1,36 @@
+<mat-form-field
+  appearance="fill"
+  class="passengers__input"
+  [formGroup]="formName"
+>
+  <mat-label>Passengers</mat-label>
+  <mat-select>
+    <div class="passengers__options">
+      <div *ngFor="let pas of passengersType" class="passengers__detail">
+        <div class="passengers__text">
+          <p class="passengers__title">{{ pas.name }}</p>
+          <span class="passengers__subtitle">{{ pas.age }}</span>
+        </div>
+        <div class="passengers__count">
+          <mat-icon
+            fontIcon="remove"
+            class="passengers__count-btn"
+            (click)="decrease(pas.id)"
+          ></mat-icon>
+          <input
+            [readonly]="true"
+            formControlName="{{ pas.id }}"
+            class="passengers__count-input"
+          />
+          <mat-icon
+            fontIcon="add"
+            class="passengers__count-btn"
+            (click)="increase(pas.id)"
+          >
+          </mat-icon>
+        </div>
+      </div>
+    </div>
+    <mat-option class="none-option" disabled> </mat-option>
+  </mat-select>
+</mat-form-field>
