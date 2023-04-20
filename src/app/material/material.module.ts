@@ -13,6 +13,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatNativeDateModule,
     MatBadgeModule,
     MatTooltipModule,
+    MatRadioModule,
+    MatAutocompleteModule,
     OverlayModule,
   ],
 })
