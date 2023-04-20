@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BookingRoutingModule } from './booking-routing.module';
 import { MainComponent } from './pages/main/main.component';
 import { FlightSelectionComponent } from './pages/flight-selection/flight-selection.component';
@@ -12,6 +11,7 @@ import { ReversesButtonComponent } from './pages/main/reverses-button/reverses-b
 import { DatesComponent } from './pages/main/dates/dates.component';
 import { PassengersComponent } from './pages/main/passengers/passengers.component';
 import { MaterialModule } from '../material/material.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     BookingRoutingModule,
     MaterialModule,
-    ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class BookingModule {}

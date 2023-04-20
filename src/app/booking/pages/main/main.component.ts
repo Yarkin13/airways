@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AIRPORTS } from 'src/app/shared/constants';
 import { IAirports } from '../../airports.model';
 
 @Component({
@@ -8,14 +9,7 @@ import { IAirports } from '../../airports.model';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent {
-  airports: IAirports[] = [
-    { airport: 'Aberdeen', cod: 'ABZ', city: 'Dyce, United Kingdom' },
-    { airport: 'Amsterdam', cod: 'AMS', city: 'Schiphol, Netherlands' },
-    { airport: 'Baku', cod: 'GYD', city: 'Heydar Aliyev, Azerbaijan' },
-    { airport: 'Barcelona', cod: 'BCN', city: 'El Prat, Spain' },
-    { airport: 'Catania', cod: 'CTA', city: 'Fontanarossa, Italy' },
-    { airport: 'Dublin', cod: 'DUB', city: 'Ireland' },
-  ];
+  airports: IAirports[] = AIRPORTS;
 
   flightSearchForm: FormGroup = new FormGroup({
     from: new FormControl(''),

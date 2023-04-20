@@ -2,12 +2,18 @@
 
 :host {
   display: block;
+  min-height: 80vh;
   padding: 150px 0;
-  background-image: url(".././../../../assets/background-main.png");
+  background-image: url("/assets/background-main.png");
   background-position: bottom center;
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
+  box-sizing: border-box;
+
+  @media (max-width: $mobile-l) {
+    padding-top: 180px;
+  }
 }
 
 .flight-search {
@@ -30,20 +36,17 @@
   grid-template-columns: minmax(250px, 311px) 1fr;
   margin-top: 28px;
   gap: 20px;
+
+  @media (max-width: $mobile-xl) {
+    grid-template-columns: minmax(250px, 311px);
+  }
 }
 
 .flight-btn {
+  @extend %button;
   display: block;
   width: 126px;
   height: 60px;
   margin-top: 10px;
   margin-left: auto;
-  font-weight: 500;
-  font-size: 16px;
-}
-
-@media (max-width: $mobile-xl) {
-  .dates-container {
-    grid-template-columns: minmax(250px, 311px);
-  }
 }
