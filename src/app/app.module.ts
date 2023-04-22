@@ -9,6 +9,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { headerDataReducer } from './redux/reducers/header-data.reducer';
 import { AppRoutingModule } from './app-routing.module';
+import { SummaryComponent } from './booking/pages/summary/summary.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     AppRoutingModule,
+    SummaryComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

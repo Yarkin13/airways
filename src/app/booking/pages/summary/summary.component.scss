@@ -1,0 +1,63 @@
+@use "src/styles.scss" as *;
+
+:host {
+  margin-top: 156px;
+  display: flex;
+  justify-content: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+.summary__container {
+  box-sizing: border-box;
+  max-width: 1150px;
+  padding: 40px 0 48px 22px;
+  flex-direction: column;
+}
+
+.summary__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  @extend %title-large;
+  font-weight: 700;
+  color: $primary;
+  width: 140px;
+  padding: 8px 0;
+}
+
+.summary__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 30px 24px;
+  margin-top: 20px;
+}
+
+.summary__buttons {
+  margin-top: 40px;
+  display: flex;
+  gap: 40px;
+  justify-content: flex-end;
+
+  .button {
+    height: 60px;
+    @extend %button;
+  }
+
+  .button-back {
+    width: 126px;
+  }
+
+  .button-add {
+    width: 171px;
+    border: 1px solid $primary;
+  }
+
+  .button-buy {
+    width: 126px;
+  }
+}
