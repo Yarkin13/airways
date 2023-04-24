@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
-import { BookedFlight, Passengers } from '../booked-flights.model';
+import { Passenger, BookedFlight } from 'src/app/booking/models/booked-flights.model';
 
 @Component({
   selector: 'app-order',
@@ -11,7 +11,7 @@ import { BookedFlight, Passengers } from '../booked-flights.model';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent {
-  @Input() passengers!: Array<Passengers>;
+  @Input() passengers!: Array<Passenger>;
 
   @Input() flight!: BookedFlight;
 }

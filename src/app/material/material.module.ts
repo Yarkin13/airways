@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { MatDividerModule } from '@angular/material/divider';
     OverlayModule,
     MatCardModule,
     MatDividerModule,
+    MatSnackBarModule,
   ],
 })
 export class MaterialModule {}

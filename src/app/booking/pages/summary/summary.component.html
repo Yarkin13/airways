@@ -12,8 +12,22 @@
   </div>
 
   <div class="summary__buttons">
-    <button mat-button color="primary" class="button button-back">Back</button>
-    <button mat-stroked-button color="primary" class="button button-add">
+    <button
+      mat-button
+      color="primary"
+      class="button button-back"
+      (click)="redirectBookingPage()"
+      [disabled]="btnDisabled"
+    >
+      Back
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      class="button button-add"
+      (click)="handleAddToCart()"
+      [disabled]="btnDisabled"
+    >
       Add to order cart
     </button>
     <button mat-flat-button color="primary" class="button button-buy">

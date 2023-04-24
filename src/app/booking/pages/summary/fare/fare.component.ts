@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Passengers } from '../booked-flights.model';
+import { Passenger } from 'src/app/booking/models/booked-flights.model';
 
 @Component({
   selector: 'app-fare',
@@ -11,7 +11,7 @@ import { Passengers } from '../booked-flights.model';
   styleUrls: ['./fare.component.scss'],
 })
 export class FareComponent implements OnInit {
-  @Input() passengers!: Array<Passengers>;
+  @Input() passengers!: Array<Passenger>;
 
   currency = '€';
 

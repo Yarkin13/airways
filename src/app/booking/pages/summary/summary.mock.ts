@@ -1,4 +1,4 @@
-import { BookedFlight, Passengers } from './booked-flights.model';
+import { BookedFlight, Passenger } from '../../models/booked-flights.model';
 
 export const bookedFlights: Array<BookedFlight> = [
   {
@@ -15,7 +15,7 @@ export const bookedFlights: Array<BookedFlight> = [
   },
 ];
 
-export const bookedPassengers: Array<Passengers> = [
+export const bookedPassengers: Array<Passenger> = [
   {
     name: 'Harry Potter',
     type: 'adult',

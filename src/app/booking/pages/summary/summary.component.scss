@@ -92,3 +92,18 @@
     width: 126px;
   }
 }
+
+::ng-deep .snackBar {
+  background: $highlight-green0;
+  color: $neutral100;
+  @extend %subtitle-small;
+  border-radius: 4px;
+  text-align: center;
+}
+
+::ng-deep .mat-mdc-snack-bar-container {
+  --mat-mdc-snack-bar-button-color: $red30;
+  --mdc-snackbar-container-color: $highlight-green0;
+  --mdc-snackbar-supporting-text-color: $neutral100;
+}
+

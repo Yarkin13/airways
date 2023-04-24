@@ -5,11 +5,17 @@ export interface BookedFlight {
   time: string;
 }
 
-export interface Passengers {
+export interface Passenger {
   name: string;
   type: string;
   count: number;
   fare: string;
   charge: string;
   seat: string | null;
+}
+
+// for Cart
+export interface Flight {
+  flights: Array<BookedFlight>,
+  passengers: Array<Passenger>,
 }

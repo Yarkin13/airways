@@ -9,7 +9,7 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { headerDataReducer } from './redux/reducers/header-data.reducer';
 import { AppRoutingModule } from './app-routing.module';
-import { SummaryComponent } from './booking/pages/summary/summary.component';
+import { cartReducer } from './redux/reducers/cart.reducers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,11 +18,14 @@ import { SummaryComponent } from './booking/pages/summary/summary.component';
     CoreModule,
     SharedModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ headerData: headerDataReducer, router: routerReducer }),
+    StoreModule.forRoot({
+      headerData: headerDataReducer,
+      cart: cartReducer,
+      router: routerReducer,
+    }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     AppRoutingModule,
-    SummaryComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],
