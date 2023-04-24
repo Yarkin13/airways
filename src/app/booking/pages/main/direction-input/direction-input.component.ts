@@ -1,4 +1,6 @@
-import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import {
+  Component, Input, ViewEncapsulation, OnInit
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -31,8 +33,6 @@ export class DirectionInputComponent implements OnInit {
 
   private filter(value: string): IAirports[] {
     const filterValue = value.toLowerCase();
-    return this.airports.filter((airport) =>
-      airport.airport.toLowerCase().includes(filterValue)
-    );
+    return this.airports.filter((airport) => airport.airport.toLowerCase().includes(filterValue));
   }
 }

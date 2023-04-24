@@ -5,10 +5,12 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { bookedFlights, bookedPassengers } from './summary.mock';
 import { BookedFlight, Passenger } from '../../models/booked-flights.model';
+import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 
 @Component({
   selector: 'app-summary',
@@ -24,7 +26,12 @@ export class SummaryComponent {
 
   btnDisabled = false;
 
-  constructor(public router: Router, private store: Store, private snackBar: MatSnackBar) {
+  constructor(
+    public router: Router,
+    private store: Store,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {
     this.btnDisabled = false;
   }
 
@@ -37,14 +44,28 @@ export class SummaryComponent {
       flights: this.flights,
       passengers: this.passengers,
     };
-    this.store.dispatch(
-      CartActions.addToCart(currentFlight)
-    );
+    this.store.dispatch(CartActions.addToCart(currentFlight));
     this.snackBar.open('Item was successfully added to your cart!', '', {
-      duration: 2000,
+      duration: 1500,
       panelClass: ['snackBar'],
       verticalPosition: 'top',
     });
     this.btnDisabled = true;
+    setTimeout(() => {
+      this.snackBar.open('Redirecting to main page...', '', {
+        duration: 1000,
+        panelClass: ['snackBarRedirect'],
+        verticalPosition: 'top',
+      });
+    }, 1500);
+    setTimeout(() => {
+      this.router.navigateByUrl('/booking/main');
+    }, 2500);
+  }
+
+  openPaymentModal() {
+    this.dialog.open(PaymentModalComponent, {
+      width: '400px',
+    });
   }
 }

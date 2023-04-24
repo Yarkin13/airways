@@ -102,8 +102,14 @@
 }
 
 ::ng-deep .mat-mdc-snack-bar-container {
-  --mat-mdc-snack-bar-button-color: $red30;
-  --mdc-snackbar-container-color: $highlight-green0;
-  --mdc-snackbar-supporting-text-color: $neutral100;
+  &.snackBar {
+    --mdc-snackbar-container-color: $highlight-green0;
+    --mdc-snackbar-supporting-text-color: $neutral100;
+  }
 }
 
+::ng-deep .snackBarRedirect {
+  @extend %subtitle-small;
+  border-radius: 4px;
+  text-align: center;
+}

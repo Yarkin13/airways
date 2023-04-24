@@ -30,7 +30,13 @@
     >
       Add to order cart
     </button>
-    <button mat-flat-button color="primary" class="button button-buy">
+    <button
+      mat-flat-button
+      color="primary"
+      class="button button-buy"
+      (click)="openPaymentModal()"
+      [disabled]="btnDisabled"
+    >
       Buy now
     </button>
   </div>
