@@ -4,6 +4,10 @@
   display: flex;
   justify-content: flex-end;
 
+  @media (max-width: 590px) {
+    width: 100%;
+  }
+
   p {
     margin: 0;
   }
@@ -17,6 +21,10 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 590px) {
+    width: 100%;
+  }
 
   .card-header {
     background: $secondary80;
@@ -66,6 +74,10 @@
       padding-left: 28px;
       color: $black;
       gap: 4px;
+
+      @media (max-width: $mobile-l) {
+        padding-left: 0;
+      }
     }
   }
 }
