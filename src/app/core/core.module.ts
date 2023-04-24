@@ -10,6 +10,7 @@ import { MaterialModule } from '../material/material.module';
 import { AuthComponent } from './components/auth/auth.component';
 import { SingUpFormComponent } from './components/auth/sing-up-form/sing-up-form.component';
 import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.component';
+import { TooltipListPipe } from './pipes/tooltip-list.pipe';
 import { StepperComponent } from './components/header/stepper/stepper.component';
 import { PageSwapComponent } from './components/footer/TO-BE-DELETED/page-swap.component';
 
@@ -22,6 +23,7 @@ import { PageSwapComponent } from './components/footer/TO-BE-DELETED/page-swap.c
     AuthComponent,
     SingUpFormComponent,
     LogInFormComponent,
+    TooltipListPipe,
     StepperComponent,
     PageSwapComponent,
   ],

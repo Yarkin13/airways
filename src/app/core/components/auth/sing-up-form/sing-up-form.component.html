@@ -30,14 +30,18 @@
       <button
         mat-icon-button
         matSuffix
-        (click)="hidePassword = !hidePassword"
-        [attr.aria-label]="'Hide password'"
-        [attr.aria-pressed]="hidePassword"
         type="button"
+        [matTooltip]="
+          [
+            'at least 8 characters',
+            'a mixture of both uppercase and lowercase letters',
+            'a mixture of letters and numbers',
+            'inclusion of at least one special character, e.g., ! @ # ? ]'
+          ] | tooltipList
+        "
       >
-        <mat-icon
-          [color]="!password?.valid && password?.touched ? 'warn' : ''"
-          >{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon
+        <mat-icon [color]="!password?.valid && password?.touched ? 'warn' : ''"
+          >info</mat-icon
         >
       </button>
       <mat-error *ngIf="password?.invalid">{{
@@ -56,6 +60,17 @@
     >
       <mat-label>First name</mat-label>
       <input matInput formControlName="firstName" />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        matTooltip="Add name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+      >
+        <mat-icon
+          [color]="!firstName?.valid && firstName?.touched ? 'warn' : ''"
+          >info</mat-icon
+        >
+      </button>
       <mat-error *ngIf="firstName?.invalid">{{
         getErrorMessageFirstName()
       }}</mat-error>
@@ -69,6 +84,16 @@
     >
       <mat-label>Last name</mat-label>
       <input matInput formControlName="lastName" />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        matTooltip="Add name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+      >
+        <mat-icon [color]="!lastName?.valid && lastName?.touched ? 'warn' : ''"
+          >info</mat-icon
+        >
+      </button>
       <mat-error *ngIf="lastName?.invalid">{{
         getErrorMessageLastName()
       }}</mat-error>
