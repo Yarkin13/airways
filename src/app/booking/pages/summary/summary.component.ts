@@ -11,11 +11,12 @@ import { OrderComponent } from './order/order.component';
 import { bookedFlights, bookedPassengers } from './summary.mock';
 import { BookedFlight, Passenger } from '../../models/booked-flights.model';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
+import { SecondMenuComponent } from '../../components/second-menu/second-menu.component';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [CommonModule, MaterialModule, FareComponent, OrderComponent],
+  imports: [CommonModule, MaterialModule, FareComponent, OrderComponent, SecondMenuComponent],
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
 })
