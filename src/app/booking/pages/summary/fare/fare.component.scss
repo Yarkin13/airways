@@ -1,8 +1,7 @@
 @use "src/styles.scss" as *;
 :host {
-  @media (max-width: 590px) {
-    width: 100%;
-  }
+  width: 100%;
+  max-width: 552px;
 
   p {
     margin: 0;
@@ -10,7 +9,6 @@
 }
 
 .fare {
-  width: 552px;
   box-sizing: border-box;
   background: $neutral100;
   border: 1px solid $secondary50;
@@ -18,10 +16,6 @@
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 590px) {
-    width: 100%;
-  }
 
   .card-content {
     display: flex;
