@@ -6,13 +6,16 @@ import { Store } from '@ngrx/store';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { selectBookingFlights, selectBookingPassengers } from 'src/app/redux/selectors/booking.selectors';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
-import { bookedFlights, bookedPassengers } from './summary.mock';
-import { BookedFlight, Passenger } from '../../models/booked-flights.model';
+import { BookedFlight, Passenger } from '../../../shared/models/booked-flights.model';
 import { PaymentModalComponent } from './payment-modal/payment-modal.component';
 import { SecondMenuComponent } from '../../components/second-menu/second-menu.component';
 
+@UntilDestroy()
 @Component({
   selector: 'app-summary',
   standalone: true,
@@ -21,9 +24,11 @@ import { SecondMenuComponent } from '../../components/second-menu/second-menu.co
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent {
-  public flights: Array<BookedFlight> = bookedFlights;
+  public flights!: Array<BookedFlight>;
 
-  public passengers: Array<Passenger> = bookedPassengers;
+  public passengers!: Array<Passenger>;
+
+  currency = '€';
 
   btnDisabled = false;
 
@@ -34,6 +39,15 @@ export class SummaryComponent {
     public dialog: MatDialog
   ) {
     this.btnDisabled = false;
+    this.store.select(selectCurrencySign).pipe(untilDestroyed(this)).subscribe((value) => {
+      this.currency = value;
+    });
+    this.store.select(selectBookingFlights).pipe(untilDestroyed(this)).subscribe((value) => {
+      this.flights = value;
+    });
+    this.store.select(selectBookingPassengers).pipe(untilDestroyed(this)).subscribe((value) => {
+      this.passengers = value;
+    });
   }
 
   redirectBookingPage() {

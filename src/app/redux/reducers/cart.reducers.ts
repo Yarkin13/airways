@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Flight } from 'src/app/booking/models/booked-flights.model';
+import { Flight } from 'src/app/shared/models/booked-flights.model';
 import { CartActions } from '../actions/cart.actions';
 
 export const initialState: Array<Flight> = [];

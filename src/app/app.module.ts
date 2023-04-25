@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { headerDataReducer } from './redux/reducers/header-data.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { cartReducer } from './redux/reducers/cart.reducers';
+import { bookingReducer } from './redux/reducers/booking.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { cartReducer } from './redux/reducers/cart.reducers';
     BrowserAnimationsModule,
     StoreModule.forRoot({
       headerData: headerDataReducer,
+      bookingData: bookingReducer,
       cart: cartReducer,
       router: routerReducer,
     }),

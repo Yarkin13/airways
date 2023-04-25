@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Flight } from 'src/app/booking/models/booked-flights.model';
+import { Flight } from 'src/app/shared/models/booked-flights.model';
 
 export const selectCartData = createFeatureSelector<Array<Flight>>('cart');
 

@@ -1,4 +1,4 @@
-import { BookedFlight, Passenger } from '../../models/booked-flights.model';
+import { BookedFlight, Passenger } from '../../../shared/models/booked-flights.model';
 
 export const bookedFlights: Array<BookedFlight> = [
   {
