@@ -46,11 +46,7 @@ export class HeaderComponent {
     });
     this.store.select(selectCartCount).pipe(untilDestroyed(this)).subscribe((value) => {
       this.cartCount = value;
-      if (value > 0) {
-        this.badgeHidden = false;
-      } else {
-        this.badgeHidden = true;
-      }
+      this.badgeHidden = value <= 0;
     });
   }
 

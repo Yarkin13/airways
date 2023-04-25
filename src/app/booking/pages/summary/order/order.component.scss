@@ -3,10 +3,8 @@
 :host {
   display: flex;
   justify-content: flex-end;
-
-  @media (max-width: 590px) {
-    width: 100%;
-  }
+  width: 100%;
+  max-width: 552px;
 
   p {
     margin: 0;
@@ -14,17 +12,13 @@
 }
 
 .order {
-  width: 552px;
   box-sizing: border-box;
   background: $neutral100;
   box-shadow: $shadow;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 590px) {
-    width: 100%;
-  }
+  width: 100%;
 
   .card-header {
     background: $secondary80;
