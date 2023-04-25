@@ -38,6 +38,5 @@ export const bookedPassengers: Array<Passenger> = [
     count: 1,
     fare: '88.00',
     charge: '10.00',
-    seat: null,
   },
 ];

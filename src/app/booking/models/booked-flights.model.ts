@@ -7,11 +7,11 @@ export interface BookedFlight {
 
 export interface Passenger {
   name: string;
-  type: string;
+  type: 'adult' | 'child' | 'infant';
   count: number;
   fare: string;
   charge: string;
-  seat: string | null;
+  seat?: string;
 }
 
 // for Cart
