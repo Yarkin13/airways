@@ -5,9 +5,22 @@
   background: $secondary90;
 }
 
+.direction__text {
+  display: block;
+  width: max-content;
+}
+
+.direction__span {
+  color: $neutral30;
+}
+
 .direction__input .mat-mdc-text-field-wrapper {
   border-radius: 4px;
   border: 0.5px solid rgba(116, 118, 122, 0.6);
+}
+
+.direction__input .mat-mdc-form-field-infix {
+  display: flex;
 }
 
 .direction__input .mdc-text-field--focused {

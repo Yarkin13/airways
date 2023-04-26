@@ -37,6 +37,10 @@
   color: $primary;
 }
 
+.disabledTitle {
+  color: $neutral0;
+}
+
 .passengers__subtitle {
   font-size: 14px;
   color: $neutral30;
@@ -56,6 +60,11 @@
   cursor: pointer;
 }
 
+.disabledBtn {
+  color: $neutral30;
+  cursor: default;
+}
+
 .passengers__count-input {
   width: 20px;
   outline: none;
@@ -66,7 +75,15 @@
   cursor: default;
 }
 
+.disabledInput {
+  opacity: 0.5;
+}
+
 .none-option {
   height: 0;
   min-height: 0;
+}
+
+.passengers__input .mat-mdc-form-field-subscript-wrapper {
+  display: none;
 }
