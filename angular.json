@@ -29,6 +29,7 @@
               "src/styles.scss",
               "src/app/material/theme.scss"
             ],
+            "allowedCommonJsDependencies": ["moment"],
             "scripts": []
           },
           "configurations": {
