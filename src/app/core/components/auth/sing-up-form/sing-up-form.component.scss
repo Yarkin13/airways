@@ -25,11 +25,19 @@
     border: 0.5px solid $neutral60;
     background: $secondary90;
   }
+
+  ::ng-deep .mat-icon {
+    color: $neutral10;
+  }
 }
 
 .signup__input--error {
   ::ng-deep .mdc-text-field {
     border: 0.5px solid $error;
+  }
+
+  ::ng-deep .mat-icon {
+    color: $error;
   }
 }
 

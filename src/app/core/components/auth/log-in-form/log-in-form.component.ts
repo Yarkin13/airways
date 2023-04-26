@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { emailValidator, passwordValidator } from '../../../validators';
+import { emailValidator, passwordValidator } from '../../../../shared/validators';
 
 @Component({
   selector: 'app-log-in-form',

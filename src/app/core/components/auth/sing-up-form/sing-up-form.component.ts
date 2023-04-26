@@ -7,7 +7,7 @@ import {
   nameValidator,
   dateValidator,
   phoneValidator,
-} from '../../../validators';
+} from '../../../../shared/validators';
 import { COUNTRY_CODES, CITIZENSHIP } from '../../../../shared/constants';
 
 @Component({
