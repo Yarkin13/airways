@@ -1,0 +1,77 @@
+@use "src/styles.scss" as *;
+
+:host {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 552px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.order {
+  box-sizing: border-box;
+  background: $neutral100;
+  box-shadow: $shadow;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .card-header {
+    background: $secondary80;
+    border-top: 3px solid $primary;
+    border-radius: 8px 8px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 22px 24px;
+
+    .flight-title-row,
+    .flight-date-row {
+      display: flex;
+      color: $black;
+    }
+
+    .flight-title-row {
+      gap: 20px;
+      @extend %title-medium;
+      font-weight: 700;
+
+      .flight-number {
+        color: $primary;
+      }
+    }
+
+    .flight-date-row {
+      gap: 36px;
+      @extend %body-large;
+    }
+  }
+
+  .passenger-info {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 16px 20px 24px;
+    gap: 12px;
+    @extend %body-large;
+
+    .name {
+      color: $neutral0;
+      @extend %body-large;
+      text-transform: uppercase;
+    }
+
+    .info {
+      padding-left: 28px;
+      color: $black;
+      gap: 4px;
+
+      @media (max-width: $mobile-l) {
+        padding-left: 0;
+      }
+    }
+  }
+}

@@ -6,8 +6,9 @@
   align-items: center;
   gap: 8px;
   width: 532px;
+  height: 40px;
 
-  @media (max-width: 1140px) {
+  @media (max-width: 1150px) {
     width: 440px;
     margin-left: 16px;
   }
@@ -50,7 +51,7 @@
     width: 80px;
     height: 0px;
 
-    @media (max-width: 1140px) {
+    @media (max-width: 1150px) {
       width: 40px;
     }
   }

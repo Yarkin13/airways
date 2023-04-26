@@ -1,0 +1,29 @@
+<div class="fare">
+  <div class="card-content">
+    <div *ngFor="let passenger of passengers">
+      <div class="row fare-type-row">
+        <p class="fare-type">
+          {{ passenger.count }} x
+          {{ passenger.type[0].toUpperCase() + passenger.type.slice(1) }} Fare
+        </p>
+        <p class="fare-type-amount">
+          {{ currency + (+passenger.fare + +passenger.charge).toFixed(2) }}
+        </p>
+      </div>
+      <div class="row fare-row">
+        <p class="fare-text">fare</p>
+        <p class="fare-amount">{{ currency + passenger.fare }}</p>
+      </div>
+      <div class="row fare-row">
+        <p class="charge-text">Tax & Service Charge</p>
+        <p class="charge-amount">{{ currency + passenger.charge }}</p>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div class="card-footer">
+    <p class="total-text">TOTAL:</p>
+    <p class="total-amount">{{ currency + total }}</p>
+  </div>
+</div>

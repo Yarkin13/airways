@@ -1,15 +1,18 @@
 @use "src/styles.scss" as *;
 
-.header {
-  min-height: 88px;
+:host {
   width: 100%;
   position: fixed;
   top: 0;
+  z-index: 2;
+}
+
+.header {
+  min-height: 88px;
   background: $neutral70;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
   box-sizing: border-box;
 }
 
@@ -24,7 +27,7 @@
   flex-wrap: wrap;
   row-gap: 16px;
 
-  @media (max-width: $desktop-s) {
+  @media (max-width: 1074px) {
     padding: 10px;
   }
 
@@ -96,6 +99,10 @@
   background: $neutral100;
 
   .menu {
+    .menu__text {
+      color: $neutral10;
+    }
+
     .user__sign-in {
       color: $neutral10;
     }
@@ -111,7 +118,7 @@
 }
 
 .media {
-    @media (max-width: 1058px) {
-      justify-content: center;
-    }
+  @media (max-width: 1058px) {
+    justify-content: center;
+  }
 }
