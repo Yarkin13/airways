@@ -11,6 +11,8 @@ import { DatesComponent } from './pages/main/dates/dates.component';
 import { PassengersComponent } from './pages/main/passengers/passengers.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
+import { PassengerInfoComponent } from './pages/booking/passenger-info/passenger-info.component';
+import { ContactDetailsComponent } from './pages/booking/contact-details/contact-details.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { SharedModule } from '../shared/shared.module';
     ReversesButtonComponent,
     DatesComponent,
     PassengersComponent,
+    PassengerInfoComponent,
+    ContactDetailsComponent,
   ],
   imports: [
     CommonModule,

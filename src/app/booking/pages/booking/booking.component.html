@@ -1,1 +1,39 @@
-<p>booking works!</p>
+<div class="booking__wrapper">
+  <div class="passengers__layout">
+    <div class="passengers__title-box">
+      <div class="passengers__title">
+        <div class="passengers__title-icon">
+          <mat-icon>person</mat-icon>
+        </div>
+        <div class="passengers__title-text">Passengers</div>
+      </div>
+      <div class="passengers__description">
+        Enter the passenger's names as they appear on document (passport or ID).
+      </div>
+    </div>
+    <app-passenger-info
+      *ngFor="let passenger of passengers; index as i"
+      [passengerType]="passenger"
+      [passengerIdx]="i + 1"
+    ></app-passenger-info>
+  </div>
+  <div class="contacts__layout">
+    <div class="contacts__title-box">
+      <div class="contacts__title">
+        <div class="contacts__title-icon">
+          <mat-icon>contacts</mat-icon>
+        </div>
+        <div class="contacts__title-text">Contact details</div>
+      </div>
+      <div class="contacts__description">
+        We need contact details to be able to deliver the latest information
+        regarding your flight.
+      </div>
+    </div>
+    <app-contact-details></app-contact-details>
+  </div>
+  <div class="buttons__layout">
+    <button mat-stroked-button color="primary" class="button">Back</button>
+    <button mat-flat-button color="primary" class="button">Continue</button>
+  </div>
+</div>

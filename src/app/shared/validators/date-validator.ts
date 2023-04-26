@@ -1,8 +1,10 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function dateValidator(): ValidatorFn {
+export function dateValidator(noLimit?: boolean): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (!Date.parse(control.value)) return { dateValidator: { value: control.value } };
+
+    if (noLimit) return null;
 
     const inputDate = new Date(control.value);
     const currentYear = new Date().getFullYear();

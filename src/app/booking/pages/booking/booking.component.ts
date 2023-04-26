@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./booking.component.scss'],
 })
 export class BookingComponent {
-
+  passengers: ('Adult' | 'Child' | 'Infant')[] = ['Adult', 'Child', 'Infant']; // TODO mocks
 }

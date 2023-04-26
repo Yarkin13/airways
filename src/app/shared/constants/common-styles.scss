@@ -71,9 +71,15 @@ $shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
   font-weight: 500;
 }
 
+%roboto-bold {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+}
+
 // title
 %title-large {
-  @extend %roboto-normal;
+  @extend %roboto-bold;
   font-size: 24px;
   line-height: 28px;
 }
