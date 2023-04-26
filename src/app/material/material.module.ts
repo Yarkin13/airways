@@ -16,6 +16,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -37,6 +40,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatAutocompleteModule,
     OverlayModule,
     MatSlideToggleModule,
+    MatCardModule,
+    MatDividerModule,
+    MatSnackBarModule,
   ],
 })
 export class MaterialModule {}

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { BookingRoutingModule } from './booking-routing.module';
 import { MainComponent } from './pages/main/main.component';
 import { FlightSelectionComponent } from './pages/flight-selection/flight-selection.component';
-import { SummaryComponent } from './pages/summary/summary.component';
 import { BookingComponent } from './pages/booking/booking.component';
 import { FlightTypeComponent } from './pages/main/flight-type/flight-type.component';
 import { DirectionInputComponent } from './pages/main/direction-input/direction-input.component';
@@ -20,7 +19,6 @@ import { ContactDetailsComponent } from './pages/booking/contact-details/contact
     BookingComponent,
     MainComponent,
     FlightSelectionComponent,
-    SummaryComponent,
     FlightTypeComponent,
     DirectionInputComponent,
     ReversesButtonComponent,

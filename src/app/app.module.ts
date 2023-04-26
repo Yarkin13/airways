@@ -9,6 +9,9 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { headerDataReducer } from './redux/reducers/header-data.reducer';
 import { AppRoutingModule } from './app-routing.module';
+import { cartReducer } from './redux/reducers/cart.reducers';
+import { bookingReducer } from './redux/reducers/booking.reducer';
+import { SecondMenuComponent } from './booking/components/second-menu/second-menu.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +19,14 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     CoreModule,
     SharedModule,
+    SecondMenuComponent,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ headerData: headerDataReducer, router: routerReducer }),
+    StoreModule.forRoot({
+      headerData: headerDataReducer,
+      bookingData: bookingReducer,
+      cart: cartReducer,
+      router: routerReducer,
+    }),
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     AppRoutingModule,

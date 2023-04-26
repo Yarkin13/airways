@@ -4,6 +4,8 @@ import { Store } from '@ngrx/store';
 import { selectUrl } from 'src/app/redux/selectors/router.selectors';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { STEPS } from 'src/app/shared/constants';
+import { selectCartCount } from 'src/app/redux/selectors/cart.selectors';
+import { Router } from '@angular/router';
 import { AuthComponent } from '../auth/auth.component';
 
 @UntilDestroy()
@@ -15,6 +17,8 @@ import { AuthComponent } from '../auth/auth.component';
 export class HeaderComponent {
   badgeHidden = true;
 
+  cartCount = 0;
+
   path$;
 
   isMainPage = true;
@@ -25,13 +29,13 @@ export class HeaderComponent {
 
   isOpaque = false;
 
-  constructor(private store: Store, public dialog: MatDialog) {
+  constructor(private store: Store, public dialog: MatDialog, public router: Router) {
     this.path$ = this.store.select(selectUrl);
     this.path$.pipe(untilDestroyed(this)).subscribe((value) => {
       if (value === '/booking/main') {
         this.isMainPage = true;
         this.isUserPage = false;
-      } else if (value === '/user') {
+      } else if (value === '/user/account' || value === '/user/cart') {
         this.isMainPage = false;
         this.isUserPage = true;
       } else {
@@ -40,14 +44,18 @@ export class HeaderComponent {
         this.currentStep = STEPS[value] || STEPS['default'];
       }
     });
+    this.store.select(selectCartCount).pipe(untilDestroyed(this)).subscribe((value) => {
+      this.cartCount = value;
+      this.badgeHidden = value <= 0;
+    });
   }
 
   openAuthModal() {
     this.dialog.open(AuthComponent);
   }
 
-  toggleBadgeVisibility() {
-    this.badgeHidden = !this.badgeHidden;
+  redirectToCart() {
+    this.router.navigateByUrl('/user/cart');
   }
 
   @HostListener('window:scroll', [])

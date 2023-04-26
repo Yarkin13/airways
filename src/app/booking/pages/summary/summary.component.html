@@ -1,1 +1,43 @@
-<p>summary works!</p>
+<div class="summary__container">
+  <div class="summary__title">
+    <img src="assets/booking/summary-icon.svg" alt="" />
+    <p>Summary</p>
+  </div>
+
+  <div class="summary__content">
+    <ng-container *ngFor="let flight of flights">
+      <app-order [passengers]="passengers" [flight]="flight"></app-order>
+    </ng-container>
+    <app-fare [passengers]="passengers" [currency]="currency"></app-fare>
+  </div>
+
+  <div class="summary__buttons">
+    <button
+      mat-button
+      color="primary"
+      class="button button-back"
+      (click)="redirectBookingPage()"
+      [disabled]="btnDisabled"
+    >
+      Back
+    </button>
+    <button
+      mat-stroked-button
+      color="primary"
+      class="button button-add"
+      (click)="handleAddToCart()"
+      [disabled]="btnDisabled"
+    >
+      Add to order cart
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="button button-buy"
+      (click)="openPaymentModal()"
+      [disabled]="btnDisabled"
+    >
+      Buy now
+    </button>
+  </div>
+</div>
