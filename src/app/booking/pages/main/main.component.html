@@ -4,28 +4,29 @@
     <form [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()">
       <div class="direction__container">
         <direction-input
-          [formName]="flightSearchForm"
+          [flightSearchForm]="flightSearchForm"
           label="From"
           controlName="from"
           placeholder="Choose departure point"
           [airports]="airports"
         ></direction-input>
         <direction-input
-          [formName]="flightSearchForm"
+          [flightSearchForm]="flightSearchForm"
           label="Destination"
           controlName="destination"
           placeholder="Choose your destination"
           [airports]="airports"
         ></direction-input>
-        <reverses-button></reverses-button>
+        <reverses-button
+          [flightSearchForm]="flightSearchForm"
+        ></reverses-button>
       </div>
       <div class="dates-container">
         <dates
-          [formName]="flightSearchForm"
-          [controlName]="'dates'"
+          [flightSearchForm]="flightSearchForm"
           [flightType]="flightType"
         ></dates>
-        <passengers [formName]="flightSearchForm"></passengers>
+        <passengers [flightSearchForm]="flightSearchForm"></passengers>
       </div>
       <button type="submit" mat-flat-button color="primary" class="flight-btn">
         Search

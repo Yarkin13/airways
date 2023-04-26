@@ -25,8 +25,6 @@ export class MainComponent {
 
   changeFlightType(newType: string) {
     this.flightType = newType;
-    this.flightSearchForm.get('dateTo')?.reset();
-    this.flightSearchForm.get('dateBack')?.reset();
   }
 
   onSubmit(): void {

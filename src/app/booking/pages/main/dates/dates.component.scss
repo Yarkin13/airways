@@ -4,12 +4,12 @@
   display: block;
   max-width: 311px;
   width: 100%;
-  background: $secondary90;
 }
 
 .flight-date .mat-mdc-text-field-wrapper {
   border-radius: 4px;
   border: 0.5px solid rgba(116, 118, 122, 0.6);
+  background: $secondary90;
 }
 
 .flight-date .mdc-text-field--focused {
@@ -21,5 +21,5 @@
 }
 
 .flight-date-picker .mat-calendar-controls {
-  margin-top: 0 !important;
+  margin-top: 0 !important; //angular material style
 }

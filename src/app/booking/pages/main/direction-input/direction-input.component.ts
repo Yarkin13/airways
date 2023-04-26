@@ -14,7 +14,7 @@ import { IAirports } from 'src/app/booking/airports.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class DirectionInputComponent implements OnInit {
-  @Input() formName!: FormGroup;
+  @Input() flightSearchForm!: FormGroup;
   @Input() label!: string;
   @Input() controlName!: string;
   @Input() placeholder!: string;
@@ -23,7 +23,7 @@ export class DirectionInputComponent implements OnInit {
   filteredAirports!: Observable<IAirports[]>;
 
   ngOnInit() {
-    this.filteredAirports = this.formName.controls[
+    this.filteredAirports = this.flightSearchForm.controls[
       this.controlName
     ].valueChanges.pipe(
       startWith(''),
@@ -34,5 +34,10 @@ export class DirectionInputComponent implements OnInit {
   private filter(value: string): IAirports[] {
     const filterValue = value.toLowerCase();
     return this.airports.filter((airport) => airport.airport.toLowerCase().includes(filterValue));
+  }
+
+  get inputValue() {
+    const control = this.flightSearchForm.get(this.controlName);
+    return this.airports.find((item) => item.airport === control?.value);
   }
 }

@@ -1,49 +1,60 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-// import { MomentDateAdapter } from '@angular/material-moment-adapter';
-// import {
-//   DateAdapter,
-//   MAT_DATE_FORMATS,
-//   MAT_DATE_LOCALE,
-// } from '@angular/material/core';
+import {
+  Component,
+  ViewEncapsulation,
+  Input,
+  OnInit,
+  Inject,
+} from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { selectHeaderDate } from 'src/app/redux/selectors/header-data.selectors';
-
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'LL',
-  },
-  display: {
-    dateInput: 'YYYY-MM-DD',
-    monthYearLabel: 'MMMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY',
-  },
-};
+import { DateFormat } from './date-format';
 
 @Component({
   selector: 'dates',
   templateUrl: './dates.component.html',
   styleUrls: ['./dates.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  // providers: [
-  //   {
-  //     provide: DateAdapter,
-  //     useClass: MomentDateAdapter,
-  //     deps: [MAT_DATE_LOCALE],
-  //   },
-  //   { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
-  // ],
+  providers: [{ provide: MAT_DATE_FORMATS, useClass: DateFormat }],
 })
-export class DatesComponent {
-  @Input() formName!: FormGroup;
-
+export class DatesComponent implements OnInit {
+  @Input() flightSearchForm!: FormGroup;
   @Input() flightType!: string;
 
-  @Input() controlName!: string;
+  dateFormat!: string;
+  dateTo: FormControl = new FormControl<Date | null>(null);
+  dateBack: FormControl = new FormControl<Date | null>(null);
 
-  dateFormat$: Observable<string> = this.store.select(selectHeaderDate);
+  constructor(
+    private store: Store,
+    @Inject(MAT_DATE_FORMATS) public config: DateFormat
+  ) {}
 
-  constructor(private store: Store) {}
+  ngOnInit() {
+    // eslint-disable-next-line @ngrx/no-store-subscription
+    this.store.select(selectHeaderDate).subscribe((date) => {
+      this.config.value = date;
+      this.dateFormat = date;
+      this.dateTo = new FormControl(this.dateTo.value);
+      this.dateBack = new FormControl(this.dateBack.value);
+    });
+  }
+
+  rangePickerChange() {
+    this.dateToControl?.setValue(new Date(this.dateTo.value));
+    this.dateBackControl?.setValue(new Date(this.dateBack.value));
+  }
+
+  datePickerChange() {
+    this.dateToControl?.setValue(new Date(this.dateTo.value));
+    this.dateBackControl?.setValue(null);
+  }
+
+  get dateToControl() {
+    return this.flightSearchForm.get('dateTo');
+  }
+  get dateBackControl() {
+    return this.flightSearchForm.get('dateBack');
+  }
 }
