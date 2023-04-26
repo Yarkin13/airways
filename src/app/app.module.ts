@@ -11,6 +11,7 @@ import { headerDataReducer } from './redux/reducers/header-data.reducer';
 import { AppRoutingModule } from './app-routing.module';
 import { cartReducer } from './redux/reducers/cart.reducers';
 import { bookingReducer } from './redux/reducers/booking.reducer';
+import { SecondMenuComponent } from './booking/components/second-menu/second-menu.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { bookingReducer } from './redux/reducers/booking.reducer';
     BrowserModule,
     CoreModule,
     SharedModule,
+    SecondMenuComponent,
     BrowserAnimationsModule,
     StoreModule.forRoot({
       headerData: headerDataReducer,

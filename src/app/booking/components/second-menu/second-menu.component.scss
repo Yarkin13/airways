@@ -1,23 +1,12 @@
 @use "src/styles.scss" as *;
 
-:host {
+.menu {
   height: 68px;
-  box-shadow: $shadow;
   background: $secondary100;
-  width: 100%;
-  position: fixed;
-  margin-top: 88px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: $desktop-ms) {
-    margin-top: 116px;
-  }
-
-  @media (max-width: $desktop-xs) {
-    margin-top: 172px;
-  }
+  box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.2);
 
   p {
     margin: 0;
