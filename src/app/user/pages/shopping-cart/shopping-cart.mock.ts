@@ -1,7 +1,7 @@
 interface PassengerInfo {
   firstName: string;
   lastName: string;
-  type: 'adult' | 'child' | 'infant';
+  type: 'Adult' | 'Child' | 'Infant';
   gender: 'male' | 'female';
   dateOfBirth: '';
   fare: string;
@@ -17,7 +17,7 @@ interface FlightInfo {
 }
 
 interface PassengerType {
-  type: 'adult' | 'child' | 'infant';
+  type: 'Adult' | 'Child' | 'Infant';
   count: number;
 }
 
@@ -44,9 +44,9 @@ export const shoppingCartData: Array<Trip> = [
   {
     id: '1',
     passengers: [
-      { type: 'adult', count: 1 },
-      { type: 'child', count: 1 },
-      { type: 'infant', count: 1 },
+      { type: 'Adult', count: 1 },
+      { type: 'Child', count: 1 },
+      { type: 'Infant', count: 1 },
     ],
     flight: {
       tripType: 'Round Trip',
@@ -69,27 +69,27 @@ export const shoppingCartData: Array<Trip> = [
       {
         firstName: 'Harry',
         lastName: 'Potter',
-        type: 'adult',
+        type: 'Adult',
         gender: 'male',
         dateOfBirth: '',
         fare: '166.00',
         charge: '91.31',
-        seat: 'Seat 19E',
+        seat: '19E',
       },
       {
         firstName: 'LiLi',
         lastName: 'Potter',
-        type: 'child',
+        type: 'Child',
         gender: 'female',
         dateOfBirth: '',
         fare: '106.00',
         charge: '90.08',
-        seat: 'Seat 20E',
+        seat: '20E',
       },
       {
         firstName: 'James',
         lastName: 'Potter',
-        type: 'infant',
+        type: 'Infant',
         gender: 'male',
         dateOfBirth: '',
         fare: '88.00',
@@ -105,7 +105,7 @@ export const shoppingCartData: Array<Trip> = [
   },
   {
     id: '2',
-    passengers: [{ type: 'adult', count: 1 }],
+    passengers: [{ type: 'Adult', count: 1 }],
     flight: {
       tripType: 'One Way',
       number: 'FR 1936',
@@ -121,12 +121,12 @@ export const shoppingCartData: Array<Trip> = [
       {
         firstName: 'LiLif',
         lastName: 'Potter',
-        type: 'adult',
+        type: 'Adult',
         gender: 'female',
         dateOfBirth: '',
         fare: '20.96',
         charge: '10.00',
-        seat: 'Seat 20E',
+        seat: '20E',
       },
     ],
     contactDetails: {
