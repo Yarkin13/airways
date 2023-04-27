@@ -16,12 +16,14 @@ interface FlightInfo {
   time: string;
 }
 
+interface PassengerType {
+  type: 'adult' | 'child' | 'infant';
+  count: number;
+}
+
 export interface Trip {
-  passengers: {
-    adult?: number;
-    child?: number;
-    infant?: number;
-  };
+  id: string;
+  passengers: Array<PassengerType>;
   flight: {
     tripType: 'Round Trip' | 'One Way';
     number: string;
@@ -31,20 +33,21 @@ export interface Trip {
   };
   passengersInfo: Array<PassengerInfo>;
   contactDetails: {
-    code: string,
-    mobile: string,
-    email: string,
-  }
+    code: string;
+    mobile: string;
+    email: string;
+  };
   totalCost: string;
 }
 
 export const shoppingCartData: Array<Trip> = [
   {
-    passengers: {
-      adult: 1,
-      child: 1,
-      infant: 1,
-    },
+    id: '1',
+    passengers: [
+      { type: 'adult', count: 1 },
+      { type: 'child', count: 1 },
+      { type: 'infant', count: 1 },
+    ],
     flight: {
       tripType: 'Round Trip',
       number: 'FR 1925',
@@ -101,9 +104,8 @@ export const shoppingCartData: Array<Trip> = [
     totalCost: '551.39',
   },
   {
-    passengers: {
-      adult: 1,
-    },
+    id: '2',
+    passengers: [{ type: 'adult', count: 1 }],
     flight: {
       tripType: 'One Way',
       number: 'FR 1936',
