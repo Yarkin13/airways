@@ -1,0 +1,34 @@
+@use "src/styles.scss" as *;
+
+.promo {
+  width: 100%;
+
+  ::ng-deep .mat-mdc-form-field-infix {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    align-items: flex-start;
+    height: 48px;
+  }
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    height: 48px;
+  }
+
+  .apply__btn {
+    height: 48px;
+    color: $primary;
+    @extend %button;
+  }
+
+  .promo__input {
+    height: 48px;
+  }
+
+  .promo__hint {
+    color: $highlight-green0;
+  }
+}
+
+
+

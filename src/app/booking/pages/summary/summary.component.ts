@@ -12,7 +12,7 @@ import { selectBookingFlights, selectBookingPassengers } from 'src/app/redux/sel
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { BookedFlight, Passenger } from '../../../shared/models/booked-flights.model';
-import { PaymentModalComponent } from './payment-modal/payment-modal.component';
+import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
 import { SecondMenuComponent } from '../../components/second-menu/second-menu.component';
 
 @UntilDestroy()
