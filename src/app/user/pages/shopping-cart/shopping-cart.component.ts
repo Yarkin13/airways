@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selector
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
+import { MatSort } from '@angular/material/sort';
 import { shoppingCartData, Trip } from './shopping-cart.mock';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
@@ -22,7 +23,7 @@ import { DiscountService } from '../../services/discount.service';
   styleUrls: ['./shopping-cart.component.scss'],
   imports: [CommonModule, MaterialModule, MenuComponent, PromoInputComponent],
 })
-export class ShoppingCartComponent {
+export class ShoppingCartComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'select',
     'number',
@@ -53,6 +54,24 @@ export class ShoppingCartComponent {
     this.discountService.getDiscount().subscribe((value) => {
       this.discount = value;
     });
+
+    this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
+      switch (sortHeaderId) {
+        case 'number': return data.flight.number;
+        case 'flight': return data.flight.oneWay.from;
+        case 'tripType': return data.flight.tripType;
+        // TO DO: sort dateTime by time stamp
+        case 'dateTime': return data.flight.oneWay.date;
+        case 'price': return +data.totalCost;
+        default: return '';
+      }
+    };
+  }
+
+  @ViewChild(MatSort) sort!: MatSort;
+
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
