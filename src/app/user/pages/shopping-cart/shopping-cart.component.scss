@@ -6,6 +6,19 @@
   max-width: 1128px;
   margin: 88px auto 0;
   padding-left: 22px;
+  box-sizing: border-box;
+
+  @media (max-width: $desktop-s) {
+    padding: 0 10px;
+  }
+
+  @media (max-width: $mobile-xll) {
+    margin: 116px auto 0;
+  }
+
+  @media (max-width: $mobile-lm) {
+    margin: 172px auto 0;
+  }
 
   p {
     margin: 0;
@@ -14,12 +27,19 @@
 
 .shopping-cart__container {
   margin-top: 40px;
+  margin-bottom: 40px;
   width: 100%;
   background-color: $neutral100;
   box-shadow: $shadow;
   border-radius: 8px;
   box-sizing: border-box;
   padding-bottom: 5px;
+  overflow-x: scroll;
+
+  @media (max-width: $mobile-ll) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 }
 
 .title__container {
@@ -29,14 +49,28 @@
     color: $primary;
     @extend %title-large;
     font-weight: 700;
+
+    @media (max-width: $mobile-xl) {
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
   }
 }
 
 .table {
   padding: 0 16px;
 
+  @media (max-width: $mobile-xl) {
+    padding: 0 8px;
+  }
+
   .mat-column-select {
     padding-right: 8px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 0 4px;
+    }
   }
 
   .mat-column-passengers,
@@ -46,6 +80,10 @@
   .mat-column-dateTime,
   .mat-column-price {
     padding: 20px 14px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 15px 8px;
+    }
   }
 
   .mat-column-number {
@@ -79,15 +117,23 @@
   }
 
   .table__footer td,
-  .table__footer-second td{
+  .table__footer-second td {
     padding: 38px 14px 38px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 20px 8px;
+    }
   }
 
-  .table__footer-second td{
+  .table__footer-second td {
     padding: 38px 14px 20px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 20px 8px 10px;
+    }
   }
 
-  .table__footer td{
+  .table__footer td {
     border-top: 1px solid $secondary50;
     border-bottom: 1px solid $secondary50;
   }
@@ -108,7 +154,7 @@
   }
 
   .table__footer-second .payment__btn-cell,
-  .table__footer-second .selected__btn-cell{
+  .table__footer-second .selected__btn-cell {
     padding: 15px 0 20px;
   }
 
@@ -130,5 +176,28 @@
     background: $secondary90;
     height: 28px;
     padding: 0 8px;
+  }
+
+  @media (max-width: $mobile-xl) {
+    .table__row td,
+    .table__header th,
+    .selected__text,
+    .table__footer-text, 
+    .new-trip__btn {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+    }
+
+    .table__footer-price {
+      font-size: 20px;
+      line-height: 20px;
+    }
+
+    .title {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
   }
 }
