@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "https://api.air-ways.online",
+      "pathRewrite": { "^/api": "" },
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+  }

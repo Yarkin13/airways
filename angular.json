@@ -65,6 +65,7 @@
               "browserTarget": "airways:build:production"
             },
             "development": {
+              "proxyConfig": "proxy.conf.json",
               "browserTarget": "airways:build:development"
             }
           },
