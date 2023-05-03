@@ -57,11 +57,11 @@ export class ShoppingCartComponent implements AfterViewInit {
 
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
       switch (sortHeaderId) {
-        case 'number': return data.flight.number;
-        case 'flight': return data.flight.oneWay.from;
+        case 'number': return data.flight.oneWay.flightNumber;
+        case 'flight': return data.flight.oneWay.from.name;
         case 'tripType': return data.flight.tripType;
         // TO DO: sort dateTime by time stamp
-        case 'dateTime': return data.flight.oneWay.date;
+        case 'dateTime': return data.flight.oneWay.takeoffDate;
         case 'price': return +data.totalCost;
         default: return '';
       }
@@ -97,7 +97,7 @@ export class ShoppingCartComponent implements AfterViewInit {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
-      row.flight.number + 1
+      row.flight.oneWay.flightNumber + 1
     }`;
   }
 

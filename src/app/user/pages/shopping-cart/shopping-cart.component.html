@@ -41,7 +41,16 @@
     <ng-container matColumnDef="number">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.flight.number }}<br />
+        {{ element.flight.oneWay.flightNumber }}<br />
+        <ng-container
+          *ngIf="
+            element.flight.returnWay &&
+            element.flight.oneWay.flightNumber !==
+              element.flight.returnWay.flightNumber
+          "
+        >
+          {{ element.flight.returnWay.flightNumber }}
+        </ng-container>
       </td>
     </ng-container>
 
@@ -49,11 +58,11 @@
     <ng-container matColumnDef="flight">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Flight</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.flight.oneWay.from }} - {{ element.flight.oneWay.destination
-        }}<br />
+        {{ element.flight.oneWay.from.city }} -
+        {{ element.flight.oneWay.to.city }}<br />
         <ng-container *ngIf="element.flight.returnWay">
-          {{ element.flight.returnWay.from }} -
-          {{ element.flight.returnWay.destination }}
+          {{ element.flight.returnWay.from.city }} -
+          {{ element.flight.returnWay.to.city }}
         </ng-container>
       </td>
     </ng-container>
@@ -70,11 +79,13 @@
     <ng-container matColumnDef="dateTime">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Date & Time</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.flight.oneWay.date | date : "d MMM, yyyy" }},
-        {{ element.flight.oneWay.time }}<br />
+        {{ element.flight.oneWay.takeoffDate | date : "d MMM, yyyy" }},
+        {{ element.flight.oneWay.takeoffDate | date : "H:mm" }} -
+        {{ element.flight.oneWay.landingDate | date : "H:mm" }}<br />
         <ng-container *ngIf="element.flight.returnWay">
-          {{ element.flight.returnWay.date | date : "d MMM, yyyy" }},
-          {{ element.flight.returnWay.time }}
+          {{ element.flight.returnWay.takeoffDate | date : "d MMM, yyyy" }},
+          {{ element.flight.returnWay.takeoffDate | date : "H:mm" }} -
+          {{ element.flight.returnWay.landingDate | date : "H:mm" }}
         </ng-container>
       </td>
     </ng-container>

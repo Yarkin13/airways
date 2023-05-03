@@ -6,14 +6,26 @@ interface PassengerInfo {
   dateOfBirth: '';
   fare: string;
   charge: string;
+  baggage?: string;
   seat?: string;
 }
 
 interface FlightInfo {
-  from: string;
-  destination: string;
-  date: string;
-  time: string;
+  flightNumber: string,
+  from: {
+    key: string,
+    country: string,
+    city: string,
+    name: string
+  },
+  to: {
+    key: string,
+    country: string,
+    city: string,
+    name: string
+  },
+  takeoffDate: string;
+  landingDate: string;
 }
 
 interface PassengerType {
@@ -26,17 +38,11 @@ export interface Trip {
   passengers: Array<PassengerType>;
   flight: {
     tripType: 'Round Trip' | 'One Way';
-    number: string;
     oneWay: FlightInfo;
     returnWay?: FlightInfo;
     price: string;
   };
   passengersInfo: Array<PassengerInfo>;
-  contactDetails: {
-    code: string;
-    mobile: string;
-    email: string;
-  };
   totalCost: string;
 }
 
@@ -50,18 +56,39 @@ export const shoppingCartData: Array<Trip> = [
     ],
     flight: {
       tripType: 'Round Trip',
-      number: 'FR 1925',
       oneWay: {
-        from: 'Dublin',
-        destination: 'Warsaw Modlin',
-        date: 'Wednesday, 1 March, 2023',
-        time: '8:40 — 12:00',
+        flightNumber: 'FR 1925',
+        from: {
+          key: 'DUB',
+          country: 'Ireland',
+          city: 'Dublin',
+          name: 'Dublin',
+        },
+        to: {
+          key: 'WMI',
+          country: 'Poland',
+          city: 'Warsaw',
+          name: 'Warsaw Modlin',
+        },
+        takeoffDate: '2023-03-01T08:40:00.000Z',
+        landingDate: '2023-03-01T12:00:00.000Z',
       },
       returnWay: {
-        from: 'Warsaw Modlin',
-        destination: 'Dublin',
-        date: 'Saturday, 18 March, 2023',
-        time: '7:40 — 11:00',
+        flightNumber: 'FR 1925',
+        from: {
+          key: 'WMI',
+          country: 'Poland',
+          city: 'Warsaw',
+          name: 'Warsaw Modlin',
+        },
+        to: {
+          key: 'DUB',
+          country: 'Ireland',
+          city: 'Dublin',
+          name: 'Dublin',
+        },
+        takeoffDate: '2023-03-18T07:40:00.000Z',
+        landingDate: '2023-03-18T11:00:00.000Z',
       },
       price: '166.00',
     },
@@ -74,6 +101,7 @@ export const shoppingCartData: Array<Trip> = [
         dateOfBirth: '',
         fare: '166.00',
         charge: '91.31',
+        baggage: '',
         seat: '19E',
       },
       {
@@ -96,11 +124,6 @@ export const shoppingCartData: Array<Trip> = [
         charge: '10.00',
       },
     ],
-    contactDetails: {
-      code: '',
-      mobile: '',
-      email: '',
-    },
     totalCost: '551.39',
   },
   {
@@ -108,12 +131,22 @@ export const shoppingCartData: Array<Trip> = [
     passengers: [{ type: 'Adult', count: 1 }],
     flight: {
       tripType: 'One Way',
-      number: 'FR 1936',
       oneWay: {
-        from: 'Gdansk',
-        destination: 'Warsaw',
-        date: '28 May, 2023',
-        time: '15:40 — 16:40',
+        flightNumber: 'FR 1936',
+        from: {
+          key: 'GDN',
+          country: 'Poland',
+          city: 'Gdansk',
+          name: 'Gdansk Lech Walesa',
+        },
+        to: {
+          key: 'WMI',
+          country: 'Poland',
+          city: 'Warsaw',
+          name: 'Warsaw Modlin',
+        },
+        takeoffDate: '2023-05-28T15:40:00.000Z',
+        landingDate: '2023-05-28T16:40:00.000Z',
       },
       price: '20.96',
     },
@@ -129,11 +162,6 @@ export const shoppingCartData: Array<Trip> = [
         seat: '20E',
       },
     ],
-    contactDetails: {
-      code: '',
-      mobile: '',
-      email: '',
-    },
     totalCost: '20.96',
   },
 ];
