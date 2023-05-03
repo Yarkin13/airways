@@ -1,10 +1,10 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { Flight } from 'src/app/shared/models/booked-flights.model';
+import { Trip } from 'src/app/shared/models/shopping-cart.model';
 
 export const CartActions = createActionGroup({
   source: 'Cart data',
   events: {
-    'Add to cart': props<Flight>(),
+    'Add to cart': props<Trip>(),
     // 'Remove from cart': props<{ id: string }>(),
   },
 });

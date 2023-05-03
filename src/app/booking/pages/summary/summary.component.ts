@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
@@ -55,11 +54,11 @@ export class SummaryComponent {
   }
 
   handleAddToCart() {
-    const currentFlight = {
-      flights: this.flights,
-      passengers: this.passengers,
-    };
-    this.store.dispatch(CartActions.addToCart(currentFlight));
+    // const currentFlight = {
+    //   flights: this.flights,
+    //   passengers: this.passengers,
+    // };
+    // this.store.dispatch(CartActions.addToCart(currentFlight));
     this.snackBar.open('Item was successfully added to your cart!', '', {
       duration: 1500,
       panelClass: ['snackBar'],

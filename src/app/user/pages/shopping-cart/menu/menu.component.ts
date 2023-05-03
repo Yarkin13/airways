@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Trip } from '../shopping-cart.mock';
+import { Trip } from 'src/app/shared/models/shopping-cart.model';
 
 @Component({
   selector: 'app-menu',

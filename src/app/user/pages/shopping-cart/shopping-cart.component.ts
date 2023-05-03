@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
 import { MatSort } from '@angular/material/sort';
-import { shoppingCartData, Trip } from './shopping-cart.mock';
+import { Trip } from 'src/app/shared/models/shopping-cart.model';
+import { selectCartData } from 'src/app/redux/selectors/cart.selectors';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -33,7 +34,7 @@ export class ShoppingCartComponent implements AfterViewInit {
     'passengers',
     'price',
   ];
-  dataSource = new MatTableDataSource<Trip>(shoppingCartData);
+  dataSource!: MatTableDataSource<Trip>;
   selection = new SelectionModel<Trip>(true, []);
 
   currency = '€';
@@ -45,6 +46,12 @@ export class ShoppingCartComponent implements AfterViewInit {
     public dialog: MatDialog,
     private discountService: DiscountService,
   ) {
+    this.store
+      .select(selectCartData)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.dataSource = new MatTableDataSource<Trip>(value);
+      });
     this.store
       .select(selectCurrencySign)
       .pipe(untilDestroyed(this))
@@ -60,7 +67,6 @@ export class ShoppingCartComponent implements AfterViewInit {
         case 'number': return data.flight.oneWay.flightNumber;
         case 'flight': return data.flight.oneWay.from.name;
         case 'tripType': return data.flight.tripType;
-        // TO DO: sort dateTime by time stamp
         case 'dateTime': return data.flight.oneWay.takeoffDate;
         case 'price': return +data.totalCost;
         default: return '';

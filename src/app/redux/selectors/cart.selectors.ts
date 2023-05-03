@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Flight } from 'src/app/shared/models/booked-flights.model';
+import { Trip } from 'src/app/shared/models/shopping-cart.model';
 
-export const selectCartData = createFeatureSelector<Array<Flight>>('cart');
+export const selectCartData = createFeatureSelector<Array<Trip>>('cart');
 
 export const selectCartCount = createSelector(
   selectCartData,
-  (state: Array<Flight>) => state.length,
+  (state: Array<Trip>) => state.length,
 );
