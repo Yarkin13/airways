@@ -36,6 +36,6 @@ export interface Flight {
 export interface PassengerType {
   type: 'Adult' | 'Child' | 'Infant';
   count: number;
-  fare: string;
-  charge: string;
+  fare?: string;
+  charge?: string;
 }

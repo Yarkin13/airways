@@ -7,7 +7,7 @@
           {{ passenger.type[0].toUpperCase() + passenger.type.slice(1) }} Fare
         </p>
         <p class="fare-type-amount">
-          {{ currency + (+passenger.fare + +passenger.charge).toFixed(2) }}
+          {{ currency + (+passenger.fare! + +passenger.charge!).toFixed(2) }}
         </p>
       </div>
       <div class="row fare-row">

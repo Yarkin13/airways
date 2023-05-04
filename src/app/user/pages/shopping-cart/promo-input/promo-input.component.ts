@@ -7,11 +7,7 @@ import {
 } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DiscountService } from 'src/app/user/services/discount.service';
-
-const CORRECT_PROMO = [
-  { code: 'sun', discount: 5 },
-  { code: 'summer', discount: 10 },
-];
+import { PROMO_CODES } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-promo-input',
@@ -32,12 +28,12 @@ export class PromoInputComponent {
   }
 
   isCorrectPromo(control: AbstractControl): ValidationErrors | null {
-    const isCorrect = CORRECT_PROMO.some((el) => el.code === control.value) || !control.value;
+    const isCorrect = PROMO_CODES.some((el) => el.code === control.value) || !control.value;
     return isCorrect ? null : { isCorrectPromo: { value: control.value } };
   }
 
   onSubmit(value: string) {
-    const disc = CORRECT_PROMO.find((el) => el.code === value)?.discount.toString();
+    const disc = PROMO_CODES.find((el) => el.code === value)?.discount.toString();
     this.discount = disc || '';
     this.discountService.setDiscount(this.discount);
   }

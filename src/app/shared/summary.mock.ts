@@ -69,12 +69,12 @@ export const passengersInfo: Array<PassengerInfo> = [
 
 export const passengers: Array<PassengerType> = [
   {
-    type: 'Adult', count: 1, fare: '166.00', charge: '91.31'
+    type: 'Adult', count: 1
   },
   {
-    type: 'Child', count: 1, fare: '106.00', charge: '90.08'
+    type: 'Child', count: 1
   },
   {
-    type: 'Infant', count: 1, fare: '88.00', charge: '10.00'
+    type: 'Infant', count: 1
   },
 ];
