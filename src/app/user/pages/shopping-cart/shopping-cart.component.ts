@@ -11,7 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
 import { MatSort } from '@angular/material/sort';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
-import { selectCartData } from 'src/app/redux/selectors/cart.selectors';
+import { selectCartDataInCur } from 'src/app/redux/selectors/cart.selectors';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -47,7 +47,7 @@ export class ShoppingCartComponent implements AfterViewInit {
     private discountService: DiscountService,
   ) {
     this.store
-      .select(selectCartData)
+      .select(selectCartDataInCur)
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.dataSource = new MatTableDataSource<Trip>(value);
