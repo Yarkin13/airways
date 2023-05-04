@@ -22,6 +22,7 @@ export class PromoInputComponent {
   discount = '';
 
   constructor(private fb: FormBuilder, private discountService: DiscountService,) {
+    this.discountService.setDiscount(this.discount);
     this.promoForm = this.fb.group({
       promoCode: ['', this.isCorrectPromo],
     }, { updateOn: 'submit' });
