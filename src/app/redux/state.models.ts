@@ -1,9 +1,8 @@
-import { Flight } from 'src/app/shared/models/booked-flights.model';
 import { Trip } from '../shared/models/shopping-cart.model';
 
 export interface State {
   headerData: HeaderData;
-  bookingData: Flight;
+  bookingData: Trip;
   cart: Array<Trip>;
 }
 

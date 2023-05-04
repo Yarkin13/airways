@@ -1,24 +1,31 @@
 <div class="order">
   <div class="card-header">
     <div class="flight-title-row">
-      <p class="flight-number">FR 1925</p>
-      <p class="flight-title">Dublin — Warsaw Modlin</p>
+      <p class="flight-number">{{ flight.flightNumber }}</p>
+      <p class="flight-title">{{ flight.from.name }} - {{ flight.to.name }}</p>
     </div>
     <div class="flight-date-row">
-      <p class="flight-date">Wednesday, 1 March, 2023</p>
-      <p class="flight-time">8:40 — 12:00</p>
+      <p class="flight-date">
+        {{ flight.takeoffDate | date : "EEEE, d MMMM, yyyy" }}
+      </p>
+      <p class="flight-time">
+        {{ flight.takeoffDate | date : "H:mm" }} -
+        {{ flight.landingDate | date : "H:mm" }}
+      </p>
     </div>
   </div>
 
   <div class="card-content" *ngFor="let passenger of passengers">
     <div class="passenger-info">
-      <div class="name">{{ passenger.name }}</div>
+      <div class="name">{{ passenger.firstName }} {{ passenger.lastName }}</div>
       <div class="info">
-        <div class="luggage">1 checked bag (total 23 kg) included</div>
+        <div class="luggage" *ngIf="passenger.baggage">
+          1 checked bag (total {{ passenger.baggage }} kg) included
+        </div>
         <div class="cabin-luggage">
           1 cabin bag + 1 personal item (max. 8 kg) included
         </div>
-        <div class="seat" *ngIf="passenger.seat">{{ passenger.seat }}</div>
+        <div class="seat" *ngIf="passenger.seat">Seat {{ passenger.seat }}</div>
       </div>
     </div>
     <mat-divider></mat-divider>

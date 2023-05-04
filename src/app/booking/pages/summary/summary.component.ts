@@ -7,10 +7,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { selectBookingFlights, selectBookingPassengers } from 'src/app/redux/selectors/booking.selectors';
+import {
+  selectBookingFlight,
+  selectCurTripCost,
+  selectCurTripCostInCur,
+  selectPassengersFareByType,
+  selectPassengersFareByTypeInCur,
+  selectPassengersInfo,
+} from 'src/app/redux/selectors/booking.selectors';
+import {
+  Flight,
+  PassengerInfo,
+  PassengerType,
+} from 'src/app/shared/models/booking.model';
+import { CartActions } from 'src/app/redux/actions/cart.actions';
+import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
-import { BookedFlight, Passenger } from '../../../shared/models/booked-flights.model';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
 import { SecondMenuComponent } from '../../components/second-menu/second-menu.component';
 
@@ -18,14 +31,28 @@ import { SecondMenuComponent } from '../../components/second-menu/second-menu.co
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [CommonModule, MaterialModule, FareComponent, OrderComponent, SecondMenuComponent],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FareComponent,
+    OrderComponent,
+    SecondMenuComponent,
+  ],
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss'],
 })
 export class SummaryComponent {
-  public flights!: Array<BookedFlight>;
+  public flight!: Flight;
 
-  public passengers!: Array<Passenger>;
+  public passengersInfo!: Array<PassengerInfo>;
+
+  public passengersFareByTypeInCur!: Array<PassengerType>;
+
+  public passengersFareByType!: Array<PassengerType>;
+
+  public totalCostInCur!: string;
+
+  public totalCost!: string;
 
   currency = '€';
 
@@ -38,15 +65,48 @@ export class SummaryComponent {
     public dialog: MatDialog
   ) {
     this.btnDisabled = false;
-    this.store.select(selectCurrencySign).pipe(untilDestroyed(this)).subscribe((value) => {
-      this.currency = value;
-    });
-    this.store.select(selectBookingFlights).pipe(untilDestroyed(this)).subscribe((value) => {
-      this.flights = value;
-    });
-    this.store.select(selectBookingPassengers).pipe(untilDestroyed(this)).subscribe((value) => {
-      this.passengers = value;
-    });
+    this.store
+      .select(selectCurrencySign)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.currency = value;
+      });
+    this.store
+      .select(selectBookingFlight)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.flight = value;
+      });
+    this.store
+      .select(selectPassengersInfo)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.passengersInfo = value;
+      });
+    this.store
+      .select(selectPassengersFareByTypeInCur)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.passengersFareByTypeInCur = value;
+      });
+    this.store
+      .select(selectPassengersFareByType)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.passengersFareByType = value;
+      });
+    this.store
+      .select(selectCurTripCostInCur)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.totalCostInCur = value;
+      });
+    this.store
+      .select(selectCurTripCost)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.totalCost = value;
+      });
   }
 
   redirectBookingPage() {
@@ -54,11 +114,17 @@ export class SummaryComponent {
   }
 
   handleAddToCart() {
-    // const currentFlight = {
-    //   flights: this.flights,
-    //   passengers: this.passengers,
-    // };
-    // this.store.dispatch(CartActions.addToCart(currentFlight));
+    const currentTrip: Trip = {
+      id: performance.now().toString(),
+      passengers: this.passengersFareByType,
+      flight: this.flight,
+      passengersInfo: this.passengersInfo,
+      totalCost: this.totalCost,
+    };
+
+    console.log(currentTrip);
+
+    this.store.dispatch(CartActions.addToCart(currentTrip));
     this.snackBar.open('Item was successfully added to your cart!', '', {
       duration: 1500,
       panelClass: ['snackBar'],
