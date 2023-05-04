@@ -5,10 +5,21 @@
   </div>
 
   <div class="summary__content">
-    <ng-container *ngFor="let flight of flights">
-      <app-order [passengers]="passengers" [flight]="flight"></app-order>
+    <app-order
+      [passengers]="passengersInfo"
+      [flight]="flight.oneWay"
+    ></app-order>
+    <ng-container *ngIf="flight.returnWay">
+      <app-order
+        [passengers]="passengersInfo"
+        [flight]="flight.returnWay"
+      ></app-order>
     </ng-container>
-    <app-fare [passengers]="passengers" [currency]="currency"></app-fare>
+    <app-fare
+      [passengersType]="passengersFareByTypeInCur"
+      [currency]="currency"
+      [total]="totalCostInCur"
+    ></app-fare>
   </div>
 
   <div class="summary__buttons">
