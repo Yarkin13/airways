@@ -12,6 +12,7 @@ import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/p
 import { MatSort } from '@angular/material/sort';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { selectCartDataInCur } from 'src/app/redux/selectors/cart.selectors';
+import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -36,7 +37,7 @@ export class ShoppingCartComponent implements AfterViewInit {
   ];
   dataSource!: MatTableDataSource<Trip>;
   selection = new SelectionModel<Trip>(true, []);
-
+  tripCount = 0;
   currency = '€';
   discount = '0';
 
@@ -50,6 +51,7 @@ export class ShoppingCartComponent implements AfterViewInit {
       .select(selectCartDataInCur)
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
+        this.tripCount = value.length;
         this.dataSource = new MatTableDataSource<Trip>(value);
       });
     this.store
@@ -134,5 +136,9 @@ export class ShoppingCartComponent implements AfterViewInit {
   handleEdit(targetElement: Trip) {
     console.log(targetElement.id);
     this.router.navigateByUrl('/booking/main');
+  }
+
+  handleDelete(tripId: string) {
+    this.store.dispatch(CartActions.removeFromCart({ id: tripId }));
   }
 }

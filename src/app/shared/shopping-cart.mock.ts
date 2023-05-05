@@ -5,13 +5,22 @@ export const shoppingCartData: Array<Trip> = [
     id: '1',
     passengers: [
       {
-        type: 'Adult', count: 1, fare: '166.00', charge: '91.31'
+        type: 'Adult',
+        count: 1,
+        fare: '166.00',
+        charge: '91.31',
       },
       {
-        type: 'Child', count: 1, fare: '106.00', charge: '90.08'
+        type: 'Child',
+        count: 1,
+        fare: '106.00',
+        charge: '90.08',
       },
       {
-        type: 'Infant', count: 1, fare: '88.00', charge: '10.00'
+        type: 'Infant',
+        count: 1,
+        fare: '88.00',
+        charge: '10.00',
       },
     ],
     flight: {
@@ -83,9 +92,14 @@ export const shoppingCartData: Array<Trip> = [
   },
   {
     id: '2',
-    passengers: [{
-      type: 'Adult', count: 1, fare: '20.96', charge: '10.00'
-    }],
+    passengers: [
+      {
+        type: 'Adult',
+        count: 1,
+        fare: '20.96',
+        charge: '10.00',
+      },
+    ],
     flight: {
       tripType: 'One Way',
       oneWay: {
