@@ -165,6 +165,7 @@
             color="primary"
             class="payment__btn"
             (click)="openPaymentModal()"
+            [disabled]="!selection.selected.length"
           >
             Payment
           </button>

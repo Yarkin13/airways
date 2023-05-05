@@ -45,14 +45,23 @@ export class ShoppingCartComponent implements AfterViewInit {
     private store: Store,
     private router: Router,
     public dialog: MatDialog,
-    private discountService: DiscountService,
+    private discountService: DiscountService
   ) {
     this.store
       .select(selectCartDataInCur)
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.tripCount = value.length;
-        this.dataSource = new MatTableDataSource<Trip>(value);
+        if (!this.dataSource) {
+          this.dataSource = new MatTableDataSource<Trip>(value);
+        } else {
+          this.dataSource.data = value;
+        }
+        this.selection.setSelection(
+          ...this.selection.selected.map(
+            (s) => value.find((row) => row.id === s.id) as Trip
+          )
+        );
       });
     this.store
       .select(selectCurrencySign)
@@ -66,12 +75,18 @@ export class ShoppingCartComponent implements AfterViewInit {
 
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
       switch (sortHeaderId) {
-        case 'number': return data.flight.oneWay.flightNumber;
-        case 'flight': return data.flight.oneWay.from.name;
-        case 'tripType': return data.flight.tripType;
-        case 'dateTime': return data.flight.oneWay.takeoffDate;
-        case 'price': return +data.totalCost;
-        default: return '';
+        case 'number':
+          return data.flight.oneWay.flightNumber;
+        case 'flight':
+          return data.flight.oneWay.from.name;
+        case 'tripType':
+          return data.flight.tripType;
+        case 'dateTime':
+          return data.flight.oneWay.takeoffDate;
+        case 'price':
+          return +data.totalCost;
+        default:
+          return '';
       }
     };
   }
