@@ -13,6 +13,6 @@ export const cartReducer = createReducer(
   ),
   on(
     CartActions.removeFromCart,
-    (state, { id }): Array<Trip> => state.filter((trip) => trip.id !== id)
+    (state, { id }): Array<Trip> => state.filter((trip) => !id.includes(trip.id))
   )
 );

@@ -22,6 +22,7 @@ import {
 } from 'src/app/shared/models/booking.model';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
+import { UserActions } from 'src/app/redux/actions/user.actions';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -121,9 +122,6 @@ export class SummaryComponent {
       passengersInfo: this.passengersInfo,
       totalCost: this.totalCost,
     };
-
-    console.log(currentTrip);
-
     this.store.dispatch(CartActions.addToCart(currentTrip));
     this.snackBar.open('Item was successfully added to your cart!', '', {
       duration: 1500,
@@ -143,9 +141,29 @@ export class SummaryComponent {
     }, 2500);
   }
 
-  openPaymentModal() {
-    this.dialog.open(PaymentModalComponent, {
-      width: '400px',
-    });
+  handlePayment() {
+    this.dialog
+      .open(PaymentModalComponent, {
+        width: '400px',
+        data: {
+          total: this.currency + this.totalCostInCur,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result === 'CONFIRMED') {
+          const currentTrip: Trip = {
+            id: performance.now().toString(),
+            passengers: this.passengersFareByType,
+            flight: this.flight,
+            passengersInfo: this.passengersInfo,
+            totalCost: this.totalCost,
+          };
+          this.store.dispatch(
+            UserActions.addToOrders({ orders: [currentTrip] })
+          );
+          this.router.navigateByUrl('/booking/main');
+        }
+      });
   }
 }
