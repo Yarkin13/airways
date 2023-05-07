@@ -20,6 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MomentDateModule } from '@angular/material-moment-adapter';
+import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -45,6 +48,9 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     MatDividerModule,
     MatSnackBarModule,
     MomentDateModule,
+    MatTableModule,
+    MatMenuModule,
+    MatSortModule,
   ],
 })
 export class MaterialModule {}

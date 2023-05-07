@@ -1,0 +1,35 @@
+<form [formGroup]="promoForm" novalidate (submit)="onSubmit(promoForm.controls['promoCode'].value)">
+  <mat-form-field appearance="outline" class="promo">
+    <input
+      matInput
+      placeholder="Promo Code"
+      class="promo__input"
+      autocomplete="off"
+      formControlName="promoCode"
+    />
+
+    <mat-error
+      *ngIf="promoForm.controls['promoCode'].hasError('isCorrectPromo')"
+    >
+      Promo code is invalid
+    </mat-error>
+
+    <mat-hint
+      class="promo__hint"
+      *ngIf="
+        promoForm.controls['promoCode'].valid &&
+        promoForm.controls['promoCode'].value
+      "
+      >{{ discount }}% discount
+      applied</mat-hint
+    >
+    <button
+      type="submit"
+      mat-button
+      class="apply__btn"
+      (click)="$event.stopPropagation()"
+    >
+      APPLY
+    </button>
+  </mat-form-field>
+</form>

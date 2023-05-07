@@ -1,21 +1,24 @@
 import { createReducer, on } from '@ngrx/store';
-import { Flight } from 'src/app/shared/models/booked-flights.model';
-import { bookedFlights, bookedPassengers } from 'src/app/booking/pages/summary/summary.mock';
+import { flight as bookingFlight, passengersInfo as bookingPassengers, passengers as passengersType } from 'src/app/shared/summary.mock';
+import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { BookingActions } from '../actions/booking.actions';
 
 export const initialState = {
-  flights: bookedFlights,
-  passengers: bookedPassengers,
+  id: '',
+  flight: bookingFlight,
+  passengersInfo: bookingPassengers,
+  passengers: passengersType,
+  totalCost: '',
 };
 
 export const bookingReducer = createReducer(
   initialState,
   on(
-    BookingActions.setFlights,
-    (state, { flights }): Flight => ({ ...state, flights }),
+    BookingActions.setFlight,
+    (state, { flight }): Trip => ({ ...state, flight }),
   ),
   on(
-    BookingActions.setPassengers,
-    (state, { passengers }): Flight => ({ ...state, passengers }),
+    BookingActions.setPassengersInfo,
+    (state, { passengersInfo }): Trip => ({ ...state, passengersInfo }),
   ),
 );

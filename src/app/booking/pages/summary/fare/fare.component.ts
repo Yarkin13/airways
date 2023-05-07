@@ -1,7 +1,7 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Passenger } from 'src/app/shared/models/booked-flights.model';
+import { PassengerType } from 'src/app/shared/models/booking.model';
 
 @Component({
   selector: 'app-fare',
@@ -10,19 +10,10 @@ import { Passenger } from 'src/app/shared/models/booked-flights.model';
   templateUrl: './fare.component.html',
   styleUrls: ['./fare.component.scss'],
 })
-export class FareComponent implements OnChanges {
-  @Input() passengers!: Array<Passenger>;
+export class FareComponent {
+  @Input() passengersType!: Array<PassengerType>;
 
   @Input() currency!: string;
 
-  total = '';
-
-  ngOnChanges(): void {
-    this.total = this.passengers
-      .reduce(
-        (acc, cur) => acc + Number(+cur.fare + +cur.charge) * cur.count,
-        0
-      )
-      .toFixed(2);
-  }
+  @Input() total!: string;
 }
