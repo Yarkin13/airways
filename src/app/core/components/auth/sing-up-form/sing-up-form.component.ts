@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import {
+  Component, OnDestroy, OnInit, Inject
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { Store } from '@ngrx/store';
+import { selectHeaderDate } from 'src/app/redux/selectors/header-data.selectors';
+import { Subscription } from 'rxjs';
 import {
   passwordValidator,
   emailValidator,
@@ -8,14 +14,21 @@ import {
   dateValidator,
   phoneValidator,
 } from '../../../../shared/validators';
-import { COUNTRY_CODES, CITIZENSHIP } from '../../../../shared/constants';
+import {
+  COUNTRY_CODES,
+  CITIZENSHIP,
+  DateFormat,
+} from '../../../../shared/constants';
+import { AuthService } from '../../../services/auth.service';
+import { InputErrorStateMatcher } from '../error-state-matcher-inputs';
 
 @Component({
   selector: 'app-sing-up-form',
   templateUrl: './sing-up-form.component.html',
   styleUrls: ['./sing-up-form.component.scss'],
+  providers: [{ provide: MAT_DATE_FORMATS, useClass: DateFormat }],
 })
-export class SingUpFormComponent {
+export class SingUpFormComponent implements OnDestroy, OnInit {
   hidePassword = true;
 
   gender = 'Male';
@@ -32,10 +45,27 @@ export class SingUpFormComponent {
 
   citizenshipArray = CITIZENSHIP;
 
-  constructor() {
+  signUpSub: Subscription;
+
+  dateFormatSub: Subscription;
+
+  constructor(
+    private auth: AuthService,
+    private store: Store,
+    @Inject(MAT_DATE_FORMATS) public config: DateFormat
+  ) {
     const currentYear = new Date().getFullYear();
     this.maxDate = new Date(currentYear - 18, 0, 0);
     this.minDate = new Date(currentYear - 90, 0, 0);
+  }
+
+  ngOnInit() {
+    this.dateFormatSub = this.store
+      .select(selectHeaderDate)
+      // eslint-disable-next-line @ngrx/no-store-subscription
+      .subscribe((date) => {
+        this.config.value = date;
+      });
   }
 
   signUpForm = new FormGroup({
@@ -49,6 +79,8 @@ export class SingUpFormComponent {
     citizenship: new FormControl('', [Validators.required]),
     agreement: new FormControl('', [Validators.requiredTrue]),
   });
+
+  errorMatcher = new InputErrorStateMatcher();
 
   get login() {
     return this.signUpForm.get('login');
@@ -100,8 +132,7 @@ export class SingUpFormComponent {
     }
 
     return this.password?.hasError('passwordValidator')
-    /* eslint-disable-next-line */
-    ? "Your password isn't strong enough"
+      ? 'Your password isn`t strong enough'
       : '';
   }
 
@@ -142,14 +173,33 @@ export class SingUpFormComponent {
   }
 
   onSubmit() {
-    console.log('submit');
     this.signUpForm.markAllAsTouched();
     if (this.signUpForm.invalid) return;
 
-    console.log(this.signUpForm.value);
+    this.signUpSub = this.auth
+      .register({
+        email: this.login?.value || '',
+        password: this.password?.value || '',
+        firstName: this.firstName?.value || '',
+        lastName: this.lastName?.value || '',
+        phone: this.phone?.value || '',
+        dateOfBirth: this.dateBirthDay?.value || '',
+        countryCode: this.countryCode?.value || '',
+        citizenship: this.citizenship?.value || '',
+        gender: this.gender,
+      })
+      .subscribe();
+
+    this.signUpForm.reset();
+    this.signUpForm.markAsUntouched();
   }
 
   selectedTabChangeGender(e: MatTabChangeEvent) {
     this.gender = e.tab.textLabel;
+  }
+
+  ngOnDestroy(): void {
+    if (this.signUpSub) this.signUpSub.unsubscribe();
+    this.dateFormatSub.unsubscribe();
   }
 }

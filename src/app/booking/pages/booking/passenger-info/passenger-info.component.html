@@ -121,7 +121,10 @@
     </mat-form-field>
   </form>
   <div class="passenger__toggle-wrapper">
-    <mat-slide-toggle color="primary" [(ngModel)]="needCheckedInBaggage"
+    <mat-slide-toggle
+      color="primary"
+      [(ngModel)]="needCheckedInBaggage"
+      *ngIf="availableCheckedInBaggage"
       ><div class="passenger__toggle">
         <mat-icon class="passenger__toggle-icon">shopping_basket</mat-icon>
         <div class="passenger__toggle-text">Need checked-in baggage?</div>

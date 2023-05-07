@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MomentDateModule } from '@angular/material-moment-adapter';
-
 import { BookingRoutingModule } from './booking-routing.module';
 import { MainComponent } from './pages/main/main.component';
 import { FlightSelectionComponent } from './pages/flight-selection/flight-selection.component';
@@ -29,12 +27,6 @@ import { ContactDetailsComponent } from './pages/booking/contact-details/contact
     PassengerInfoComponent,
     ContactDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    BookingRoutingModule,
-    SharedModule,
-    MaterialModule,
-    MomentDateModule,
-  ],
+  imports: [CommonModule, BookingRoutingModule, SharedModule, MaterialModule],
 })
 export class BookingModule {}

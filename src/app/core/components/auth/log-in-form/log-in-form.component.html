@@ -42,7 +42,11 @@
       </button>
     </mat-form-field>
     <!-- TODO where to go  -->
-    <a href="./" class="login__link">Forgot password?</a>
+
+    <mat-error *ngIf="auth.isErrorLogin$ | async"
+      >Wrong login or password</mat-error
+    >
+
     <button class="login__submit-btn">Log in</button>
   </form>
   <button></button>
