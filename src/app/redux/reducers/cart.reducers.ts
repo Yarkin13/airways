@@ -9,6 +9,10 @@ export const cartReducer = createReducer(
   initialState,
   on(
     CartActions.addToCart,
-    (state, flight): Array<Trip> => [...state, flight]
+    (state, trip): Array<Trip> => [...state, trip]
+  ),
+  on(
+    CartActions.removeFromCart,
+    (state, { id }): Array<Trip> => state.filter((trip) => !id.includes(trip.id))
   )
 );
