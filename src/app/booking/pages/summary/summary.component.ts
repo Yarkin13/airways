@@ -22,7 +22,7 @@ import {
 } from 'src/app/shared/models/booking.model';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
-import { UserActions } from 'src/app/redux/actions/user.actions';
+import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -160,7 +160,7 @@ export class SummaryComponent {
             totalCost: this.totalCost,
           };
           this.store.dispatch(
-            UserActions.addToOrders({ orders: [currentTrip] })
+            UserOrdersActions.addToOrders({ orders: [currentTrip] })
           );
           this.router.navigateByUrl('/booking/main');
         }

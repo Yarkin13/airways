@@ -14,7 +14,7 @@ import { MatSort } from '@angular/material/sort';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { selectCartDataInCur } from 'src/app/redux/selectors/cart.selectors';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
-import { UserActions } from 'src/app/redux/actions/user.actions';
+import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -152,7 +152,7 @@ export class ShoppingCartComponent implements AfterViewInit {
       .subscribe((result) => {
         if (result === 'CONFIRMED') {
           this.store.dispatch(
-            UserActions.addToOrders({ orders: this.selection.selected })
+            UserOrdersActions.addToOrders({ orders: this.selection.selected })
           );
           this.store.dispatch(
             CartActions.removeFromCart({

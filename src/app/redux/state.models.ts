@@ -4,7 +4,7 @@ export interface State {
   headerData: HeaderData;
   bookingData: Trip;
   cart: Array<Trip>;
-  user: UserData;
+  userOrders: UserOrdersData;
 }
 
 export interface HeaderData {
@@ -12,6 +12,6 @@ export interface HeaderData {
   currencyValue: string;
 }
 
-export interface UserData {
+export interface UserOrdersData {
   orders: Array<Trip>;
 }

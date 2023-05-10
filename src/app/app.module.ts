@@ -12,7 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { cartReducer } from './redux/reducers/cart.reducers';
 import { bookingReducer } from './redux/reducers/booking.reducer';
 import { SecondMenuComponent } from './booking/components/second-menu/second-menu.component';
-import { userReducer } from './redux/reducers/user.reducer';
+import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +24,7 @@ import { userReducer } from './redux/reducers/user.reducer';
     BrowserAnimationsModule,
     StoreModule.forRoot({
       headerData: headerDataReducer,
-      userData: userReducer,
+      userOrdersData: userOrdersReducer,
       bookingData: bookingReducer,
       cart: cartReducer,
       router: routerReducer,
