@@ -24,6 +24,7 @@
 
   <div class="summary__buttons">
     <button
+      *ngIf="!isPaid"
       mat-button
       color="primary"
       class="button button-back"
@@ -33,15 +34,17 @@
       Back
     </button>
     <button
+      *ngIf="!isPaid"
       mat-stroked-button
       color="primary"
       class="button button-add"
       (click)="handleAddToCart()"
       [disabled]="btnDisabled"
     >
-      Add to order cart
+      Add to cart
     </button>
     <button
+      *ngIf="!isPaid"
       mat-flat-button
       color="primary"
       class="button button-buy"
@@ -49,6 +52,16 @@
       [disabled]="btnDisabled"
     >
       Buy now
+    </button>
+    <button
+      *ngIf="isPaid"
+      mat-stroked-button
+      color="primary"
+      class="button button-add"
+      (click)="redirectToUserAccount()"
+      [disabled]="btnDisabled"
+    >
+      Return to Account
     </button>
   </div>
 </div>

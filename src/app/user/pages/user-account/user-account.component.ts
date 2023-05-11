@@ -7,7 +7,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
-import { selectUserOrdersData } from 'src/app/redux/selectors/user-orders.selectors';
+import { selectUserOrdersInCur } from 'src/app/redux/selectors/user-orders.selectors';
 import { MaterialModule } from 'src/app/material/material.module';
 
 @UntilDestroy()
@@ -36,7 +36,7 @@ export class UserAccountComponent implements AfterViewInit {
     private router: Router,
   ) {
     this.store
-      .select(selectUserOrdersData)
+      .select(selectUserOrdersInCur)
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.tripCount = value.length;
@@ -77,7 +77,7 @@ export class UserAccountComponent implements AfterViewInit {
     this.router.navigateByUrl('/booking/main');
   }
 
-  redirectToSummary() {
-    this.router.navigateByUrl('/booking/summary');
+  redirectToSummary(element: Trip) {
+    this.router.navigate(['/booking/summary', { id: element.id }]);
   }
 }

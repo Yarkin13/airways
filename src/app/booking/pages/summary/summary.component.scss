@@ -13,6 +13,7 @@
 .summary__container {
   box-sizing: border-box;
   max-width: 1150px;
+  width: 100%;
   padding: 40px 0 48px 22px;
   display: flex;
   flex-direction: column;
@@ -42,7 +43,7 @@
   width: 140px;
   padding: 8px 0;
 
-  @media (max-width: $mobile-ll) {
+  @media (max-width: $desktop-s) {
     margin: 0 auto;
   }
 }
@@ -73,15 +74,14 @@
   gap: 40px;
   justify-content: flex-end;
 
-  @media (max-width: $mobile-l) {
-    gap: 20px;
+  @media (max-width: $desktop-s) {
+    justify-content: center;
   }
 
   @media (max-width: $mobile-l) {
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 20px;
-    justify-content: center;
   }
 
   .button {
@@ -90,16 +90,16 @@
   }
 
   .button-back {
-    width: 126px;
+    padding: 20px 45px;
   }
 
   .button-add {
-    width: 171px;
     border: 1px solid $primary;
+    padding: 20px 24px;
   }
 
   .button-buy {
-    width: 126px;
+    padding: 20px 32px;
   }
 }
 

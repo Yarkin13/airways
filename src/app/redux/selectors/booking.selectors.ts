@@ -5,17 +5,7 @@ import { selectHeaderCurrency } from './header-data.selectors';
 
 const selectBookingData = createFeatureSelector<Trip>('bookingData');
 
-export const selectPassengersInfo = createSelector(
-  selectBookingData,
-  (state: Trip) => state.passengersInfo
-);
-
-export const selectBookingFlight = createSelector(
-  selectBookingData,
-  (state: Trip) => state.flight
-);
-
-export const selectPassengersType = createSelector(
+const selectPassengersType = createSelector(
   selectBookingData,
   (state: Trip) => state.passengers
 );
@@ -25,7 +15,7 @@ const selectFlightPrice = createSelector(
   (state: Trip) => state.flight.price
 );
 
-export const selectPassengersFareByType = createSelector(
+const selectPassengersFareByType = createSelector(
   selectPassengersType,
   selectFlightPrice,
   (passengersType, price) => passengersType.map((passenger) => {
@@ -49,7 +39,7 @@ export const selectPassengersFareByType = createSelector(
   })
 );
 
-export const selectPassengersFareByTypeInCur = createSelector(
+const selectPassengersFareByTypeInCur = createSelector(
   selectPassengersFareByType,
   selectHeaderCurrency,
   (passengersType, currency) => passengersType.map((passenger) => ({
@@ -63,7 +53,7 @@ export const selectPassengersFareByTypeInCur = createSelector(
   }))
 );
 
-export const selectCurTripCost = createSelector(
+const selectCurTripCost = createSelector(
   selectPassengersFareByType,
   (passengersType) => passengersType
     .reduce((acc, cur) => acc + Number(+cur.fare + +cur.charge), 0)
@@ -71,8 +61,30 @@ export const selectCurTripCost = createSelector(
     .toString()
 );
 
-export const selectCurTripCostInCur = createSelector(
+const selectCurTripCostInCur = createSelector(
   selectCurTripCost,
   selectHeaderCurrency,
   (cost, currency) => (+cost * CURRENCY_EXCHANGE[currency]).toFixed(2).toString()
+);
+
+export const selectBookingTrip = createSelector(
+  selectBookingData,
+  selectPassengersFareByType,
+  selectCurTripCost,
+  (data, passengersFare, cost) => ({
+    ...data,
+    passengers: passengersFare,
+    totalCost: cost,
+  })
+);
+
+export const selectBookingTripInCur = createSelector(
+  selectBookingData,
+  selectPassengersFareByTypeInCur,
+  selectCurTripCostInCur,
+  (data, passengersFare, cost) => ({
+    ...data,
+    passengers: passengersFare,
+    totalCost: cost,
+  })
 );

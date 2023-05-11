@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
-  selectBookingFlight,
-  selectCurTripCost,
-  selectCurTripCostInCur,
-  selectPassengersFareByType,
-  selectPassengersFareByTypeInCur,
-  selectPassengersInfo,
+  selectBookingTrip,
+  selectBookingTripInCur,
 } from 'src/app/redux/selectors/booking.selectors';
 import {
   Flight,
@@ -23,6 +19,10 @@ import {
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
+import {
+  selectOrderById,
+  selectOrderByIdInCur,
+} from 'src/app/redux/selectors/user-orders.selectors';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -59,8 +59,11 @@ export class SummaryComponent {
 
   btnDisabled = false;
 
+  isPaid = false;
+
   constructor(
     public router: Router,
+    public route: ActivatedRoute,
     private store: Store,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
@@ -72,42 +75,51 @@ export class SummaryComponent {
       .subscribe((value) => {
         this.currency = value;
       });
-    this.store
-      .select(selectBookingFlight)
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.flight = value;
-      });
-    this.store
-      .select(selectPassengersInfo)
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.passengersInfo = value;
-      });
-    this.store
-      .select(selectPassengersFareByTypeInCur)
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.passengersFareByTypeInCur = value;
-      });
-    this.store
-      .select(selectPassengersFareByType)
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.passengersFareByType = value;
-      });
-    this.store
-      .select(selectCurTripCostInCur)
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.totalCostInCur = value;
-      });
-    this.store
-      .select(selectCurTripCost)
-      .pipe(untilDestroyed(this))
-      .subscribe((value) => {
-        this.totalCost = value;
-      });
+
+    this.route.params.pipe(untilDestroyed(this)).subscribe((params) => {
+      const tripId = params['id'];
+      if (tripId) {
+        this.isPaid = true;
+        this.store
+          .select(selectOrderById(tripId))
+          .pipe(untilDestroyed(this))
+          .subscribe((value) => {
+            if (value) {
+              this.flight = value.flight;
+              this.passengersInfo = value.passengersInfo;
+              this.passengersFareByType = value.passengers;
+              this.totalCost = value.totalCost;
+            }
+          });
+        this.store
+          .select(selectOrderByIdInCur(tripId))
+          .pipe(untilDestroyed(this))
+          .subscribe((value) => {
+            if (value) {
+              this.passengersFareByTypeInCur = value.passengers;
+              this.totalCostInCur = value.totalCost;
+            }
+          });
+      } else {
+        this.isPaid = false;
+        this.store
+          .select(selectBookingTrip)
+          .pipe(untilDestroyed(this))
+          .subscribe((value) => {
+            this.flight = value.flight;
+            this.passengersInfo = value.passengersInfo;
+            this.passengersFareByType = value.passengers;
+            this.totalCost = value.totalCost;
+          });
+        this.store
+          .select(selectBookingTripInCur)
+          .pipe(untilDestroyed(this))
+          .subscribe((value) => {
+            this.passengersFareByTypeInCur = value.passengers;
+            this.totalCostInCur = value.totalCost;
+          });
+      }
+    });
   }
 
   redirectBookingPage() {
@@ -165,5 +177,9 @@ export class SummaryComponent {
           this.router.navigateByUrl('/booking/main');
         }
       });
+  }
+
+  redirectToUserAccount() {
+    this.router.navigateByUrl('/user/account');
   }
 }

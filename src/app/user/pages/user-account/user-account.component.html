@@ -99,16 +99,13 @@
         <td mat-cell *matCellDef="let element">
           <div class="table__cell-price">
             {{ currency }}{{ element.totalCost }}
-            <!-- <button>details</button>
-            <a mat-flat-button href="https://www.google.com/">Details</a> -->
-            <button mat-flat-button color="primary" (click)="redirectToSummary()">Details</button>
-            <!-- <button mat-stroked-button color="primary">Details</button> -->
-            <!-- <a href="">details</a> -->
-            <!-- <app-menu
-              [element]="element"
-              (editEvent)="handleEdit($event)"
-              (deleteEvent)="handleDelete($event)"
-            ></app-menu> -->
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="redirectToSummary(element)"
+            >
+              Details
+            </button>
           </div>
         </td>
       </ng-container>
