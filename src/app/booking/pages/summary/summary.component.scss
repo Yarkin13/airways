@@ -87,6 +87,7 @@
   .button {
     height: 60px;
     @extend %button;
+    min-width: 126px;
   }
 
   .button-back {
@@ -98,7 +99,8 @@
     padding: 20px 24px;
   }
 
-  .button-buy {
+  .button-buy,
+  .button-cancel {
     padding: 20px 32px;
   }
 }

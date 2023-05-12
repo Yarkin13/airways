@@ -12,9 +12,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
 import { MatSort } from '@angular/material/sort';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
-import { selectCartDataInCur } from 'src/app/redux/selectors/cart.selectors';
+import {
+  selectCartDataById,
+  selectCartDataInCur,
+} from 'src/app/redux/selectors/cart.selectors';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
+import { BookingActions } from 'src/app/redux/actions/booking.actions';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -165,8 +169,15 @@ export class ShoppingCartComponent implements AfterViewInit {
   }
 
   handleEdit(targetElement: Trip) {
-    console.log(targetElement.id);
-    this.router.navigateByUrl('/booking/main');
+    this.store
+      .select(selectCartDataById(targetElement.id))
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        if (value) {
+          this.store.dispatch(BookingActions.setBookingInitialState(value));
+        }
+      });
+    this.router.navigate(['/booking/booking', { id: targetElement.id }]);
   }
 
   handleDelete(tripId: string) {

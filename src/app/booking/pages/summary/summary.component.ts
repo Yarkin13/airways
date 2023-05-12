@@ -61,6 +61,10 @@ export class SummaryComponent {
 
   isPaid = false;
 
+  isEdit = false;
+
+  tripIdEdit = '';
+
   constructor(
     public router: Router,
     public route: ActivatedRoute,
@@ -78,7 +82,8 @@ export class SummaryComponent {
 
     this.route.params.pipe(untilDestroyed(this)).subscribe((params) => {
       const tripId = params['id'];
-      if (tripId) {
+      const isEdit = params['edit'];
+      if (tripId && !isEdit) {
         this.isPaid = true;
         this.store
           .select(selectOrderById(tripId))
@@ -118,6 +123,10 @@ export class SummaryComponent {
             this.passengersFareByTypeInCur = value.passengers;
             this.totalCostInCur = value.totalCost;
           });
+      }
+      if (tripId && isEdit) {
+        this.isEdit = true;
+        this.tripIdEdit = tripId;
       }
     });
   }
@@ -181,5 +190,19 @@ export class SummaryComponent {
 
   redirectToUserAccount() {
     this.router.navigateByUrl('/user/account');
+  }
+
+  handleCancelEdit() {
+    this.router.navigateByUrl('/user/cart');
+  }
+
+  handleSaveOnEdit() {
+    this.store.dispatch(
+      CartActions.editCartTrip({
+        id: [this.tripIdEdit],
+        info: this.passengersInfo,
+      })
+    );
+    this.router.navigateByUrl('/user/cart');
   }
 }

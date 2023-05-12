@@ -3,7 +3,7 @@ import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { CURRENCY_EXCHANGE } from 'src/app/shared/constants/currency';
 import { selectHeaderCurrency } from './header-data.selectors';
 
-export const selectCartData = createFeatureSelector<Array<Trip>>('cart');
+const selectCartData = createFeatureSelector<Array<Trip>>('cart');
 
 export const selectCartCount = createSelector(
   selectCartData,
@@ -19,4 +19,14 @@ export const selectCartDataInCur = createSelector(
       .toFixed(2)
       .toString()
   }))
+);
+
+export const selectCartDataById = (id: string) => createSelector(
+  selectCartData,
+  (cart) => {
+    if (cart) {
+      return cart.find((trip) => trip.id === id);
+    }
+    return undefined;
+  }
 );

@@ -97,7 +97,7 @@ export const shoppingCartData: Array<Trip> = [
         type: 'Adult',
         count: 1,
         fare: '20.96',
-        charge: '10.00',
+        charge: '11.53',
       },
     ],
     flight: {
@@ -131,6 +131,6 @@ export const shoppingCartData: Array<Trip> = [
         seat: '20E',
       },
     ],
-    totalCost: '20.96',
+    totalCost: '32.49',
   },
 ];

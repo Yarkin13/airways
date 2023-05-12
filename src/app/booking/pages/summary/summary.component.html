@@ -24,7 +24,7 @@
 
   <div class="summary__buttons">
     <button
-      *ngIf="!isPaid"
+      *ngIf="!isPaid && !isEdit"
       mat-button
       color="primary"
       class="button button-back"
@@ -34,7 +34,7 @@
       Back
     </button>
     <button
-      *ngIf="!isPaid"
+      *ngIf="!isPaid && !isEdit"
       mat-stroked-button
       color="primary"
       class="button button-add"
@@ -44,7 +44,7 @@
       Add to cart
     </button>
     <button
-      *ngIf="!isPaid"
+      *ngIf="!isPaid && !isEdit"
       mat-flat-button
       color="primary"
       class="button button-buy"
@@ -53,6 +53,7 @@
     >
       Buy now
     </button>
+    <!-- Btn if Details from User Acoount booked trip -->
     <button
       *ngIf="isPaid"
       mat-stroked-button
@@ -62,6 +63,27 @@
       [disabled]="btnDisabled"
     >
       Return to Account
+    </button>
+    <!-- Btns if Edit trip from Cart -->
+    <button
+      *ngIf="isEdit"
+      mat-button
+      color="primary"
+      class="button button-cancel"
+      (click)="handleCancelEdit()"
+      [disabled]="btnDisabled"
+    >
+      Cancel
+    </button>
+    <button
+      *ngIf="isEdit"
+      mat-flat-button
+      color="primary"
+      class="button button-buy"
+      (click)="handleSaveOnEdit()"
+      [disabled]="btnDisabled"
+    >
+      Save
     </button>
   </div>
 </div>

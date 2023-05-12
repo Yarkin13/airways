@@ -1,10 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
-import { shoppingCartData } from 'src/app/shared/shopping-cart.mock';
 import { UserOrdersActions } from '../actions/user-orders.actions';
 import { UserOrdersData } from '../state.models';
 
 export const initialState: UserOrdersData = {
-  orders: shoppingCartData,
+  orders: [],
 };
 
 export const userOrdersReducer = createReducer(
