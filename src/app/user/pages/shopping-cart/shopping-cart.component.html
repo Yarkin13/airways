@@ -3,181 +3,201 @@
     <p class="title">Cart</p>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="table" matSort>
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
-        <mat-checkbox
-          (change)="$event ? toggleAllRows() : null"
-          [checked]="selection.hasValue() && isAllSelected()"
-          [indeterminate]="selection.hasValue() && !isAllSelected()"
-          [aria-label]="checkboxLabel()"
-          color="primary"
-        >
-        </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
-        <mat-checkbox
-          (click)="$event.stopPropagation()"
-          (change)="$event ? selection.toggle(row) : null"
-          [checked]="selection.isSelected(row)"
-          [aria-label]="checkboxLabel(row)"
-          color="primary"
-        >
-        </mat-checkbox>
-      </td>
-      <td mat-footer-cell *matFooterCellDef colspan="5">
-        <button
-          mat-flat-button
-          class="new-trip__btn"
-          (click)="redirectToMain()"
-        >
-          + Add new trip
-        </button>
-      </td>
-    </ng-container>
+  <ng-container *ngIf="!tripCount; else tripTable">
+    <mat-divider></mat-divider>
+    <div class="empty-cart__container">
+      <mat-divider></mat-divider>
+      <p class="empty-cart__text">YOUR CART IS EMPTY</p>
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="redirectToMain()"
+        class="empty-cart__button"
+      >
+        Select trip
+      </button>
+    </div>
+  </ng-container>
 
-    <!-- Number Column -->
-    <ng-container matColumnDef="number">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.flight.oneWay.flightNumber }}<br />
-        <ng-container
-          *ngIf="
-            element.flight.returnWay &&
-            element.flight.oneWay.flightNumber !==
-              element.flight.returnWay.flightNumber
-          "
-        >
-          {{ element.flight.returnWay.flightNumber }}
-        </ng-container>
-      </td>
-    </ng-container>
+  <ng-template #tripTable>
+    <table mat-table [dataSource]="dataSource" class="table" matSort>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox
+            (change)="$event ? toggleAllRows() : null"
+            [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            [aria-label]="checkboxLabel()"
+            color="primary"
+          >
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)"
+            [aria-label]="checkboxLabel(row)"
+            color="primary"
+          >
+          </mat-checkbox>
+        </td>
+        <td mat-footer-cell *matFooterCellDef colspan="5">
+          <button
+            mat-flat-button
+            class="new-trip__btn"
+            (click)="redirectToMain()"
+          >
+            + Add new trip
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- Flight Column -->
-    <ng-container matColumnDef="flight">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Flight</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.flight.oneWay.from.city }} -
-        {{ element.flight.oneWay.to.city }}<br />
-        <ng-container *ngIf="element.flight.returnWay">
-          {{ element.flight.returnWay.from.city }} -
-          {{ element.flight.returnWay.to.city }}
-        </ng-container>
-      </td>
-    </ng-container>
+      <!-- Number Column -->
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.flight.oneWay.flightNumber }}<br />
+          <ng-container
+            *ngIf="
+              element.flight.returnWay &&
+              element.flight.oneWay.flightNumber !==
+                element.flight.returnWay.flightNumber
+            "
+          >
+            {{ element.flight.returnWay.flightNumber }}
+          </ng-container>
+        </td>
+      </ng-container>
 
-    <!-- Type trip Column -->
-    <ng-container matColumnDef="tripType">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Trip Type</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.flight.tripType }}
-      </td>
-    </ng-container>
+      <!-- Flight Column -->
+      <ng-container matColumnDef="flight">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Flight</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.flight.oneWay.from.city }} -
+          {{ element.flight.oneWay.to.city }}<br />
+          <ng-container *ngIf="element.flight.returnWay">
+            {{ element.flight.returnWay.from.city }} -
+            {{ element.flight.returnWay.to.city }}
+          </ng-container>
+        </td>
+      </ng-container>
 
-    <!-- Data & Time Column -->
-    <ng-container matColumnDef="dateTime">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date & Time</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.flight.oneWay.takeoffDate | date : "d MMM, yyyy" }},
-        {{ element.flight.oneWay.takeoffDate | date : "H:mm" }} -
-        {{ element.flight.oneWay.landingDate | date : "H:mm" }}<br />
-        <ng-container *ngIf="element.flight.returnWay">
-          {{ element.flight.returnWay.takeoffDate | date : "d MMM, yyyy" }},
-          {{ element.flight.returnWay.takeoffDate | date : "H:mm" }} -
-          {{ element.flight.returnWay.landingDate | date : "H:mm" }}
-        </ng-container>
-      </td>
-    </ng-container>
+      <!-- Type trip Column -->
+      <ng-container matColumnDef="tripType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Trip Type</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.flight.tripType }}
+        </td>
+      </ng-container>
 
-    <!-- Passengers Column -->
-    <ng-container matColumnDef="passengers">
-      <th mat-header-cell *matHeaderCellDef>Passengers</th>
-      <td mat-cell *matCellDef="let element">
-        <ng-container *ngFor="let passenger of element.passengers">
-          {{ passenger.count }} x {{ passenger.type }}<br />
-        </ng-container>
-      </td>
-      <td mat-footer-cell *matFooterCellDef class="table__footer-text">
-        Total
-      </td>
-    </ng-container>
+      <!-- Data & Time Column -->
+      <ng-container matColumnDef="dateTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date & Time</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.flight.oneWay.takeoffDate | date : "d MMM, yyyy" }},
+          {{ element.flight.oneWay.takeoffDate | date : "H:mm" }} -
+          {{ element.flight.oneWay.landingDate | date : "H:mm" }}<br />
+          <ng-container *ngIf="element.flight.returnWay">
+            {{ element.flight.returnWay.takeoffDate | date : "d MMM, yyyy" }},
+            {{ element.flight.returnWay.takeoffDate | date : "H:mm" }} -
+            {{ element.flight.returnWay.landingDate | date : "H:mm" }}
+          </ng-container>
+        </td>
+      </ng-container>
 
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
-      <td mat-cell *matCellDef="let element">
-        <div class="table__cell-price">
-          {{ currency }}{{ element.totalCost }}
-          <app-menu
-            [element]="element"
-            (editEvent)="handleEdit($event)"
-          ></app-menu>
-        </div>
-      </td>
-      <td mat-footer-cell *matFooterCellDef class="table__footer-price">
-        {{ currency }}{{ getTotalCost() }}
-      </td>
-    </ng-container>
+      <!-- Passengers Column -->
+      <ng-container matColumnDef="passengers">
+        <th mat-header-cell *matHeaderCellDef>Passengers</th>
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngFor="let passenger of element.passengers">
+            {{ passenger.count }} x {{ passenger.type }}<br />
+          </ng-container>
+        </td>
+        <td mat-footer-cell *matFooterCellDef class="table__footer-text">
+          Total
+        </td>
+      </ng-container>
 
-    <!-- Second footer promo -->
-    <ng-container matColumnDef="secondFooterPromo">
-      <td mat-footer-cell *matFooterCellDef colspan="3">
-        <app-promo-input></app-promo-input>
-      </td>
-    </ng-container>
+      <!-- Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table__cell-price">
+            {{ currency }}{{ element.totalCost }}
+            <app-menu
+              [element]="element"
+              (editEvent)="handleEdit($event)"
+              (deleteEvent)="handleDelete($event)"
+            ></app-menu>
+          </div>
+        </td>
+        <td mat-footer-cell *matFooterCellDef class="table__footer-price">
+          {{ currency }}{{ getTotalCost() }}
+        </td>
+      </ng-container>
 
-    <!-- Second footer empty -->
-    <ng-container matColumnDef="secondFooterEmpty">
-      <td mat-footer-cell *matFooterCellDef colspan="2"></td>
-    </ng-container>
+      <!-- Second footer promo -->
+      <ng-container matColumnDef="secondFooterPromo">
+        <td mat-footer-cell *matFooterCellDef colspan="3">
+          <app-promo-input></app-promo-input>
+        </td>
+      </ng-container>
 
-    <!-- Second footer selected -->
-    <ng-container matColumnDef="secondFooterSelected">
-      <td mat-footer-cell *matFooterCellDef class="selected__btn-cell">
-        <p class="selected__text">{{ selection.selected.length }} selected</p>
-      </td>
-    </ng-container>
+      <!-- Second footer empty -->
+      <ng-container matColumnDef="secondFooterEmpty">
+        <td mat-footer-cell *matFooterCellDef colspan="2"></td>
+      </ng-container>
 
-    <!-- Second footer btn -->
-    <ng-container matColumnDef="secondFooterBtn">
-      <td mat-footer-cell *matFooterCellDef class="payment__btn-cell">
-        <button
-          mat-flat-button
-          color="primary"
-          class="payment__btn"
-          (click)="openPaymentModal()"
-        >
-          Payment
-        </button>
-      </td>
-    </ng-container>
+      <!-- Second footer selected -->
+      <ng-container matColumnDef="secondFooterSelected">
+        <td mat-footer-cell *matFooterCellDef class="selected__btn-cell">
+          <p class="selected__text">{{ selection.selected.length }} selected</p>
+        </td>
+      </ng-container>
 
-    <tr
-      mat-header-row
-      *matHeaderRowDef="displayedColumns"
-      class="table__header"
-    ></tr>
-    <tr
-      mat-row
-      *matRowDef="let row; columns: displayedColumns"
-      (click)="selection.toggle(row)"
-      class="table__row"
-    ></tr>
-    <tr
-      mat-footer-row
-      *matFooterRowDef="['select', 'passengers', 'price']"
-      class="table__footer"
-    ></tr>
-    <tr
-      mat-footer-row
-      *matFooterRowDef="[
-        'secondFooterPromo',
-        'secondFooterEmpty',
-        'secondFooterSelected',
-        'secondFooterBtn'
-      ]"
-      class="table__footer-second"
-    ></tr>
-  </table>
+      <!-- Second footer btn -->
+      <ng-container matColumnDef="secondFooterBtn">
+        <td mat-footer-cell *matFooterCellDef class="payment__btn-cell">
+          <button
+            mat-flat-button
+            color="primary"
+            class="payment__btn"
+            (click)="handlePayment()"
+            [disabled]="!selection.selected.length"
+          >
+            Payment
+          </button>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="displayedColumns"
+        class="table__header"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        (click)="selection.toggle(row)"
+        class="table__row"
+      ></tr>
+      <tr
+        mat-footer-row
+        *matFooterRowDef="['select', 'passengers', 'price']"
+        class="table__footer"
+      ></tr>
+      <tr
+        mat-footer-row
+        *matFooterRowDef="[
+          'secondFooterPromo',
+          'secondFooterEmpty',
+          'secondFooterSelected',
+          'secondFooterBtn'
+        ]"
+        class="table__footer-second"
+      ></tr>
+    </table>
+  </ng-template>
 </div>

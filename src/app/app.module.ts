@@ -18,6 +18,7 @@ import { SecondMenuComponent } from './booking/components/second-menu/second-men
 import { userReducer } from './redux/reducers/user.reducer';
 import { InterceptorAuthService } from './core/interceptors/interceptor-auth.service';
 import { InterceptorUrlService } from './core/interceptors/interceptor-url.service';
+import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { InterceptorUrlService } from './core/interceptors/interceptor-url.servi
     BrowserAnimationsModule,
     StoreModule.forRoot({
       headerData: headerDataReducer,
+      userOrdersData: userOrdersReducer,
       bookingData: bookingReducer,
       cart: cartReducer,
       router: routerReducer,

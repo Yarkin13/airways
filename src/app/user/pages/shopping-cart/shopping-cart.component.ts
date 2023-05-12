@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -12,6 +13,8 @@ import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/p
 import { MatSort } from '@angular/material/sort';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { selectCartDataInCur } from 'src/app/redux/selectors/cart.selectors';
+import { CartActions } from 'src/app/redux/actions/cart.actions';
+import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -34,9 +37,9 @@ export class ShoppingCartComponent implements AfterViewInit {
     'passengers',
     'price',
   ];
-  dataSource!: MatTableDataSource<Trip>;
+  dataSource = new MatTableDataSource<Trip>();
   selection = new SelectionModel<Trip>(true, []);
-
+  tripCount = 0;
   currency = '€';
   discount = '0';
 
@@ -44,13 +47,19 @@ export class ShoppingCartComponent implements AfterViewInit {
     private store: Store,
     private router: Router,
     public dialog: MatDialog,
-    private discountService: DiscountService,
+    private discountService: DiscountService
   ) {
     this.store
       .select(selectCartDataInCur)
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
-        this.dataSource = new MatTableDataSource<Trip>(value);
+        this.tripCount = value.length;
+        this.dataSource.data = value;
+        this.selection.setSelection(
+          ...this.selection.selected.map(
+            (s) => value.find((row) => row.id === s.id) as Trip
+          )
+        );
       });
     this.store
       .select(selectCurrencySign)
@@ -64,12 +73,18 @@ export class ShoppingCartComponent implements AfterViewInit {
 
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
       switch (sortHeaderId) {
-        case 'number': return data.flight.oneWay.flightNumber;
-        case 'flight': return data.flight.oneWay.from.name;
-        case 'tripType': return data.flight.tripType;
-        case 'dateTime': return data.flight.oneWay.takeoffDate;
-        case 'price': return +data.totalCost;
-        default: return '';
+        case 'number':
+          return data.flight.oneWay.flightNumber;
+        case 'flight':
+          return data.flight.oneWay.from.name;
+        case 'tripType':
+          return data.flight.tripType;
+        case 'dateTime':
+          return data.flight.oneWay.takeoffDate;
+        case 'price':
+          return +data.totalCost;
+        default:
+          return '';
       }
     };
   }
@@ -125,14 +140,39 @@ export class ShoppingCartComponent implements AfterViewInit {
     this.router.navigateByUrl('/booking/main');
   }
 
-  openPaymentModal() {
-    this.dialog.open(PaymentModalComponent, {
-      width: '400px',
-    });
+  handlePayment() {
+    this.dialog
+      .open(PaymentModalComponent, {
+        width: '400px',
+        data: {
+          total: this.currency + this.getTotalCost(),
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result === 'CONFIRMED') {
+          this.store.dispatch(
+            UserOrdersActions.addToOrders({ orders: this.selection.selected })
+          );
+          this.store.dispatch(
+            CartActions.removeFromCart({
+              id: this.selection.selected.map((trip) => trip.id),
+            })
+          );
+          this.selection.clear();
+        }
+      });
   }
 
   handleEdit(targetElement: Trip) {
     console.log(targetElement.id);
     this.router.navigateByUrl('/booking/main');
+  }
+
+  handleDelete(tripId: string) {
+    this.selection.setSelection(
+      ...this.selection.selected.filter((s) => tripId !== s.id)
+    );
+    this.store.dispatch(CartActions.removeFromCart({ id: [tripId] }));
   }
 }

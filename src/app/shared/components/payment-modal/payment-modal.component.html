@@ -1,11 +1,25 @@
 <h1 mat-dialog-title>Payment</h1>
 <div mat-dialog-content>
-  You are going to pay for your order. Money will be automatically deducted from
-  the attached card.
+  Money will be automatically deducted from the attached card.
 </div>
+
+<div class="amount__container">
+  <mat-divider></mat-divider>
+  <p class="amount__text">
+    Amount: <span>{{ data.total }}</span>
+  </p>
+  <mat-divider></mat-divider>
+</div>
+
 <div mat-dialog-actions class="buttons__container">
   <button mat-stroked-button color="primary" mat-dialog-close>Close</button>
-  <button mat-flat-button color="primary" mat-dialog-close cdkFocusInitial>
+  <button
+    mat-flat-button
+    color="primary"
+    mat-dialog-close
+    cdkFocusInitial
+    (click)="onConfirm()"
+  >
     Confirm payment
   </button>
 </div>
