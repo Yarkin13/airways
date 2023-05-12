@@ -8,7 +8,11 @@
       }"
     >
       <mat-label>Email</mat-label>
-      <input matInput formControlName="login" />
+      <input
+        matInput
+        formControlName="login"
+        [errorStateMatcher]="errorMatcher"
+      />
       <mat-error *ngIf="login?.invalid">{{ getErrorMessageLogin() }}</mat-error>
     </mat-form-field>
 
@@ -26,6 +30,7 @@
         matInput
         [type]="hidePassword ? 'password' : 'text'"
         formControlName="password"
+        [errorStateMatcher]="errorMatcher"
       />
       <button
         mat-icon-button
@@ -59,7 +64,11 @@
       }"
     >
       <mat-label>First name</mat-label>
-      <input matInput formControlName="firstName" />
+      <input
+        matInput
+        formControlName="firstName"
+        [errorStateMatcher]="errorMatcher"
+      />
       <button
         mat-icon-button
         matSuffix
@@ -83,7 +92,11 @@
       }"
     >
       <mat-label>Last name</mat-label>
-      <input matInput formControlName="lastName" />
+      <input
+        matInput
+        formControlName="lastName"
+        [errorStateMatcher]="errorMatcher"
+      />
       <button
         mat-icon-button
         matSuffix
@@ -115,6 +128,7 @@
         [matDatepicker]="picker"
         [max]="maxDate"
         [min]="minDate"
+        [errorStateMatcher]="errorMatcher"
       />
       <mat-error *ngIf="dateBirthDay?.invalid">
         {{ getErrorMessageBirthday() }}
@@ -158,7 +172,10 @@
         }"
       >
         <mat-label>Country code</mat-label>
-        <mat-select formControlName="countryCode">
+        <mat-select
+          formControlName="countryCode"
+          [errorStateMatcher]="errorMatcher"
+        >
           <mat-option *ngFor="let item of countryCodes" [value]="item.code">{{
             item.name + ' (' + item.dial_code + ')'
           }}</mat-option>
@@ -175,7 +192,12 @@
         }"
       >
         <mat-label>Mobile phone number</mat-label>
-        <input matInput formControlName="phone" type="number" />
+        <input
+          matInput
+          formControlName="phone"
+          type="number"
+          [errorStateMatcher]="errorMatcher"
+        />
         <mat-error *ngIf="phone?.invalid">{{
           getErrorMessagePhone()
         }}</mat-error>
@@ -192,7 +214,10 @@
       }"
     >
       <mat-label>Citizenship</mat-label>
-      <mat-select formControlName="citizenship">
+      <mat-select
+        formControlName="citizenship"
+        [errorStateMatcher]="errorMatcher"
+      >
         <mat-option *ngFor="let item of citizenshipArray" [value]="item">{{
           item
         }}</mat-option>
@@ -207,12 +232,7 @@
     <div class="signup__checkbox-wrapper">
       <div class="signup__checkbox-field">
         <mat-checkbox color="primary" formControlName="agreement">
-          <!-- TODO WHERE GO LINK -->
-          I agree to Airway's
-          <a href="./" class="signup__checkbox-link">Privacy Policy</a> and
-          <a href="./" class="signup__checkbox-link"
-            >Terms of Use</a
-          ></mat-checkbox
+          I agree to Airway's Privacy Policy and Terms of Use</mat-checkbox
         >
       </div>
       <mat-error

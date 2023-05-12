@@ -1,4 +1,4 @@
-@use "src/styles.scss" as *;
+@use 'src/styles.scss' as *;
 
 :host {
   width: 100%;
@@ -78,11 +78,19 @@
     .user__sign-in {
       background: $neutral90;
       border: 0.5px solid $neutral60;
-      width: 114px;
-      height: 40px;
       gap: 3px;
+      padding: 10px 16px;
+      height: 100%;
       color: $neutral100;
       @extend %button;
+
+      ::ng-deep {
+        .mdc-button__label {
+          max-width: 100px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
     }
 
     .user__cart {
@@ -121,4 +129,10 @@
   @media (max-width: 1058px) {
     justify-content: center;
   }
+}
+
+.user__logout-button {
+  color: $neutral100;
+  background: transparent;
+  cursor: pointer;
 }

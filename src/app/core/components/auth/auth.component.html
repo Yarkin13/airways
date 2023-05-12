@@ -1,5 +1,10 @@
 <div class="auth__layout">
-  <mat-tab-group animationDuration="0ms" class="auth__tab-group">
+  <mat-tab-group
+    animationDuration="0ms"
+    class="auth__tab-group"
+    [selectedIndex]="auth.authStage$ | async"
+    (selectedIndexChange)="onChangeTabs($event)"
+  >
     <mat-tab label="Log in"><app-log-in-form></app-log-in-form></mat-tab>
     <mat-tab label="Sign up">
       <mat-dialog-content class="auth__signup-container">

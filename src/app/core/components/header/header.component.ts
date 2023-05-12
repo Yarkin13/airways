@@ -1,12 +1,14 @@
 import { Component, HostListener } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { selectUrl } from 'src/app/redux/selectors/router.selectors';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { STEPS } from 'src/app/shared/constants';
+import { selectUserInfo } from 'src/app/redux/selectors/user.selectors';
+import { removeUser } from 'src/app/redux/actions/user-data.actions';
 import { selectCartCount } from 'src/app/redux/selectors/cart.selectors';
 import { Router } from '@angular/router';
-import { AuthComponent } from '../auth/auth.component';
+import { AuthService } from '../../services/auth.service';
+import { ModalService } from '../../services/modal.service';
 
 @UntilDestroy()
 @Component({
@@ -29,7 +31,14 @@ export class HeaderComponent {
 
   isOpaque = false;
 
-  constructor(private store: Store, public dialog: MatDialog, public router: Router) {
+  userFistName = '';
+
+  constructor(
+    private store: Store,
+    public modal: ModalService,
+    public router: Router,
+    public auth: AuthService
+  ) {
     this.path$ = this.store.select(selectUrl);
     this.path$.pipe(untilDestroyed(this)).subscribe((value) => {
       if (value === '/booking/main') {
@@ -44,14 +53,20 @@ export class HeaderComponent {
         this.currentStep = STEPS[value] || STEPS['default'];
       }
     });
-    this.store.select(selectCartCount).pipe(untilDestroyed(this)).subscribe((value) => {
-      this.cartCount = value;
-      this.badgeHidden = value <= 0;
-    });
-  }
+    this.store
+      .select(selectCartCount)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.cartCount = value;
+        this.badgeHidden = value <= 0;
+      });
 
-  openAuthModal() {
-    this.dialog.open(AuthComponent);
+    this.store
+      .select(selectUserInfo)
+      .pipe(untilDestroyed(this))
+      .subscribe((data) => {
+        this.userFistName = data.firstName;
+      });
   }
 
   redirectToCart() {
@@ -69,5 +84,10 @@ export class HeaderComponent {
     } else {
       this.isOpaque = false;
     }
+  }
+
+  logout() {
+    this.auth.logout();
+    this.store.dispatch(removeUser());
   }
 }

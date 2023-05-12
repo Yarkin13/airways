@@ -9,7 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { selectHeaderDate } from 'src/app/redux/selectors/header-data.selectors';
-import { DateFormat } from './date-format';
+import { DateFormat } from '../../../../shared/constants';
 
 @Component({
   selector: 'dates',

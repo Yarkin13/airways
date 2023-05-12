@@ -19,6 +19,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
@@ -46,6 +47,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatCardModule,
     MatDividerModule,
     MatSnackBarModule,
+    MomentDateModule,
     MatTableModule,
     MatMenuModule,
     MatSortModule,

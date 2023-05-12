@@ -27,11 +27,21 @@
           mat-flat-button
           class="user__sign-in"
           [ngClass]="{ colorDark: !isMainPage }"
-          (click)="openAuthModal()"
+          (click)="modal.openAuthModal()"
+          [disabled]="auth.userIsAuth$ | async"
         >
           <mat-icon>perm_identity</mat-icon>
-          Sign in
+          {{ (auth.userIsAuth$ | async) ? userFistName : 'Sign in' }}
         </button>
+
+        <button
+          class="user__logout-button"
+          *ngIf="auth.userIsAuth$ | async"
+          (click)="logout()"
+        >
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+
         <div
           [matBadge]="cartCount"
           matBadgeSize="small"
