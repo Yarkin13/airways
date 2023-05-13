@@ -10,6 +10,7 @@ import { PASSENGERS_TYPE } from 'src/app/shared/constants';
 })
 export class PassengersComponent {
   @Input() flightSearchForm!: FormGroup;
+  @Input() error!: boolean;
 
   passengersType = PASSENGERS_TYPE;
   passengersValue = '';

@@ -1,8 +1,8 @@
 export const AIRPORTS = [
-  { airport: 'Aberdeen', cod: 'ABZ', city: 'Dyce, United Kingdom' },
-  { airport: 'Amsterdam', cod: 'AMS', city: 'Schiphol, Netherlands' },
-  { airport: 'Baku', cod: 'GYD', city: 'Heydar Aliyev, Azerbaijan' },
-  { airport: 'Barcelona', cod: 'BCN', city: 'El Prat, Spain' },
-  { airport: 'Catania', cod: 'CTA', city: 'Fontanarossa, Italy' },
-  { airport: 'Dublin', cod: 'DUB', city: 'Ireland' },
+  { name: 'Aberdeen', key: 'ABZ', city: 'Dyce, United Kingdom' },
+  { name: 'Amsterdam', key: 'AMS', city: 'Schiphol, Netherlands' },
+  { name: 'Baku', key: 'GYD', city: 'Heydar Aliyev, Azerbaijan' },
+  { name: 'Barcelona', key: 'BCN', city: 'El Prat, Spain' },
+  { name: 'Catania', key: 'CTA', city: 'Fontanarossa, Italy' },
+  { name: 'Dublin', key: 'DUB', city: 'Ireland' },
 ];

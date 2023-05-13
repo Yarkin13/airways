@@ -1,5 +1,6 @@
 export interface IAirports {
-  airport: string;
-  cod: string;
+  key: string;
+  country?: string;
   city: string;
+  name: string;
 }

@@ -19,6 +19,7 @@ import { userReducer } from './redux/reducers/user.reducer';
 import { InterceptorAuthService } from './core/interceptors/interceptor-auth.service';
 import { InterceptorUrlService } from './core/interceptors/interceptor-url.service';
 import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
+import { HttpService } from './http.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,6 +60,7 @@ import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
+    HttpService
   ],
   bootstrap: [AppComponent],
 })

@@ -2,6 +2,7 @@
   appearance="fill"
   class="passengers__input"
   [formGroup]="flightSearchForm"
+  [ngClass]="{ errorInput: error }"
 >
   <mat-label>Passengers</mat-label>
   <mat-select value="{{ passengersValue ? 'showOption' : '' }}">
