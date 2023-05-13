@@ -14,5 +14,19 @@ export const cartReducer = createReducer(
   on(
     CartActions.removeFromCart,
     (state, { id }): Array<Trip> => state.filter((trip) => !id.includes(trip.id))
+  ),
+  on(
+    CartActions.editCartTrip,
+    (state, { id, info }): Array<Trip> => {
+      let editTrip = state.find((trip) => id.includes(trip.id));
+      if (editTrip) {
+        editTrip = {
+          ...editTrip,
+          passengersInfo: info,
+        };
+        return [...state.filter((trip) => !id.includes(trip.id)), editTrip];
+      }
+      return state;
+    }
   )
 );

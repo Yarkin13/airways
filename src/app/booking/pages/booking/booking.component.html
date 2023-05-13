@@ -33,7 +33,21 @@
     <app-contact-details></app-contact-details>
   </div>
   <div class="buttons__layout">
-    <button mat-stroked-button color="primary" class="button">Back</button>
-    <button mat-flat-button color="primary" class="button">Continue</button>
+    <button
+      mat-stroked-button
+      color="primary"
+      class="button"
+      *ngIf="!tripIdInCart"
+    >
+      Back
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      class="button"
+      (click)="handleContinue()"
+    >
+      Continue
+    </button>
   </div>
 </div>

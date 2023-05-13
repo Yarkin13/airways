@@ -14,6 +14,10 @@ export const initialState = {
 export const bookingReducer = createReducer(
   initialState,
   on(
+    BookingActions.setBookingInitialState,
+    (state, trip): Trip => trip,
+  ),
+  on(
     BookingActions.setFlight,
     (state, { flight }): Trip => ({ ...state, flight }),
   ),

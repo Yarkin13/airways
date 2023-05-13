@@ -1,9 +1,168 @@
+@use "src/styles.scss" as *;
+
 :host {
-  margin-top: 156px;
   display: flex;
-  justify-content: center;
+  width: 100%;
+  max-width: 1128px;
+  margin: 88px auto 0;
+  padding-left: 22px;
+  box-sizing: border-box;
+
+  @media (max-width: $desktop-s) {
+    padding: 0 10px;
+  }
+
+  @media (max-width: $mobile-xll) {
+    margin: 116px auto 0;
+  }
+
+  @media (max-width: $mobile-lm) {
+    margin: 172px auto 0;
+  }
 
   p {
     margin: 0;
+  }
+}
+
+.orders__container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+  background-color: $neutral100;
+  box-shadow: $shadow;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+
+  @media (max-width: $mobile-ll) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-x: scroll;
+  }
+}
+
+.title__container {
+  padding: 33px 0 27px 31px;
+
+  .title {
+    color: $primary;
+    @extend %title-large;
+    font-weight: 700;
+
+    @media (max-width: $mobile-xl) {
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.empty-orders__container{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  padding-top: 60px;
+  padding-bottom: 120px;
+
+  .empty-orders__text {
+    @extend %title-medium;
+    font-weight: 500;
+  }
+
+  .empty-orders__button {
+    @extend %button;
+    width: 208px;
+    height: 40px;
+  }
+}
+
+.table {
+  padding: 0 16px;
+
+  @media (max-width: $mobile-xl) {
+    padding: 0 8px;
+  }
+
+  .mat-column-passengers,
+  .mat-column-number,
+  .mat-column-flight,
+  .mat-column-tripType,
+  .mat-column-dateTime,
+  .mat-column-price {
+    padding: 20px 14px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 15px 8px;
+    }
+  }
+
+  .mat-column-number {
+    color: $secondary0;
+  }
+
+  .mat-column-price {
+    color: $highlight-green0;
+  }
+
+  .table__header th {
+    background: $neutral80;
+    @extend %subtitle-medium;
+    font-weight: 700;
+    font-size: 18px;
+    color: $black;
+    user-select: none;
+  }
+
+  .table__row td {
+    @extend %body-xlarge;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .table__footer td {
+    padding: 35px 14px 30px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 20px 8px;
+    }
+  }
+
+  .table__footer td {
+    border-top: 1px solid $secondary50;
+  }
+
+  .table__cell-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .new-trip__btn {
+    color: $primary;
+    @extend %button;
+    background: $secondary90;
+    height: 28px;
+    padding: 0 8px;
+  }
+
+  @media (max-width: $mobile-xl) {
+    .table__row td,
+    .table__header th,
+    .new-trip__btn {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+    }
+
+    .title {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
   }
 }
