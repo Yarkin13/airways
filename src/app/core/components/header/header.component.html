@@ -27,11 +27,10 @@
           mat-flat-button
           class="user__sign-in"
           [ngClass]="{ colorDark: !isMainPage }"
-          (click)="modal.openAuthModal()"
-          [disabled]="auth.userIsAuth$ | async"
+          (click)="handleSignInBtnClick()"
         >
           <mat-icon>perm_identity</mat-icon>
-          {{ (auth.userIsAuth$ | async) ? userFistName : 'Sign in' }}
+          {{ (auth.userIsAuth$ | async) ? userFistName : "Sign in" }}
         </button>
 
         <button

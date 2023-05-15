@@ -107,11 +107,9 @@
   background: $neutral100;
 
   .menu {
-    .menu__text {
-      color: $neutral10;
-    }
-
-    .user__sign-in {
+    .menu__text,
+    .user__sign-in,
+    .user__logout-button {
       color: $neutral10;
     }
 

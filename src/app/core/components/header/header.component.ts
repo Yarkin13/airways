@@ -90,4 +90,12 @@ export class HeaderComponent {
     this.auth.logout();
     this.store.dispatch(removeUser());
   }
+
+  handleSignInBtnClick() {
+    if (this.auth.userIsAuth$.value) {
+      this.router.navigateByUrl('/user/account');
+    } else {
+      this.modal.openAuthModal();
+    }
+  }
 }
