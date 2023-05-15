@@ -9,6 +9,7 @@ import { selectCartCount } from 'src/app/redux/selectors/cart.selectors';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
+import { UserRegisterData } from '../../models/user.model';
 
 @UntilDestroy()
 @Component({
@@ -31,7 +32,7 @@ export class HeaderComponent {
 
   isOpaque = false;
 
-  userFistName = '';
+  user: UserRegisterData;
 
   constructor(
     private store: Store,
@@ -65,7 +66,7 @@ export class HeaderComponent {
       .select(selectUserInfo)
       .pipe(untilDestroyed(this))
       .subscribe((data) => {
-        this.userFistName = data.firstName;
+        this.user = data;
       });
   }
 
@@ -91,11 +92,7 @@ export class HeaderComponent {
     this.store.dispatch(removeUser());
   }
 
-  handleSignInBtnClick() {
-    if (this.auth.userIsAuth$.value) {
-      this.router.navigateByUrl('/user/account');
-    } else {
-      this.modal.openAuthModal();
-    }
+  redirectToAccount() {
+    this.router.navigateByUrl('/user/account');
   }
 }
