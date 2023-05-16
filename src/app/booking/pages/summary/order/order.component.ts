@@ -12,6 +12,6 @@ import { FlightInfo, PassengerInfo } from 'src/app/shared/models/booking.model';
 })
 export class OrderComponent {
   @Input() passengers!: Array<PassengerInfo>;
-
   @Input() flight!: FlightInfo;
+  @Input() dateFormatStr!: string;
 }

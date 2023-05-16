@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
-import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
+import { selectCurrencySign, selectDateFormatPipeString } from 'src/app/redux/selectors/header-data.selectors';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { selectUserOrdersInCur } from 'src/app/redux/selectors/user-orders.selectors';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -30,6 +30,7 @@ export class UserAccountComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Trip>();
   tripCount = 0;
   currency = '€';
+  dateFormatStr = '';
 
   constructor(
     private store: Store,
@@ -47,6 +48,12 @@ export class UserAccountComponent implements AfterViewInit {
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.currency = value;
+      });
+    this.store
+      .select(selectDateFormatPipeString)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.dateFormatStr = value;
       });
 
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {

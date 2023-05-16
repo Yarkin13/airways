@@ -8,11 +8,13 @@
     <app-order
       [passengers]="passengersInfo"
       [flight]="flight.oneWay"
+      [dateFormatStr]="dateFormatStr"
     ></app-order>
     <ng-container *ngIf="flight.returnWay">
       <app-order
         [passengers]="passengersInfo"
         [flight]="flight.returnWay"
+        [dateFormatStr]="dateFormatStr"
       ></app-order>
     </ng-container>
     <app-fare

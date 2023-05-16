@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Store } from '@ngrx/store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
+import { selectCurrencySign, selectDateFormatPipeString } from 'src/app/redux/selectors/header-data.selectors';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
@@ -46,6 +46,7 @@ export class ShoppingCartComponent implements AfterViewInit {
   tripCount = 0;
   currency = '€';
   discount = '0';
+  dateFormatStr = '';
 
   constructor(
     private store: Store,
@@ -70,6 +71,12 @@ export class ShoppingCartComponent implements AfterViewInit {
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.currency = value;
+      });
+    this.store
+      .select(selectDateFormatPipeString)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.dateFormatStr = value;
       });
     this.discountService.getDiscount().subscribe((value) => {
       this.discount = value;

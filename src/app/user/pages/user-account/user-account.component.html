@@ -72,11 +72,11 @@
       <ng-container matColumnDef="dateTime">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Date & Time</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.flight.oneWay.takeoffDate | date : "d MMM, yyyy" }},
+          {{ element.flight.oneWay.takeoffDate | date : dateFormatStr }},
           {{ element.flight.oneWay.takeoffDate | date : "H:mm" }} -
           {{ element.flight.oneWay.landingDate | date : "H:mm" }}<br />
           <ng-container *ngIf="element.flight.returnWay">
-            {{ element.flight.returnWay.takeoffDate | date : "d MMM, yyyy" }},
+            {{ element.flight.returnWay.takeoffDate | date : dateFormatStr }},
             {{ element.flight.returnWay.takeoffDate | date : "H:mm" }} -
             {{ element.flight.returnWay.landingDate | date : "H:mm" }}
           </ng-container>
