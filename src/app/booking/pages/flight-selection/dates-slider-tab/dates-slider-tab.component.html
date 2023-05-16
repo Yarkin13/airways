@@ -1,0 +1,16 @@
+<div class="date-item" [ngClass]="currentClasses">
+  <p class="date-item__date">{{ date.takeoffDate | date : "dd MMM" }}</p>
+  <p class="date-item__day">{{ date.takeoffDate | date : "EEEE" }}</p>
+  <p *ngIf="date.price && currency; else notFly" class="date-item__price">
+    {{
+      date.price[currency.toLowerCase()] | currency : currency : "symbol-narrow"
+    }}
+  </p>
+  <ng-template #notFly>
+    <img
+      src="assets/booking/do-not-fly.svg"
+      alt="do not fly"
+      class="date-item__img"
+    />
+  </ng-template>
+</div>

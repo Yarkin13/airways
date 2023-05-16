@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError } from 'rxjs';
 import { API_URL } from './shared/constants';
-import { IAirports } from './booking/airports.model';
+import { IAirports } from './shared/models/airports.model';
+import { IFlightRequest } from './shared/models/flight-request.model';
+import { IFlightResponse } from './shared/models/flight-response.model';
 
 @Injectable()
 export class HttpService {
@@ -17,5 +19,12 @@ export class HttpService {
           return [];
         })
       );
+  }
+
+  postFlight(request: IFlightRequest): Observable<IFlightResponse[]> {
+    return this.http.post<IFlightResponse[]>(
+      `${API_URL}search/flight`,
+      request
+    );
   }
 }

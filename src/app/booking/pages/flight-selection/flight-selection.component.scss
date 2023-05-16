@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  margin-top: 250px;
+}
+
+.flights {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.flight-selection__btns {
+  display: flex;
+  margin-top: 40px;
+  justify-content: flex-end;
+  gap: 30px;
+
+  .mdc-button {
+    height: 60px;
+    padding: 20px 30px;
+  }
+}

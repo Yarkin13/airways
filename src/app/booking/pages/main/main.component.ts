@@ -75,14 +75,19 @@ export class MainComponent implements OnInit {
         { type: 'Infant', count: this.infantValue },
       ];
       this.store.dispatch(BookingActions.setPassengers({ passengers }));
-      this.router.navigate(['/booking/flights'], {
-        queryParams: {
-          from: this.fromValue,
-          to: this.destinationValue,
-          dateIn: this.dateToValue.toISOString(),
-          dateOut: this.dateBackValue.toISOString(),
-        },
-      });
+
+      const request = this.dateBackValue ? {
+        fromKey: this.fromValue,
+        toKey: this.destinationValue,
+        forwardDate: this.dateToValue.toISOString(),
+        backDate: this.dateBackValue.toISOString(),
+      } : {
+        fromKey: this.fromValue,
+        toKey: this.destinationValue,
+        forwardDate: this.dateToValue.toISOString(),
+      };
+
+      this.router.navigate(['/booking/flights'], { queryParams: request, });
     }
   }
 

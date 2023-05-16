@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { HttpService } from 'src/app/http.service';
-import { IAirports } from 'src/app/booking/airports.model';
+import { IAirports } from 'src/app/shared/models/airports.model';
 
 @Component({
   selector: 'direction-input',

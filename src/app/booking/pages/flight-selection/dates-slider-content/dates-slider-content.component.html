@@ -1,0 +1,57 @@
+<div class="flight-container">
+  <div class="flight">
+    <p class="flight__date">{{ date.takeoffDate | date : "EEE, d MMM y" }}</p>
+    <p class="flight__time">
+      {{ date.takeoffDate | date : "H:mm" : date.form?.gmt }}
+      <span>{{ date.takeoffDate | date : "z" : date.form?.gmt }}</span>
+    </p>
+    <p class="flight__airport">{{ date.form?.name }}</p>
+  </div>
+
+  <div class="duration">
+    <p class="duration__time">{{ durationTime }}</p>
+    <div class="duration__img-container">
+      <img
+        src="assets/booking/flight.svg"
+        alt="flight"
+        class="duration__img"
+        [ngClass]="{ backImg: back }"
+      />
+    </div>
+    <p class="duration__transplants">Direct</p>
+  </div>
+
+  <div class="flight back-flight">
+    <p class="flight__date">{{ date.landingDate | date : "EEE, d MMM y" }}</p>
+    <p class="flight__time">
+      <span>{{ date.landingDate | date : "z" : date.to?.gmt }}</span>
+      {{ date.landingDate | date : "H:mm" : date.to?.gmt }}
+    </p>
+    <p class="flight__airport">{{ date.to?.name }}</p>
+  </div>
+
+  <div class="flight__no">
+    Flight no. <span>{{ date.flightNumber }}</span>
+  </div>
+</div>
+
+<div class="select-container">
+  <div class="price-container">
+    <p class="price__seats" [ngClass]="currentClasses">
+      {{ date.seats?.avaible }} seats <br />
+      available
+    </p>
+    <div>
+      <p class="price__title">Price</p>
+      <p class="price__value" *ngIf="date.price">
+        {{
+          date.price[currency.toLowerCase()]
+            | currency : currency : "symbol-narrow"
+        }}
+      </p>
+    </div>
+  </div>
+  <button mat-flat-button class="price__btn" onclick="selectFlight()">
+    Select
+  </button>
+</div>

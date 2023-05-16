@@ -1,0 +1,9 @@
+<div class="flight-title">
+  <mat-icon
+    fontIcon="flight"
+    class="flight-title__icon"
+    [ngClass]="{ backIcon: back }"
+  ></mat-icon>
+  <p>{{ flight.form.name }} to {{ flight.to.name }}</p>
+</div>
+<dates-slider [dates]="datesArray" [back]="back"></dates-slider>
