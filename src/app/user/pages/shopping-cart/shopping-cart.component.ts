@@ -181,7 +181,7 @@ export class ShoppingCartComponent implements AfterViewInit {
             discount: this.discount,
             totalCost: (
               +trip.totalCost
-              / CURRENCY_EXCHANGE['RUB']
+              / CURRENCY_EXCHANGE[this.headerCurrency]
             )
               .toFixed(2)
               .toString(),
