@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
+import { selectCurrencySign, selectDateFormatPipeStringWithDay } from 'src/app/redux/selectors/header-data.selectors';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   selectBookingTrip,
@@ -44,25 +44,17 @@ import { SecondMenuComponent } from '../../components/second-menu/second-menu.co
 })
 export class SummaryComponent {
   public flight!: Flight;
-
   public passengersInfo!: Array<PassengerInfo>;
-
   public passengersFareByTypeInCur!: Array<PassengerType>;
-
   public passengersFareByType!: Array<PassengerType>;
-
   public totalCostInCur!: string;
-
   public totalCost!: string;
 
   currency = '€';
-
+  dateFormatStr = '';
   btnDisabled = false;
-
   isPaid = false;
-
   isEdit = false;
-
   tripIdEdit = '';
 
   constructor(
@@ -78,6 +70,12 @@ export class SummaryComponent {
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.currency = value;
+      });
+    this.store
+      .select(selectDateFormatPipeStringWithDay)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.dateFormatStr = value;
       });
 
     this.route.params.pipe(untilDestroyed(this)).subscribe((params) => {

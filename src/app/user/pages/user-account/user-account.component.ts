@@ -5,7 +5,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
-import { selectCurrencySign } from 'src/app/redux/selectors/header-data.selectors';
+import {
+  selectCurrencySign,
+  selectDateFormatPipeString,
+} from 'src/app/redux/selectors/header-data.selectors';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { selectUserOrdersInCur } from 'src/app/redux/selectors/user-orders.selectors';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -16,7 +19,7 @@ import { MaterialModule } from 'src/app/material/material.module';
   standalone: true,
   imports: [CommonModule, MaterialModule],
   templateUrl: './user-account.component.html',
-  styleUrls: ['./user-account.component.scss']
+  styleUrls: ['./user-account.component.scss'],
 })
 export class UserAccountComponent implements AfterViewInit {
   displayedColumns: string[] = [
@@ -30,11 +33,9 @@ export class UserAccountComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Trip>();
   tripCount = 0;
   currency = '€';
+  dateFormatStr = '';
 
-  constructor(
-    private store: Store,
-    private router: Router,
-  ) {
+  constructor(private store: Store, private router: Router) {
     this.store
       .select(selectUserOrdersInCur)
       .pipe(untilDestroyed(this))
@@ -47,6 +48,12 @@ export class UserAccountComponent implements AfterViewInit {
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.currency = value;
+      });
+    this.store
+      .select(selectDateFormatPipeString)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.dateFormatStr = value;
       });
 
     this.dataSource.sortingDataAccessor = (data, sortHeaderId) => {
@@ -79,5 +86,13 @@ export class UserAccountComponent implements AfterViewInit {
 
   redirectToSummary(element: Trip) {
     this.router.navigate(['/booking/summary', { id: element.id }]);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  getTotalCost(total: string, disc: string) {
+    if (total && disc) {
+      return `${(+total * (1 - 0.01 * +disc)).toFixed(2)}*`;
+    }
+    return total;
   }
 }

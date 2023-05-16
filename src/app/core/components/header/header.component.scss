@@ -83,15 +83,20 @@
       height: 100%;
       color: $neutral100;
       @extend %button;
+      }
 
-      ::ng-deep {
-        .mdc-button__label {
-          max-width: 100px;
-          overflow: hidden;
-          text-overflow: ellipsis;
+      .user__acc {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $neutral90;
+        color: $neutral100;
+
+        .icon {
+          margin: 0;
         }
       }
-    }
 
     .user__cart {
       cursor: pointer;
@@ -107,12 +112,15 @@
   background: $neutral100;
 
   .menu {
-    .menu__text {
+    .menu__text,
+    .user__sign-in,
+    .user__acc,
+    .user__logout-button {
       color: $neutral10;
     }
 
-    .user__sign-in {
-      color: $neutral10;
+    .user__acc {
+      background: $neutral80;
     }
 
     .user__cart {
@@ -123,6 +131,11 @@
 
 .smallGap {
   gap: 16px;
+
+  .user {
+    gap: 16px;
+    margin-left: 16px;
+  }
 }
 
 .media {
@@ -131,8 +144,8 @@
   }
 }
 
-.user__logout-button {
-  color: $neutral100;
-  background: transparent;
-  cursor: pointer;
+.user-menu__text-container {
+  display: flex;
+  padding: 16px;
+  gap: 16px;
 }

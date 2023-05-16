@@ -6,7 +6,7 @@
     </div>
     <div class="flight-date-row">
       <p class="flight-date">
-        {{ flight.takeoffDate | date : "EEEE, d MMMM, yyyy" }}
+        {{ flight.takeoffDate | date : dateFormatStr }}
       </p>
       <p class="flight-time">
         {{ flight.takeoffDate | date : "H:mm" }} -

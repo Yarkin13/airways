@@ -23,24 +23,44 @@
       ></app-currency-selector>
 
       <div class="user">
-        <button
-          mat-flat-button
-          class="user__sign-in"
-          [ngClass]="{ colorDark: !isMainPage }"
-          (click)="modal.openAuthModal()"
-          [disabled]="auth.userIsAuth$ | async"
-        >
-          <mat-icon>perm_identity</mat-icon>
-          {{ (auth.userIsAuth$ | async) ? userFistName : 'Sign in' }}
-        </button>
+        <ng-template #signin>
+          <button
+            mat-flat-button
+            class="user__sign-in"
+            [ngClass]="{ colorDark: !isMainPage }"
+            (click)="modal.openAuthModal()"
+          >
+            <mat-icon>perm_identity</mat-icon>
+            Sign in
+          </button>
+        </ng-template>
 
         <button
-          class="user__logout-button"
-          *ngIf="auth.userIsAuth$ | async"
-          (click)="logout()"
+          *ngIf="auth.userIsAuth$ | async; else signin"
+          mat-icon-button
+          class="user__acc"
+          [ngClass]="{ colorDark: !isMainPage }"
+          [matMenuTriggerFor]="menu"
         >
-          <mat-icon>exit_to_app</mat-icon>
+          <mat-icon class="icon">perm_identity</mat-icon>
         </button>
+
+        <mat-menu #menu="matMenu">
+          <div class="user-menu__text-container">
+            <mat-icon>account_circle</mat-icon>
+            <span>{{ user.firstName }} {{ user.lastName }}</span>
+          </div>
+
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="redirectToAccount()">
+            <mat-icon>dialpad</mat-icon>
+            <span>My Account</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Sign out</span>
+          </button>
+        </mat-menu>
 
         <div
           [matBadge]="cartCount"
