@@ -6,7 +6,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Store } from '@ngrx/store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { selectCurrencySign, selectDateFormatPipeString } from 'src/app/redux/selectors/header-data.selectors';
+import {
+  selectCurrencySign,
+  selectDateFormatPipeString,
+  selectHeaderCurrency,
+} from 'src/app/redux/selectors/header-data.selectors';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
@@ -19,6 +23,9 @@ import {
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import { BookingActions } from 'src/app/redux/actions/booking.actions';
+import {
+  CURRENCY_EXCHANGE
+} from 'src/app/shared/constants/currency';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -44,8 +51,9 @@ export class ShoppingCartComponent implements AfterViewInit {
   dataSource = new MatTableDataSource<Trip>();
   selection = new SelectionModel<Trip>(true, []);
   tripCount = 0;
-  currency = '€';
-  discount = '0';
+  currency = '';
+  headerCurrency = '';
+  discount = '';
   dateFormatStr = '';
 
   constructor(
@@ -71,6 +79,12 @@ export class ShoppingCartComponent implements AfterViewInit {
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.currency = value;
+      });
+    this.store
+      .select(selectHeaderCurrency)
+      .pipe(untilDestroyed(this))
+      .subscribe((value) => {
+        this.headerCurrency = value;
       });
     this.store
       .select(selectDateFormatPipeString)
@@ -162,9 +176,22 @@ export class ShoppingCartComponent implements AfterViewInit {
       .afterClosed()
       .subscribe((result) => {
         if (result === 'CONFIRMED') {
+          const selectedTrip = this.selection.selected.map((trip) => ({
+            ...trip,
+            discount: this.discount,
+            totalCost: (
+              +trip.totalCost
+              / CURRENCY_EXCHANGE['RUB']
+            )
+              .toFixed(2)
+              .toString(),
+          }));
           this.store.dispatch(
-            UserOrdersActions.addToOrders({ orders: this.selection.selected })
+            UserOrdersActions.addToOrders({
+              orders: selectedTrip,
+            })
           );
+
           this.store.dispatch(
             CartActions.removeFromCart({
               id: this.selection.selected.map((trip) => trip.id),

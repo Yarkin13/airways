@@ -6,4 +6,5 @@ export interface Trip {
   flight: Flight;
   passengersInfo: Array<PassengerInfo>;
   totalCost: string;
+  discount?: string;
 }
