@@ -1,9 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import {
-  flight as bookingFlight,
-  passengersInfo as bookingPassengers,
-  passengers as passengersType,
-} from 'src/app/shared/summary.mock';
+import { flight as bookingFlight, passengers as passengersType } from 'src/app/shared/summary.mock';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { Flight } from 'src/app/shared/models/booking.model';
 import { BookingActions } from '../actions/booking.actions';
@@ -53,10 +49,6 @@ export const bookingReducer = createReducer(
       ...state,
       passengersInfo: passengersInfo.passengersInfo,
     })
-  ),
-  on(
-    BookingActions.setPassengers,
-    (state, { passengers }): Trip => ({ ...state, passengers }),
   ),
   on(
     BookingActions.setContactDetails,
