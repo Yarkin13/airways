@@ -1,7 +1,7 @@
-import {
-  Component, Input, ViewEncapsulation, OnInit
-} from '@angular/core';
-import { IFlightInfo } from 'src/app/shared/models/flight-info.model';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectHeaderCurrency } from 'src/app/redux/selectors/header-data.selectors';
+import { IEmptyFlight, IFlightInfo } from 'src/app/shared/models/flight-info.model';
 
 @Component({
   selector: 'dates-slider-tab',
@@ -10,8 +10,8 @@ import { IFlightInfo } from 'src/app/shared/models/flight-info.model';
   encapsulation: ViewEncapsulation.None,
 })
 export class DatesSliderTabComponent implements OnInit {
-  @Input() date!: IFlightInfo;
-  @Input() currency = 'eur';
+  @Input() date!: IFlightInfo | IEmptyFlight;
+  currency$ = this.store.select(selectHeaderCurrency);
 
   currentClasses = {
     redBorder: false,
@@ -19,8 +19,10 @@ export class DatesSliderTabComponent implements OnInit {
     greenBorder: false,
   };
 
+  constructor(private store: Store) {}
+
   ngOnInit() {
-    if (this.date.seats) {
+    if (this.date.price) {
       const { total, avaible } = this.date.seats;
       if (avaible < 10) this.currentClasses.redBorder = true;
       else if (total / 2 > avaible) this.currentClasses.orangeBorder = true;

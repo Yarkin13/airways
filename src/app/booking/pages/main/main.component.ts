@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { switchMap } from 'rxjs/operators';
-import { BookingActions } from 'src/app/redux/actions/booking.actions';
-import { PassengerType } from 'src/app/shared/models/booking.model';
 
 @Component({
   selector: 'app-main',
@@ -69,25 +67,19 @@ export class MainComponent implements OnInit {
 
   onSubmit(): void {
     if (this.checkErrors()) {
-      const passengers: PassengerType[] = [
-        { type: 'Adult', count: this.adultValue },
-        { type: 'Child', count: this.childValue },
-        { type: 'Infant', count: this.infantValue },
-      ];
-      this.store.dispatch(BookingActions.setPassengers({ passengers }));
-
-      const request = this.dateBackValue ? {
+      const request = {
         fromKey: this.fromValue,
         toKey: this.destinationValue,
+        fromValue: this.flightSearchForm.get('from')?.value.name,
+        toValue: this.flightSearchForm.get('destination')?.value.name,
         forwardDate: this.dateToValue.toISOString(),
-        backDate: this.dateBackValue.toISOString(),
-      } : {
-        fromKey: this.fromValue,
-        toKey: this.destinationValue,
-        forwardDate: this.dateToValue.toISOString(),
+        backDate: this.dateBackValue ? this.dateToValue.toISOString() : null,
+        adult: this.adultValue,
+        child: this.childValue,
+        infant: this.infantValue,
       };
 
-      this.router.navigate(['/booking/flights'], { queryParams: request, });
+      this.router.navigate(['/booking/flights'], { queryParams: request });
     }
   }
 

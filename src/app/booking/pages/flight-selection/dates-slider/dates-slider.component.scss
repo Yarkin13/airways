@@ -5,8 +5,6 @@
 }
 
 .slider {
-  margin-top: 16px;
-
   .mat-mdc-tab-labels {
     align-items: end;
   }
@@ -19,10 +17,10 @@
   .mat-mdc-tab-header-pagination {
     position: absolute !important; // angular material style
     top: 36px;
-    min-width: 24px !important;
+    min-width: 24px !important; // angular material style
     height: 24px;
     padding: 0;
-    background-color: $secondary60 !important;
+    background-color: $secondary60 !important; // angular material style
     border-radius: 50%;
 
     .mat-mdc-tab-header-pagination-chevron {

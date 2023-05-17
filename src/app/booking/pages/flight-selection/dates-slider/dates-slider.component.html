@@ -4,11 +4,11 @@
     disabled="{{ !date.price }}"
   >
     <ng-template mat-tab-label>
-      <dates-slider-tab [date]="date" [currency]="currency"></dates-slider-tab>
+      <dates-slider-tab [date]="date"></dates-slider-tab>
     </ng-template>
     <dates-slider-content
+      *ngIf="date.price"
       [date]="date"
-      [currency]="currency"
       [back]="back"
     ></dates-slider-content>
   </mat-tab>

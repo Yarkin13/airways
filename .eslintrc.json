@@ -36,7 +36,8 @@
         "import/no-extraneous-dependencies": "off",
         "@typescript-eslint/comma-dangle": 0,
         "@typescript-eslint/lines-between-class-members": 0,
-        "linebreak-style": 0
+        "linebreak-style": 0,
+        "object-curly-newline": 0
       }
     },
     {

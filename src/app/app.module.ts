@@ -20,6 +20,7 @@ import { InterceptorAuthService } from './core/interceptors/interceptor-auth.ser
 import { InterceptorUrlService } from './core/interceptors/interceptor-url.service';
 import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
 import { HttpService } from './http.service';
+import { flightReducer } from './redux/reducers/flight.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,6 +34,7 @@ import { HttpService } from './http.service';
       headerData: headerDataReducer,
       userOrdersData: userOrdersReducer,
       bookingData: bookingReducer,
+      flightData: flightReducer,
       cart: cartReducer,
       router: routerReducer,
       userInfo: userReducer,

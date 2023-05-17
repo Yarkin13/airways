@@ -11,15 +11,15 @@
         [back]="!!i"
       ></flight>
       <div class="flight-selection__btns">
-        <a mat-button routerLink="/booking" color="primary">Back</a>
-        <a
+        <button mat-button (click)="backClick()" color="primary">Back</button>
+        <button
           mat-flat-button
-          routerLink="/booking/booking"
+          [disabled]="selectReady$ | async"
+          (click)="continueClick()"
           color="primary"
-          disabled
         >
           Continue
-        </a>
+        </button>
       </div>
     </section>
   </ng-template>
