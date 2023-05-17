@@ -50,7 +50,7 @@ export class SingUpFormComponent implements OnDestroy, OnInit {
   dateFormatSub: Subscription;
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private store: Store,
     @Inject(MAT_DATE_FORMATS) public config: DateFormat
   ) {
@@ -188,10 +188,12 @@ export class SingUpFormComponent implements OnDestroy, OnInit {
         citizenship: this.citizenship?.value || '',
         gender: this.gender,
       })
-      .subscribe();
-
-    this.signUpForm.reset();
-    this.signUpForm.markAsUntouched();
+      .subscribe((data) => {
+        if (data.token) {
+          this.signUpForm.reset();
+          this.signUpForm.markAsUntouched();
+        }
+      });
   }
 
   selectedTabChangeGender(e: MatTabChangeEvent) {

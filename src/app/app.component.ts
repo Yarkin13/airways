@@ -14,17 +14,18 @@ export class AppComponent implements OnDestroy, OnInit {
 
   checkAuthenticatedSub: Subscription;
 
-  constructor(
-    private auth: AuthService,
-    private readonly store: Store
-  ) {}
+  constructor(private auth: AuthService, private readonly store: Store) {}
 
   ngOnInit() {
-    this.checkAuthenticatedSub = this.auth
-      .checkAuthenticated()
-      .subscribe((data) => this.store.dispatch(addUserData(data)));
+    if (this.auth.getToken()) {
+      this.checkAuthenticatedSub = this.auth
+        .checkAuthenticated()
+        .subscribe((data) => this.store.dispatch(addUserData(data)));
+    }
   }
   ngOnDestroy() {
-    this.checkAuthenticatedSub.unsubscribe();
+    if (this.checkAuthenticatedSub) {
+      this.checkAuthenticatedSub.unsubscribe();
+    }
   }
 }

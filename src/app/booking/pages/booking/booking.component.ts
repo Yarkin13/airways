@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
+import { BookingActions } from 'src/app/redux/actions/booking.actions';
 import { selectBookingTrip } from 'src/app/redux/selectors/booking.selectors';
 import {
+  ContactDetails,
   PassengerInfo,
-  PassengerType,
 } from 'src/app/shared/models/booking.model';
 
 @UntilDestroy()
@@ -15,13 +16,19 @@ import {
   styleUrls: ['./booking.component.scss'],
 })
 export class BookingComponent {
-  passengers: ('Adult' | 'Child' | 'Infant')[] = ['Adult', 'Child', 'Infant']; // не будет нужен
+  passengersByType: ('Adult' | 'Child' | 'Infant')[] = [];
 
   tripIdInCart = '';
 
-  passengersInfo: Array<PassengerInfo> = [];
+  passengersInfo: PassengerInfo[] = [];
 
-  passengersByType: Array<PassengerType> = []; // вместо this.passengers
+  submitEmitter: EventEmitter<void> = new EventEmitter();
+
+  passengersInfoFormsValidArray: boolean[] = [];
+
+  contactDetailsValid = false;
+
+  contactDetailsInfo: ContactDetails;
 
   constructor(
     public router: Router,
@@ -41,23 +48,67 @@ export class BookingComponent {
       .select(selectBookingTrip)
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
-        this.passengersInfo = value.passengersInfo;
-        this.passengersByType = value.passengers;
+        this.passengersInfo = [...value.passengersInfo];
+
+        value.passengers.forEach((passengerType) => {
+          for (let i = 0; i < passengerType.count; i += 1) {
+            this.passengersByType.push(passengerType.type);
+          }
+        });
       });
   }
 
-  handleContinue() {
-    // TODO save changed data to Booking obj
-    // this.store.dispatch(
-    //   BookingActions.setPassengersInfo({ passengersInfo: this.passengersInfo })
-    // );
-    if (this.tripIdInCart) {
-      this.router.navigate([
-        '/booking/summary',
-        { id: this.tripIdInCart, edit: true },
-      ]);
+  getPassengersValidInfo(value: boolean) {
+    this.passengersInfoFormsValidArray.push(value);
+  }
+
+  getContactDetails(value: ContactDetails) {
+    this.contactDetailsInfo = value;
+  }
+
+  getPassengersFormInfo(value: PassengerInfo) {
+    if (this.passengersInfo.find((passenger) => passenger.id === value.id)) {
+      this.passengersInfo[
+        this.passengersInfo.findIndex((passenger) => passenger.id === value.id)
+      ] = value;
     } else {
-      this.router.navigateByUrl('/booking/summary');
+      this.passengersInfo.push(value);
     }
+  }
+
+  getContactDetailsValid(value: boolean) {
+    this.contactDetailsValid = value;
+  }
+
+  handleContinue() {
+    this.submitEmitter.emit();
+
+    const validPassengersForm = this.passengersInfoFormsValidArray.every(
+      (item) => item === true
+    );
+
+    if (validPassengersForm && this.contactDetailsValid) {
+      /* eslint-disable-next-line */
+      this.store.dispatch(
+        BookingActions.setPassengersInfo({
+          passengersInfo: this.passengersInfo,
+        })
+      );
+      /* eslint-disable-next-line */
+      this.store.dispatch(
+        BookingActions.setContactDetails(this.contactDetailsInfo)
+      );
+
+      if (this.tripIdInCart) {
+        this.router.navigate([
+          '/booking/summary',
+          { id: this.tripIdInCart, edit: true },
+        ]);
+      } else {
+        this.router.navigateByUrl('/booking/summary');
+      }
+    }
+
+    this.passengersInfoFormsValidArray = [];
   }
 }

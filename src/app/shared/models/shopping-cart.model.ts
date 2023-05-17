@@ -1,4 +1,9 @@
-import { PassengerType, Flight, PassengerInfo } from './booking.model';
+import {
+  PassengerType,
+  Flight,
+  PassengerInfo,
+  ContactDetails,
+} from './booking.model';
 
 export interface Trip {
   id: string;
@@ -7,4 +12,5 @@ export interface Trip {
   passengersInfo: Array<PassengerInfo>;
   totalCost: string;
   discount?: string;
+  contactDetails?: ContactDetails;
 }

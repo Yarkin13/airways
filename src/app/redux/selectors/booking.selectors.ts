@@ -15,6 +15,19 @@ const selectFlightPrice = createSelector(
   (state: Trip) => state.flight.price
 );
 
+const selectPassengersInfo = createSelector(
+  selectBookingData,
+  (state: Trip) => state.passengersInfo
+);
+
+export const selectContactDetails = createSelector(
+  selectBookingData,
+  (state: Trip) => state.contactDetails
+);
+
+/* eslint-disable-next-line */
+export const selectPassengerById = (id: string) => createSelector(selectPassengersInfo, (passengersInfo) => passengersInfo.find((item) => item.id === id));
+
 const selectPassengersFareByType = createSelector(
   selectPassengersType,
   selectFlightPrice,

@@ -1,5 +1,9 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { Flight, PassengerInfo } from 'src/app/shared/models/booking.model';
+import {
+  ContactDetails,
+  Flight,
+  PassengerInfo,
+} from 'src/app/shared/models/booking.model';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 
 export const BookingActions = createActionGroup({
@@ -8,5 +12,6 @@ export const BookingActions = createActionGroup({
     'Set booking initial state': props<Trip>(),
     'Set flight': props<{ flight: Flight }>(),
     'Set passengers info': props<{ passengersInfo: Array<PassengerInfo> }>(),
+    'Set contact details': props<ContactDetails>(),
   },
 });

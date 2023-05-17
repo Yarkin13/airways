@@ -242,6 +242,12 @@
       </mat-error>
     </div>
 
+    <mat-error *ngIf="auth.isErrorRegisterMessage$ | async">{{
+      auth.isErrorRegisterMessage$ | async
+    }}</mat-error>
+
+    <mat-spinner *ngIf="auth.isLoading$ | async" [diameter]="20"></mat-spinner>
+
     <button class="signup__submit-btn" type="submit">Sign up</button>
   </form>
 </div>
