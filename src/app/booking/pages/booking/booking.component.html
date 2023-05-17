@@ -11,11 +11,27 @@
         Enter the passenger's names as they appear on document (passport or ID).
       </div>
     </div>
-    <app-passenger-info
-      *ngFor="let passenger of passengers; index as i"
-      [passengerType]="passenger"
-      [passengerIdx]="i + 1"
-    ></app-passenger-info>
+    <div class="passengers__passengers-info-box" *ngIf="passengersInfo.length">
+      <app-passenger-info
+        *ngFor="let passenger of passengersInfo; index as i"
+        [passengerType]="passenger.passengerType"
+        [passengerIdx]="i + 1"
+        [submitEmitter]="submitEmitter"
+        (validPassengerInfoFormEmitter)="getPassengersValidInfo($event)"
+        (passengerInfoFormEmitter)="getPassengersFormInfo($event)"
+        [id]="passenger.id"
+      ></app-passenger-info>
+    </div>
+    <div class="passengers__passengers-info-box" *ngIf="!passengersInfo.length">
+      <app-passenger-info
+        *ngFor="let passenger of passengersByType; index as i"
+        [passengerType]="passenger"
+        [passengerIdx]="i + 1"
+        [submitEmitter]="submitEmitter"
+        (validPassengerInfoFormEmitter)="getPassengersValidInfo($event)"
+        (passengerInfoFormEmitter)="getPassengersFormInfo($event)"
+      ></app-passenger-info>
+    </div>
   </div>
   <div class="contacts__layout">
     <div class="contacts__title-box">
@@ -30,7 +46,11 @@
         regarding your flight.
       </div>
     </div>
-    <app-contact-details></app-contact-details>
+    <app-contact-details
+      [submitEmitter]="submitEmitter"
+      (validContactDetailsFormEmitter)="getContactDetailsValid($event)"
+      (contactDetailsFormEmitter)="getContactDetails($event)"
+    ></app-contact-details>
   </div>
   <div class="buttons__layout">
     <button

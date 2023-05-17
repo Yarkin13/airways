@@ -1,5 +1,9 @@
 <div class="contacts__wrapper">
-  <form class="contacts__form" [formGroup]="contactDetailsForm">
+  <form
+    class="contacts__form"
+    [formGroup]="contactDetailsForm"
+    (submit)="onSubmit()"
+  >
     <mat-form-field
       class="contacts__input"
       [ngClass]="{

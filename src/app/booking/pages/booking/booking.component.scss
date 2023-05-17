@@ -134,3 +134,9 @@
   @extend %button;
   width: 126px;
 }
+
+.passengers__passengers-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

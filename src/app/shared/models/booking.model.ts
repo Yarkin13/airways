@@ -1,27 +1,29 @@
 export interface PassengerInfo {
   firstName: string;
   lastName: string;
-  type: 'Adult' | 'Child' | 'Infant';
-  gender: 'male' | 'female';
-  dateOfBirth: '';
+  passengerType: 'Adult' | 'Child' | 'Infant';
+  gender: 'Male' | 'Female';
+  needSpecialAssistance: boolean;
+  dateOfBirth: string;
   baggage?: string;
   seat?: string;
+  id: string;
 }
 
 export interface FlightInfo {
-  flightNumber: string,
+  flightNumber: string;
   from: {
-    key: string,
-    country: string,
-    city: string,
-    name: string
-  },
+    key: string;
+    country: string;
+    city: string;
+    name: string;
+  };
   to: {
-    key: string,
-    country: string,
-    city: string,
-    name: string
-  },
+    key: string;
+    country: string;
+    city: string;
+    name: string;
+  };
   takeoffDate: string;
   landingDate: string;
 }
@@ -38,4 +40,10 @@ export interface PassengerType {
   count: number;
   fare?: string;
   charge?: string;
+}
+
+export interface ContactDetails {
+  countryCode: string;
+  phone: string;
+  email: string;
 }

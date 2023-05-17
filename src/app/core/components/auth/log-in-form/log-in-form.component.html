@@ -43,10 +43,11 @@
     </mat-form-field>
     <!-- TODO where to go  -->
 
-    <mat-error *ngIf="auth.isErrorLogin$ | async"
-      >Wrong login or password</mat-error
-    >
+    <mat-error *ngIf="auth.isErrorLoginMessage$ | async">{{
+      auth.isErrorLoginMessage$ | async
+    }}</mat-error>
 
+    <mat-spinner *ngIf="auth.isLoading$ | async" [diameter]="20"></mat-spinner>
     <button class="login__submit-btn">Log in</button>
   </form>
   <button></button>

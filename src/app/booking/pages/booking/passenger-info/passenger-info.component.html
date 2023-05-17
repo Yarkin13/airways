@@ -1,6 +1,6 @@
 <div class="passenger__wrapper">
   <div class="passenger__title">{{ passengerIdx }}. {{ passengerType }}</div>
-  <form class="passenger__info" [formGroup]="bookingForm">
+  <form class="passenger__info" [formGroup]="bookingForm" (submit)="onSubmit()">
     <mat-form-field
       class="passenger__input"
       [ngClass]="{
@@ -131,7 +131,7 @@
       </div></mat-slide-toggle
     >
 
-    <mat-slide-toggle color="primary"
+    <mat-slide-toggle color="primary" [(ngModel)]="needSpecAssist"
       ><div class="passenger__toggle">
         <mat-icon class="passenger__toggle-icon">accessible</mat-icon>
         <div class="passenger__toggle-text">Need special assistance?</div>
