@@ -2,6 +2,7 @@
   *ngIf="flightType === 'roundTrip'; else OneWay"
   appearance="fill"
   class="flight-date"
+  [ngClass]="{ errorInput: error }"
 >
   <mat-label>Dates</mat-label>
   <mat-date-range-input [rangePicker]="rangePicker">

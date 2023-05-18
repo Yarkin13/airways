@@ -1,26 +1,29 @@
 <mat-form-field
   appearance="fill"
   class="direction__input"
-  [formGroup]="flightSearchForm"
+  [ngClass]="{ errorInput: error }"
 >
   <mat-label>{{ label }}</mat-label>
   <input
     type="text"
     matInput
-    formControlName="{{ controlName }}"
+    [formControl]="direction"
     [matAutocomplete]="auto"
     class="direction__text"
-    size="{{ inputValue?.airport?.length || 10 }}"
+    size="{{ direction.value.length || 10 }}"
   />
-  <span class="direction__span">{{ inputValue?.cod }}</span>
+  <span class="direction__span">{{ inputKey }}</span>
 
-  <mat-autocomplete #auto="matAutocomplete" class="direction__options">
-    <mat-option
-      *ngFor="let airport of filteredAirports | async"
-      [value]="airport.airport"
-    >
-      <p class="direction__title">{{ airport.airport }} ({{ airport.cod }})</p>
-      <span class="direction__subtitle">{{ airport.city }}</span>
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    class="direction__options"
+    (optionSelected)="onSelectionChange()"
+  >
+    <mat-option *ngFor="let airport of airports" [value]="airport.name">
+      <p class="direction__title">{{ airport.name }} ({{ airport.key }})</p>
+      <span class="direction__subtitle"
+        >{{ airport.city }}, {{ airport.country }}</span
+      >
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>

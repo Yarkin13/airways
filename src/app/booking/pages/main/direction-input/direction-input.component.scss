@@ -19,6 +19,10 @@
   border: 0.5px solid rgba(116, 118, 122, 0.6);
 }
 
+.errorInput .mat-mdc-text-field-wrapper {
+  border-color: red;
+}
+
 .direction__input .mat-mdc-form-field-infix {
   display: flex;
 }

@@ -8,14 +8,14 @@
           label="From"
           controlName="from"
           placeholder="Choose departure point"
-          [airports]="airports"
+          [error]="errors.from"
         ></direction-input>
         <direction-input
           [flightSearchForm]="flightSearchForm"
           label="Destination"
           controlName="destination"
           placeholder="Choose your destination"
-          [airports]="airports"
+          [error]="errors.destination"
         ></direction-input>
         <reverses-button
           [flightSearchForm]="flightSearchForm"
@@ -25,8 +25,12 @@
         <dates
           [flightSearchForm]="flightSearchForm"
           [flightType]="flightType"
+          [error]="errors.date"
         ></dates>
-        <passengers [flightSearchForm]="flightSearchForm"></passengers>
+        <passengers
+          [flightSearchForm]="flightSearchForm"
+          [error]="errors.passengers"
+        ></passengers>
       </div>
       <button type="submit" mat-flat-button color="primary" class="flight-btn">
         Search

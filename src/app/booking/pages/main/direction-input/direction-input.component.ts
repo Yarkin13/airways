@@ -1,11 +1,9 @@
-import {
-  Component, Input, ViewEncapsulation, OnInit
-} from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-
-import { IAirports } from 'src/app/booking/airports.model';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { HttpService } from 'src/app/http.service';
+import { IAirports } from 'src/app/shared/models/airports.model';
 
 @Component({
   selector: 'direction-input',
@@ -18,26 +16,54 @@ export class DirectionInputComponent implements OnInit {
   @Input() label!: string;
   @Input() controlName!: string;
   @Input() placeholder!: string;
-  @Input() airports!: IAirports[];
+  @Input() error!: boolean;
 
-  filteredAirports!: Observable<IAirports[]>;
+  direction: FormControl = new FormControl('');
+  airports!: IAirports[];
+
+  constructor(private httpService: HttpService) {}
 
   ngOnInit() {
-    this.filteredAirports = this.flightSearchForm.controls[
-      this.controlName
-    ].valueChanges.pipe(
-      startWith(''),
-      map((value) => this.filter(value || ''))
-    );
+    this.formDirection?.valueChanges
+      .pipe(
+        switchMap(async (data) => {
+          if (data.name !== this.direction.value) {
+            this.direction.setValue(data.name);
+          }
+        })
+      )
+      .subscribe();
+
+    this.direction.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(async (query) => {
+          this.httpService.getAirports(query).subscribe((data: IAirports[]) => {
+            this.airports = data;
+          });
+        })
+      )
+      .subscribe();
   }
 
-  private filter(value: string): IAirports[] {
-    const filterValue = value.toLowerCase();
-    return this.airports.filter((airport) => airport.airport.toLowerCase().includes(filterValue));
+  onSelectionChange() {
+    this.formDirection?.setValue({
+      key: this.inputKey,
+      name: this.direction.value,
+    });
   }
 
-  get inputValue() {
-    const control = this.flightSearchForm.get(this.controlName);
-    return this.airports.find((item) => item.airport === control?.value);
+  get formDirection() {
+    return this.flightSearchForm.get(this.controlName);
+  }
+
+  get inputKey() {
+    if (!this.airports) {
+      return '';
+    }
+
+    return this.airports.find((item) => item.name === this.direction.value)
+      ?.key;
   }
 }

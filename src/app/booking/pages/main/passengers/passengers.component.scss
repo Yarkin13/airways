@@ -10,6 +10,10 @@
   border: 0.5px solid rgba(116, 118, 122, 0.6);
 }
 
+.errorInput .mat-mdc-text-field-wrapper {
+  border-color: red;
+}
+
 .passengers__input .mdc-text-field--focused {
   border: 0.5px solid $primary;
 }

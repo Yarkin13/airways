@@ -1,0 +1,80 @@
+@use "src/styles.scss" as *;
+
+.date-item {
+  width: 225px;
+  padding: 5px;
+  margin-left: -1px;
+  background-color: white;
+  border-right: 1px solid $neutral60;
+  border-left: 1px solid $neutral60;
+
+  p {
+    margin: 0;
+  }
+}
+
+.date-item__date {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: $secondary0;
+}
+
+.date-item__day {
+  font-weight: 100;
+  font-size: 12px;
+  line-height: 12px;
+  color: $neutral30;
+}
+
+.date-item__price {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: $primary;
+}
+
+.date-item__img {
+  margin: 7px 0 3px;
+}
+
+.mdc-tab--active {
+  .date-item__date {
+    font-weight: 700;
+    font-size: 20px;
+    color: $primary;
+  }
+
+  .date-item__day {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .date-item__price {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .redBorder {
+    border-bottom: 4px solid $error;
+  }
+  .orangeBorder {
+    border-bottom: 4px solid #f1c933;
+  }
+  .greenBorder {
+    border-bottom: 4px solid green;
+  }
+}
+
+.mat-mdc-tab-disabled {
+  opacity: 1 !important; // angular material style
+  cursor: default;
+
+  .date-item {
+    background-color: white;
+  }
+  .date-item__date {
+    color: $neutral60;
+  }
+}

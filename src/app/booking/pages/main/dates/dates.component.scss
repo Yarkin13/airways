@@ -12,6 +12,10 @@
   background: $secondary90;
 }
 
+.errorInput .mat-mdc-text-field-wrapper {
+  border-color: red;
+}
+
 .flight-date .mdc-text-field--focused {
   border: 0.5px solid $primary;
 }

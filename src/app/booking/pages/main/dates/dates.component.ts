@@ -21,6 +21,7 @@ import { DateFormat } from '../../../../shared/constants';
 export class DatesComponent implements OnInit {
   @Input() flightSearchForm!: FormGroup;
   @Input() flightType!: string;
+  @Input() error!: boolean;
 
   dateFormat!: string;
   dateTo: FormControl = new FormControl<Date | null>(null);

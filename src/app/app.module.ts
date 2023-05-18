@@ -19,6 +19,8 @@ import { userReducer } from './redux/reducers/user.reducer';
 import { InterceptorAuthService } from './core/interceptors/interceptor-auth.service';
 import { InterceptorUrlService } from './core/interceptors/interceptor-url.service';
 import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
+import { HttpService } from './http.service';
+import { flightReducer } from './redux/reducers/flight.reducer';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +34,7 @@ import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
       headerData: headerDataReducer,
       userOrdersData: userOrdersReducer,
       bookingData: bookingReducer,
+      flightData: flightReducer,
       cart: cartReducer,
       router: routerReducer,
       userInfo: userReducer,
@@ -59,6 +62,7 @@ import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
+    HttpService
   ],
   bootstrap: [AppComponent],
 })
