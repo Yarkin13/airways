@@ -1,12 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
-import { flight as bookingFlight } from 'src/app/shared/summary.mock';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { Flight } from 'src/app/shared/models/booking.model';
 import { BookingActions } from '../actions/booking.actions';
 
 export const initialState: Trip = {
   id: '',
-  flight: bookingFlight,
+  flight: {
+    tripType: 'One Way',
+    oneWay: {
+      flightNumber: '',
+      from: {
+        key: '',
+        country: '',
+        city: '',
+        name: '',
+      },
+      to: {
+        key: '',
+        country: '',
+        city: '',
+        name: '',
+      },
+      takeoffDate: '',
+      landingDate: '',
+    },
+    price: '',
+  },
   passengersInfo: [],
   passengers: [],
   totalCost: '',
