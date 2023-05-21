@@ -95,6 +95,11 @@ export const shoppingCartData: Array<Trip> = [
       },
     ],
     totalCost: '551.39',
+    contactDetails: {
+      countryCode: '',
+      phone: '8355645555',
+      email: 'milena.belianova@bla.cd',
+    }
   },
   {
     id: '2',
@@ -140,5 +145,10 @@ export const shoppingCartData: Array<Trip> = [
       },
     ],
     totalCost: '32.49',
+    contactDetails: {
+      countryCode: '',
+      phone: '',
+      email: '',
+    }
   },
 ];

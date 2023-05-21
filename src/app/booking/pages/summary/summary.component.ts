@@ -13,6 +13,7 @@ import {
   selectBookingTripInCur,
 } from 'src/app/redux/selectors/booking.selectors';
 import {
+  ContactDetails,
   Flight,
   PassengerInfo,
   PassengerType,
@@ -58,6 +59,7 @@ export class SummaryComponent {
   isPaid = false;
   isEdit = false;
   tripIdEdit = '';
+  contactDetails: ContactDetails;
 
   constructor(
     public router: Router,
@@ -115,6 +117,7 @@ export class SummaryComponent {
             this.passengersInfo = value.passengersInfo;
             this.passengersFareByType = value.passengers;
             this.totalCost = value.totalCost;
+            this.contactDetails = value.contactDetails;
           });
         this.store
           .select(selectBookingTripInCur)
@@ -142,6 +145,7 @@ export class SummaryComponent {
       flight: this.flight,
       passengersInfo: this.passengersInfo,
       totalCost: this.totalCost,
+      contactDetails: this.contactDetails,
     };
     this.store.dispatch(CartActions.addToCart(currentTrip));
     this.snackBar.open('Item was successfully added to your cart!', '', {
@@ -150,7 +154,6 @@ export class SummaryComponent {
       verticalPosition: 'top',
     });
     this.btnDisabled = true;
-    this.store.dispatch(BookingActions.reset());
     setTimeout(() => {
       this.snackBar.open('Redirecting to main page...', '', {
         duration: 1000,
@@ -160,6 +163,7 @@ export class SummaryComponent {
     }, 1500);
     setTimeout(() => {
       this.router.navigateByUrl('/booking/main');
+      this.store.dispatch(BookingActions.reset());
     }, 2500);
   }
 
@@ -180,12 +184,13 @@ export class SummaryComponent {
             flight: this.flight,
             passengersInfo: this.passengersInfo,
             totalCost: this.totalCost,
+            contactDetails: this.contactDetails,
           };
           this.store.dispatch(
             UserOrdersActions.addToOrders({ orders: [currentTrip] })
           );
-          this.store.dispatch(BookingActions.reset());
           this.router.navigateByUrl('/booking/main');
+          this.store.dispatch(BookingActions.reset());
         }
       });
   }

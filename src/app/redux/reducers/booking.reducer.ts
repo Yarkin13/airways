@@ -10,6 +10,11 @@ export const initialState: Trip = {
   passengersInfo: [],
   passengers: [],
   totalCost: '',
+  contactDetails: {
+    countryCode: '',
+    phone: '',
+    email: '',
+  }
 };
 
 export const bookingReducer = createReducer(
