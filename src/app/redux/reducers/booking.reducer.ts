@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { flight as bookingFlight, passengers as passengersType } from 'src/app/shared/summary.mock';
+import { flight as bookingFlight } from 'src/app/shared/summary.mock';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
 import { Flight } from 'src/app/shared/models/booking.model';
 import { BookingActions } from '../actions/booking.actions';
@@ -8,13 +8,14 @@ export const initialState: Trip = {
   id: '',
   flight: bookingFlight,
   passengersInfo: [],
-  passengers: passengersType,
+  passengers: [],
   totalCost: '',
 };
 
 export const bookingReducer = createReducer(
   initialState,
   on(BookingActions.setBookingInitialState, (state, trip): Trip => trip),
+  on(BookingActions.reset, (): Trip => ({ ...initialState })),
   on(BookingActions.setFlight, (state, { flightData }): Trip => {
     const { flightTo, flightBack, passengers } = flightData;
     const flight: Flight = {

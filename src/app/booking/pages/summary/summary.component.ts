@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -23,6 +24,7 @@ import {
   selectOrderById,
   selectOrderByIdInCur,
 } from 'src/app/redux/selectors/user-orders.selectors';
+import { BookingActions } from 'src/app/redux/actions/booking.actions';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -148,6 +150,7 @@ export class SummaryComponent {
       verticalPosition: 'top',
     });
     this.btnDisabled = true;
+    this.store.dispatch(BookingActions.reset());
     setTimeout(() => {
       this.snackBar.open('Redirecting to main page...', '', {
         duration: 1000,
@@ -181,6 +184,7 @@ export class SummaryComponent {
           this.store.dispatch(
             UserOrdersActions.addToOrders({ orders: [currentTrip] })
           );
+          this.store.dispatch(BookingActions.reset());
           this.router.navigateByUrl('/booking/main');
         }
       });
