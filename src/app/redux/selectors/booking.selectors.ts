@@ -35,14 +35,14 @@ const selectPassengersFareByType = createSelector(
     let farePrice;
     let chargePrice;
     if (passenger.type === 'Adult') {
-      farePrice = +price;
-      chargePrice = +price * 0.55;
+      farePrice = +price * 0.6451362170144961;
+      chargePrice = +price * 0.3548637829855039;
     } else if (passenger.type === 'Child') {
-      farePrice = +price * 0.6386;
-      chargePrice = +price * 0.5427;
+      farePrice = +price * 0.4119544518285337;
+      chargePrice = +price * 0.3500835567991916;
     } else {
-      farePrice = +price * 0.53;
-      chargePrice = +price * 0.0602;
+      farePrice = +price * 0.3419999222727449;
+      chargePrice = +price * 0.03886362753099374;
     }
     return {
       ...passenger,
