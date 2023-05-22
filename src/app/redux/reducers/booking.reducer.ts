@@ -23,6 +23,10 @@ export const initialState: Trip = {
       },
       takeoffDate: '',
       landingDate: '',
+      seats: {
+        available: 0,
+        total: 0,
+      },
     },
     price: '',
   },
@@ -50,6 +54,10 @@ export const bookingReducer = createReducer(
         to: flightTo.to,
         takeoffDate: flightTo.takeoffDate,
         landingDate: flightTo.landingDate,
+        seats: {
+          available: flightTo.seats.avaible,
+          total: flightTo.seats.total,
+        },
       },
       price: flightBack
         ? (flightTo.price['eur'] + flightBack.price['eur']).toString()
@@ -63,6 +71,10 @@ export const bookingReducer = createReducer(
         to: flightBack.to,
         takeoffDate: flightBack.takeoffDate,
         landingDate: flightBack.landingDate,
+        seats: {
+          available: flightBack.seats.avaible,
+          total: flightBack.seats.total,
+        },
       };
     }
 

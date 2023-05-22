@@ -61,6 +61,7 @@ export class SummaryComponent {
   isEdit = false;
   tripIdEdit = '';
   contactDetails: ContactDetails;
+  isReturnWay = true;
 
   constructor(
     public router: Router,

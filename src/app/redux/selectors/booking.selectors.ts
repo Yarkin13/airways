@@ -5,19 +5,73 @@ import { selectHeaderCurrency } from './header-data.selectors';
 
 const selectBookingData = createFeatureSelector<Trip>('bookingData');
 
-const selectPassengersType = createSelector(
-  selectBookingData,
-  (state: Trip) => state.passengers
-);
+const selectPassengersType = createSelector(selectBookingData, (state: Trip) => state.passengers);
 
-const selectFlightPrice = createSelector(
+const selectFlightPrice = createSelector(selectBookingData, (state: Trip) => state.flight.price);
+
+const selectFlightSeatOneWay = createSelector(
   selectBookingData,
-  (state: Trip) => state.flight.price
+  (state: Trip) => state.flight.oneWay.seats
 );
 
 const selectPassengersInfo = createSelector(
   selectBookingData,
-  (state: Trip) => state.passengersInfo
+  selectFlightSeatOneWay,
+  (state: Trip, seatsOneWay) => {
+    // Generate seat logic
+    const seatsReturnWay = state.flight.returnWay ? state.flight.returnWay.seats : undefined;
+    const getSeatArray = (totalSeats: number, passengersCount: number) => {
+      const maxRows = totalSeats / 6;
+      let randomRow = Math.floor(Math.random() * maxRows - 1) + 1;
+      const seatsArray = ['A', 'B', 'C', 'D', 'E', 'F'];
+      const resultSeatArr: Array<string> = [];
+      let letterInd = Math.floor(Math.random() * 5);
+
+      for (let i = 1; i <= passengersCount; i += 1) {
+        if (letterInd === 5) {
+          letterInd = 0;
+          if (randomRow !== maxRows) {
+            randomRow += 1;
+          } else {
+            const oldRandomRow = randomRow;
+            do {
+              randomRow = Math.floor(Math.random() * maxRows);
+            } while (oldRandomRow !== randomRow);
+          }
+        } else {
+          letterInd += 1;
+        }
+
+        resultSeatArr.push(randomRow + seatsArray[letterInd]);
+      }
+      return resultSeatArr;
+    };
+
+    const seatArrayOneWay = getSeatArray(seatsOneWay.total, state.passengersInfo.length);
+    const seatArrayReturnWay = seatsReturnWay
+      ? getSeatArray(seatsReturnWay.total, state.passengersInfo.length)
+      : undefined;
+    let passengerSeatOneWay;
+    let passengerSeatReturnWay;
+
+    return state.passengersInfo.map((passenger, index) => {
+      if (passenger.passengerType === 'Infant') {
+        passengerSeatOneWay = undefined;
+        passengerSeatReturnWay = undefined;
+      } else {
+        passengerSeatOneWay = seatArrayOneWay[index];
+        passengerSeatReturnWay = seatArrayReturnWay ? seatArrayReturnWay[index] : undefined;
+      }
+
+      return {
+        ...passenger,
+        seat: {
+          oneWay: passengerSeatOneWay,
+          returnWay: passengerSeatReturnWay,
+        },
+      };
+    });
+  }
 );
 
 export const selectContactDetails = createSelector(
@@ -57,19 +111,14 @@ const selectPassengersFareByTypeInCur = createSelector(
   selectHeaderCurrency,
   (passengersType, currency) => passengersType.map((passenger) => ({
     ...passenger,
-    fare: (+passenger.fare * CURRENCY_EXCHANGE[currency])
-      .toFixed(2)
-      .toString(),
-    charge: (+passenger.charge * CURRENCY_EXCHANGE[currency])
-      .toFixed(2)
-      .toString(),
+    fare: (+passenger.fare * CURRENCY_EXCHANGE[currency]).toFixed(2).toString(),
+    charge: (+passenger.charge * CURRENCY_EXCHANGE[currency]).toFixed(2).toString(),
   }))
 );
 
 const selectCurTripCost = createSelector(
   selectPassengersFareByType,
-  (passengersType) => passengersType
-    .reduce((acc, cur) => acc + Number(+cur.fare + +cur.charge), 0)
+  (passengersType) => passengersType.reduce((acc, cur) => acc + Number(+cur.fare + +cur.charge), 0)
     .toFixed(2)
     .toString()
 );
@@ -83,10 +132,12 @@ const selectCurTripCostInCur = createSelector(
 export const selectBookingTrip = createSelector(
   selectBookingData,
   selectPassengersFareByType,
+  selectPassengersInfo,
   selectCurTripCost,
-  (data, passengersFare, cost) => ({
+  (data, passengersFare, info, cost) => ({
     ...data,
     passengers: passengersFare,
+    passengersInfo: info,
     totalCost: cost,
   })
 );

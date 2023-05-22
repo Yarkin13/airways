@@ -15,6 +15,7 @@
         [passengers]="passengersInfo"
         [flight]="flight.returnWay"
         [dateFormatStr]="dateFormatStr"
+        [returnWay]="isReturnWay"
       ></app-order>
     </ng-container>
     <app-fare
@@ -55,7 +56,7 @@
     >
       Buy now
     </button>
-    <!-- Btn if Details from User Acoount booked trip -->
+    <!-- Btn if Details from User Account booked trip -->
     <button
       *ngIf="isPaid"
       mat-stroked-button

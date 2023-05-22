@@ -14,4 +14,5 @@ export class OrderComponent {
   @Input() passengers!: Array<PassengerInfo>;
   @Input() flight!: FlightInfo;
   @Input() dateFormatStr!: string;
+  @Input() returnWay!: boolean;
 }
