@@ -66,7 +66,9 @@ export const bookingReducer = createReducer(
       };
     }
 
-    return { ...state, passengers, flight };
+    const passengersType = passengers.filter((p) => p.count > 0);
+
+    return { ...state, passengers: passengersType, flight };
   }),
   on(
     BookingActions.setPassengersInfo,
