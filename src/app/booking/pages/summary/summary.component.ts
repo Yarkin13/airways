@@ -26,6 +26,7 @@ import {
   selectOrderByIdInCur,
 } from 'src/app/redux/selectors/user-orders.selectors';
 import { BookingActions } from 'src/app/redux/actions/booking.actions';
+import { v4 as uuidv4 } from 'uuid';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -140,7 +141,7 @@ export class SummaryComponent {
 
   handleAddToCart() {
     const currentTrip: Trip = {
-      id: performance.now().toString(),
+      id: uuidv4(),
       passengers: this.passengersFareByType,
       flight: this.flight,
       passengersInfo: this.passengersInfo,
@@ -179,7 +180,7 @@ export class SummaryComponent {
       .subscribe((result) => {
         if (result === 'CONFIRMED') {
           const currentTrip: Trip = {
-            id: performance.now().toString(),
+            id: uuidv4(),
             passengers: this.passengersFareByType,
             flight: this.flight,
             passengersInfo: this.passengersInfo,
