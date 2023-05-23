@@ -36,11 +36,9 @@ export class PassengerInfoComponent implements OnDestroy, OnInit {
 
   @Input() submitEmitter: EventEmitter<void>;
 
-  @Output() validPassengerInfoFormEmitter: EventEmitter<boolean> =
-    new EventEmitter();
+  @Output() validPassengerInfoFormEmitter: EventEmitter<boolean> = new EventEmitter();
 
-  @Output() passengerInfoFormEmitter: EventEmitter<PassengerInfo> =
-    new EventEmitter();
+  @Output() passengerInfoFormEmitter: EventEmitter<PassengerInfo> = new EventEmitter();
 
   submitSub: Subscription;
 

@@ -62,8 +62,7 @@ export class BookingComponent {
         });
       });
 
-    this.initPassengersLength =
-      this.passengersInfo.length || this.passengersByType.length;
+    this.initPassengersLength = this.passengersInfo.length || this.passengersByType.length;
   }
 
   getPassengersValidInfo(value: boolean) {

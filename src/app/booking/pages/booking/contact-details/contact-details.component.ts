@@ -32,11 +32,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   @Input() submitEmitter: EventEmitter<void>;
 
-  @Output() validContactDetailsFormEmitter: EventEmitter<boolean> =
-    new EventEmitter();
+  @Output() validContactDetailsFormEmitter: EventEmitter<boolean> = new EventEmitter();
 
-  @Output() contactDetailsFormEmitter: EventEmitter<ContactDetails> =
-    new EventEmitter();
+  @Output() contactDetailsFormEmitter: EventEmitter<ContactDetails> = new EventEmitter();
 
   submitSub: Subscription;
 
@@ -71,9 +69,9 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
         [Validators.required, emailValidator()]
       ),
       countryCode: new FormControl(
-        this.initContactDetails?.countryCode ||
-          this.userRegisterData.countryCode ||
-          '',
+        this.initContactDetails?.countryCode
+          || this.userRegisterData.countryCode
+          || '',
         [Validators.required]
       ),
       phone: new FormControl(
