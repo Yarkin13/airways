@@ -18,9 +18,13 @@ import {
 export class BookingComponent {
   passengersByType: ('Adult' | 'Child' | 'Infant')[] = [];
 
+  initPassengersLength = 0;
+
   tripIdInCart = '';
 
   passengersInfo: PassengerInfo[] = [];
+
+  passengersInfoForRender: PassengerInfo[] = [];
 
   submitEmitter: EventEmitter<void> = new EventEmitter();
 
@@ -49,6 +53,7 @@ export class BookingComponent {
       .pipe(untilDestroyed(this))
       .subscribe((value) => {
         this.passengersInfo = [...value.passengersInfo];
+        this.passengersInfoForRender = [...value.passengersInfo];
 
         value.passengers.forEach((passengerType) => {
           for (let i = 0; i < passengerType.count; i += 1) {
@@ -56,6 +61,9 @@ export class BookingComponent {
           }
         });
       });
+
+    this.initPassengersLength =
+      this.passengersInfo.length || this.passengersByType.length;
   }
 
   getPassengersValidInfo(value: boolean) {
@@ -110,5 +118,6 @@ export class BookingComponent {
     }
 
     this.passengersInfoFormsValidArray = [];
+    this.passengersInfo = [];
   }
 }

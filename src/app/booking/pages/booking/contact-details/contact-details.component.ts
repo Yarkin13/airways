@@ -11,9 +11,11 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { selectContactDetails } from 'src/app/redux/selectors/booking.selectors';
+import { selectUserInfo } from 'src/app/redux/selectors/user.selectors';
 import { COUNTRY_CODES } from 'src/app/shared/constants';
 import { ContactDetails } from 'src/app/shared/models/booking.model';
 import { emailValidator, phoneValidator } from 'src/app/shared/validators';
+import { UserRegisterData } from 'src/app/core/models/user.model';
 
 @UntilDestroy()
 @Component({
@@ -30,15 +32,19 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
 
   @Input() submitEmitter: EventEmitter<void>;
 
-  @Output() validContactDetailsFormEmitter: EventEmitter<boolean> = new EventEmitter();
+  @Output() validContactDetailsFormEmitter: EventEmitter<boolean> =
+    new EventEmitter();
 
-  @Output() contactDetailsFormEmitter: EventEmitter<ContactDetails> = new EventEmitter();
+  @Output() contactDetailsFormEmitter: EventEmitter<ContactDetails> =
+    new EventEmitter();
 
   submitSub: Subscription;
 
   initContactDetails: ContactDetails;
 
   contactDetailsForm: FormGroup;
+
+  userRegisterData: UserRegisterData;
 
   constructor(private store: Store) {}
 
@@ -52,18 +58,28 @@ export class ContactDetailsComponent implements OnInit, OnDestroy {
         if (value) this.initContactDetails = value;
       });
 
+    this.store
+      .select(selectUserInfo)
+      .pipe(untilDestroyed(this))
+      .subscribe((data) => {
+        this.userRegisterData = data;
+      });
+
     this.contactDetailsForm = new FormGroup({
-      email: new FormControl(this.initContactDetails?.email || '', [
-        Validators.required,
-        emailValidator(),
-      ]),
-      countryCode: new FormControl(this.initContactDetails?.countryCode || '', [
-        Validators.required,
-      ]),
-      phone: new FormControl(this.initContactDetails?.phone || '', [
-        Validators.required,
-        phoneValidator(),
-      ]),
+      email: new FormControl(
+        this.initContactDetails?.email || this.userRegisterData.email || '',
+        [Validators.required, emailValidator()]
+      ),
+      countryCode: new FormControl(
+        this.initContactDetails?.countryCode ||
+          this.userRegisterData.countryCode ||
+          '',
+        [Validators.required]
+      ),
+      phone: new FormControl(
+        this.initContactDetails?.phone || this.userRegisterData.phone || '',
+        [Validators.required, phoneValidator()]
+      ),
     });
   }
 
