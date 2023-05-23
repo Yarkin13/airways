@@ -87,6 +87,10 @@ export class BookingComponent {
     this.contactDetailsValid = value;
   }
 
+  handleBack() {
+    this.router.navigateByUrl('/booking/flights');
+  }
+
   handleContinue() {
     this.submitEmitter.emit();
 
