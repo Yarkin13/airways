@@ -11,9 +11,12 @@
         Enter the passenger's names as they appear on document (passport or ID).
       </div>
     </div>
-    <div class="passengers__passengers-info-box" *ngIf="passengersInfo.length">
+    <div
+      class="passengers__passengers-info-box"
+      *ngIf="passengersInfoForRender.length === initPassengersLength"
+    >
       <app-passenger-info
-        *ngFor="let passenger of passengersInfo; index as i"
+        *ngFor="let passenger of passengersInfoForRender; index as i"
         [passengerType]="passenger.passengerType"
         [passengerIdx]="i + 1"
         [submitEmitter]="submitEmitter"
@@ -22,7 +25,10 @@
         [id]="passenger.id"
       ></app-passenger-info>
     </div>
-    <div class="passengers__passengers-info-box" *ngIf="!passengersInfo.length">
+    <div
+      class="passengers__passengers-info-box"
+      *ngIf="passengersInfoForRender.length !== initPassengersLength"
+    >
       <app-passenger-info
         *ngFor="let passenger of passengersByType; index as i"
         [passengerType]="passenger"
@@ -58,6 +64,7 @@
       color="primary"
       class="button"
       *ngIf="!tripIdInCart"
+      (click)="handleBack()"
     >
       Back
     </button>
