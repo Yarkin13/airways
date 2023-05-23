@@ -118,7 +118,8 @@ const selectPassengersFareByTypeInCur = createSelector(
 
 const selectCurTripCost = createSelector(
   selectPassengersFareByType,
-  (passengersType) => passengersType.reduce((acc, cur) => acc + Number(+cur.fare + +cur.charge), 0)
+  (passengersType) => passengersType
+    .reduce((acc, cur) => acc + Number(+cur.fare + +cur.charge) * cur.count, 0)
     .toFixed(2)
     .toString()
 );
