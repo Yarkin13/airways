@@ -92,5 +92,9 @@ export const bookingReducer = createReducer(
   on(
     BookingActions.setContactDetails,
     (state, contactDetails): Trip => ({ ...state, contactDetails })
+  ),
+  on(
+    BookingActions.removePassengersInfo,
+    (state): Trip => ({ ...state, passengersInfo: [] })
   )
 );

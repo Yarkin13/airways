@@ -1,5 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { BookingActions } from 'src/app/redux/actions/booking.actions';
 import { PASSENGERS_TYPE } from 'src/app/shared/constants';
 
 @Component({
@@ -14,6 +16,8 @@ export class PassengersComponent {
 
   passengersType = PASSENGERS_TYPE;
   passengersValue = '';
+
+  constructor(private store: Store) {}
 
   decrease(id: string) {
     const control = this.flightSearchForm.get(id);
@@ -34,6 +38,8 @@ export class PassengersComponent {
       .filter(([, value]) => value > 0)
       .map((item) => item.reverse().join(' '))
       .join(', ');
+
+    this.store.dispatch(BookingActions.removePassengersInfo());
   }
 
   get passengersCount() {
