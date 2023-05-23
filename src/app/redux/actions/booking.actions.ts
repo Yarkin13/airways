@@ -10,6 +10,7 @@ export const BookingActions = createActionGroup({
   source: 'Booking data',
   events: {
     'Set booking initial state': props<Trip>(),
+    reset: emptyProps(),
     'Set flight': props<{ flightData: IBookingFlight }>(),
     'Set passengers info': props<{ passengersInfo: Array<PassengerInfo> }>(),
     'Set contact details': props<ContactDetails>(),

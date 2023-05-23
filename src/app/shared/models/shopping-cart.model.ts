@@ -12,5 +12,5 @@ export interface Trip {
   passengersInfo: Array<PassengerInfo>;
   totalCost: string;
   discount?: string;
-  contactDetails?: ContactDetails;
+  contactDetails: ContactDetails;
 }

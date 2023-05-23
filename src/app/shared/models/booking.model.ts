@@ -6,10 +6,14 @@ export interface PassengerInfo {
   needSpecialAssistance: boolean;
   dateOfBirth: string;
   baggage?: string;
-  seat?: string;
+  seat?: Seat;
   id: string;
 }
 
+export interface Seat {
+  oneWay?: string,
+  returnWay?: string,
+}
 export interface FlightInfo {
   flightNumber: string;
   from: {
@@ -26,6 +30,10 @@ export interface FlightInfo {
   };
   takeoffDate: string;
   landingDate: string;
+  seats: {
+    available: number;
+    total: number;
+  };
 }
 
 export interface Flight {

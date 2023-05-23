@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -12,6 +13,7 @@ import {
   selectBookingTripInCur,
 } from 'src/app/redux/selectors/booking.selectors';
 import {
+  ContactDetails,
   Flight,
   PassengerInfo,
   PassengerType,
@@ -23,6 +25,8 @@ import {
   selectOrderById,
   selectOrderByIdInCur,
 } from 'src/app/redux/selectors/user-orders.selectors';
+import { BookingActions } from 'src/app/redux/actions/booking.actions';
+import { v4 as uuidv4 } from 'uuid';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -56,6 +60,8 @@ export class SummaryComponent {
   isPaid = false;
   isEdit = false;
   tripIdEdit = '';
+  contactDetails: ContactDetails;
+  isReturnWay = true;
 
   constructor(
     public router: Router,
@@ -113,6 +119,7 @@ export class SummaryComponent {
             this.passengersInfo = value.passengersInfo;
             this.passengersFareByType = value.passengers;
             this.totalCost = value.totalCost;
+            this.contactDetails = value.contactDetails;
           });
         this.store
           .select(selectBookingTripInCur)
@@ -135,11 +142,12 @@ export class SummaryComponent {
 
   handleAddToCart() {
     const currentTrip: Trip = {
-      id: performance.now().toString(),
+      id: uuidv4(),
       passengers: this.passengersFareByType,
       flight: this.flight,
       passengersInfo: this.passengersInfo,
       totalCost: this.totalCost,
+      contactDetails: this.contactDetails,
     };
     this.store.dispatch(CartActions.addToCart(currentTrip));
     this.snackBar.open('Item was successfully added to your cart!', '', {
@@ -157,6 +165,7 @@ export class SummaryComponent {
     }, 1500);
     setTimeout(() => {
       this.router.navigateByUrl('/booking/main');
+      this.store.dispatch(BookingActions.reset());
     }, 2500);
   }
 
@@ -172,16 +181,18 @@ export class SummaryComponent {
       .subscribe((result) => {
         if (result === 'CONFIRMED') {
           const currentTrip: Trip = {
-            id: performance.now().toString(),
+            id: uuidv4(),
             passengers: this.passengersFareByType,
             flight: this.flight,
             passengersInfo: this.passengersInfo,
             totalCost: this.totalCost,
+            contactDetails: this.contactDetails,
           };
           this.store.dispatch(
             UserOrdersActions.addToOrders({ orders: [currentTrip] })
           );
           this.router.navigateByUrl('/booking/main');
+          this.store.dispatch(BookingActions.reset());
         }
       });
   }

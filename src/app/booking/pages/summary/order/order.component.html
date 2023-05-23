@@ -25,7 +25,14 @@
         <div class="cabin-luggage">
           1 cabin bag + 1 personal item (max. 8 kg) included
         </div>
-        <div class="seat" *ngIf="passenger.seat">Seat {{ passenger.seat }}</div>
+        <ng-container *ngIf="passenger.seat && passenger.passengerType !== 'Infant'">
+          <div class="seat" *ngIf="!returnWay">
+            Seat {{ passenger.seat.oneWay }}
+          </div>
+          <div class="seat" *ngIf="returnWay">
+            Seat {{ passenger.seat.returnWay }}
+          </div>
+        </ng-container>
       </div>
     </div>
     <mat-divider></mat-divider>
