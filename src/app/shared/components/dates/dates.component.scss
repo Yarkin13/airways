@@ -16,8 +16,16 @@
   border-color: red;
 }
 
+.flight-date__error {
+  color: #f44336;
+}
+
 .flight-date .mdc-text-field--focused {
   border: 0.5px solid $primary;
+}
+
+.flight-date .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .flight-date .mdc-line-ripple {

@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BookingActions } from 'src/app/redux/actions/booking.actions';
@@ -10,7 +10,7 @@ import { PASSENGERS_TYPE } from 'src/app/shared/constants';
   styleUrls: ['./passengers.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PassengersComponent {
+export class PassengersComponent implements OnInit {
   @Input() flightSearchForm!: FormGroup;
   @Input() error!: boolean;
 
@@ -18,6 +18,10 @@ export class PassengersComponent {
   passengersValue = '';
 
   constructor(private store: Store) {}
+
+  ngOnInit() {
+    this.changePassengersValue();
+  }
 
   decrease(id: string) {
     const control = this.flightSearchForm.get(id);

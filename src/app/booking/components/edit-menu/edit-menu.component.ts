@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MaterialModule } from 'src/app/material/material.module';
+import { selectFlightData } from 'src/app/redux/selectors/flight.selectors';
+import { Store } from '@ngrx/store';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { switchMap, take } from 'rxjs/operators';
-import { selectFlightData } from 'src/app/redux/selectors/flight.selectors';
+import { switchMap, take } from 'rxjs';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss'],
+  selector: 'app-edit-menu',
+  standalone: true,
+  imports: [CommonModule, MaterialModule, SharedModule],
+  templateUrl: './edit-menu.component.html',
+  styleUrls: ['./edit-menu.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-export class MainComponent implements OnInit {
+export class EditMenuComponent implements OnInit, OnDestroy {
   flightSearchForm: FormGroup = new FormGroup({
     from: new FormControl({ key: '', name: '' }, Validators.required),
     destination: new FormControl({ key: '', name: '' }, Validators.required),
@@ -21,7 +27,8 @@ export class MainComponent implements OnInit {
     infant: new FormControl(0),
   });
 
-  flightType = 'roundTrip';
+  @Output() hideForm = new EventEmitter<boolean>();
+
   errors = {
     from: false,
     destination: false,
@@ -32,7 +39,7 @@ export class MainComponent implements OnInit {
   constructor(private store: Store, private router: Router) {
     this.store
       .select(selectFlightData)
-      .pipe(take(1))
+      .pipe(take(2))
       .subscribe((data) => {
         this.flightSearchForm.setValue({
           from: { key: data.fromKey, name: data.from },
@@ -43,7 +50,6 @@ export class MainComponent implements OnInit {
           child: +data.child,
           infant: +data.infant,
         });
-        this.flightType = data.type || 'roundTrip';
       });
   }
 
@@ -64,24 +70,13 @@ export class MainComponent implements OnInit {
       .subscribe();
   }
 
-  changeFlightType(newType: string) {
-    this.flightType = newType;
+  ngOnDestroy() {
+    this.hideForm.emit();
   }
 
   checkErrors() {
-    const today = new Date();
-
     if (!this.fromValue) this.errors.from = true;
     if (!this.destinationValue) this.errors.destination = true;
-    if (this.dateToValue < today) {
-      this.errors.date = 'Only dates in the future';
-    }
-    if (this.flightType === 'roundTrip' && this.dateBackValue < today) {
-      this.errors.date = 'Only dates in the future';
-    }
-    if (this.flightType === 'roundTrip' && !Date.parse(this.dateBackValue)) {
-      this.errors.date = 'No return date selected';
-    }
     if (!Date.parse(this.dateToValue)) this.errors.date = 'Required field';
 
     if (this.adultValue === 0 && this.childValue === 0 && this.infantValue === 0) {
@@ -98,13 +93,14 @@ export class MainComponent implements OnInit {
         fromValue: this.flightSearchForm.get('from')?.value.name,
         toValue: this.flightSearchForm.get('destination')?.value.name,
         forwardDate: this.getCurrentDate(this.dateToValue),
-        backDate: this.flightType === 'oneWay' ? null : this.getCurrentDate(this.dateBackValue),
+        backDate: this.getCurrentDate(this.dateBackValue),
         adult: this.adultValue,
         child: this.childValue,
         infant: this.infantValue,
       };
 
       this.router.navigate(['/booking/flights'], { queryParams: request });
+      this.hideForm.emit();
     }
   }
 

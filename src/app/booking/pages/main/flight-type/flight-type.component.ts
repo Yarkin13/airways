@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 
 @Component({
@@ -8,6 +8,7 @@ import { MatRadioChange } from '@angular/material/radio';
 })
 export class FlightTypeComponent {
   @Output() flightType = new EventEmitter<string>();
+  @Input() type!: string;
 
   toggleFlightType(ev: MatRadioChange) {
     this.flightType.emit(ev.value);

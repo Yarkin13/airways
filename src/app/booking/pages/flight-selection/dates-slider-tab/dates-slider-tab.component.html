@@ -1,6 +1,10 @@
 <div class="date-item" [ngClass]="currentClasses">
-  <p class="date-item__date">{{ date.takeoffDate | date : "dd MMM" }}</p>
-  <p class="date-item__day">{{ date.takeoffDate | date : "EEEE" }}</p>
+  <p class="date-item__date">
+    {{ date.takeoffDate.substring(0, 10) | date : "dd MMM" }}
+  </p>
+  <p class="date-item__day">
+    {{ date.takeoffDate.substring(0, 10) | date : "EEEE" }}
+  </p>
   <p
     *ngIf="date.price && (currency$ | async) as currency; else notFly"
     class="date-item__price"

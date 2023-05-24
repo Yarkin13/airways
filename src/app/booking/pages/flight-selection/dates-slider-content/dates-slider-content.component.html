@@ -1,6 +1,8 @@
 <div class="flight-container">
   <div class="flight">
-    <p class="flight__date">{{ date.takeoffDate | date : "EEE, d MMM y" }}</p>
+    <p class="flight__date">
+      {{ date.takeoffDate | date : "EEE, d MMM y" : date.form.gmt }}
+    </p>
     <p class="flight__time">
       {{ date.takeoffDate | date : "H:mm" : date.form.gmt }}
       <span>{{ date.takeoffDate | date : "z" : date.form.gmt }}</span>
@@ -22,7 +24,9 @@
   </div>
 
   <div class="flight back-flight">
-    <p class="flight__date">{{ date.landingDate | date : "EEE, d MMM y" }}</p>
+    <p class="flight__date">
+      {{ date.landingDate | date : "EEE, d MMM y" : date.to.gmt }}
+    </p>
     <p class="flight__time">
       <span>{{ date.landingDate | date : "z" : date.to.gmt }}</span>
       {{ date.landingDate | date : "H:mm" : date.to.gmt }}

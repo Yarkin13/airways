@@ -1,21 +1,22 @@
 import { createAction, props } from '@ngrx/store';
-import { ISetFlightProps } from 'src/app/shared/models/flight-data.model';
+import { IFlightData, ISetFlightProps } from 'src/app/shared/models/flight-data.model';
 import { IFlightInfo } from 'src/app/shared/models/flight-info.model';
 
-// export const FlightActions = createActionGroup({
-//   source: 'Flight data',
-//   events: {
-//     'Set flight info': props<{ flightInfo: ISetFlightProps }>(),
-//     'Set flight to': props<{ flight: IFlightInfo }>(),
-//     'Set flight back': props<{ flight: IFlightInfo }>(),
-//     'Delete flight to': props<{ flight: IFlightInfo }>(),
-//     'Delete flight back':,
-//   },
-// });
-
-export const setFlightInfo = createAction(
+export const setPassengersInfo = createAction(
   '[Flight selection page] Set flight info',
+  props<{ passengers: { adult: number; child: number; infant: number } }>()
+);
+export const searchFlights = createAction(
+  '[Flight selection page] Search flights',
   props<{ flightInfo: ISetFlightProps }>()
+);
+export const searchFlightsSuccess = createAction(
+  '[Flight selection page] Search flights Success',
+  props<{ newState: IFlightData }>()
+);
+export const changeStatus = createAction(
+  '[Flight selection page] Change status flights',
+  props<{ status: string }>()
 );
 export const setFlightTo = createAction(
   '[Flight selection page] Set flight to',

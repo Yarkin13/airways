@@ -21,6 +21,8 @@ import { InterceptorUrlService } from './core/interceptors/interceptor-url.servi
 import { userOrdersReducer } from './redux/reducers/user-orders.reducer';
 import { HttpService } from './http.service';
 import { flightReducer } from './redux/reducers/flight.reducer';
+import { EditMenuComponent } from './booking/components/edit-menu/edit-menu.component';
+import { FlightEffects } from './redux/effects/flight.effect';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +31,7 @@ import { flightReducer } from './redux/reducers/flight.reducer';
     CoreModule,
     SharedModule,
     SecondMenuComponent,
+    EditMenuComponent,
     BrowserAnimationsModule,
     StoreModule.forRoot({
       headerData: headerDataReducer,
@@ -40,7 +43,7 @@ import { flightReducer } from './redux/reducers/flight.reducer';
       userInfo: userReducer,
     }),
     HttpClientModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([FlightEffects]),
     StoreRouterConnectingModule.forRoot(),
     AppRoutingModule,
     StoreDevtoolsModule.instrument({
@@ -62,7 +65,7 @@ import { flightReducer } from './redux/reducers/flight.reducer';
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    HttpService
+    HttpService,
   ],
   bootstrap: [AppComponent],
 })

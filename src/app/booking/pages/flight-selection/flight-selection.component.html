@@ -1,10 +1,13 @@
-<div [ngSwitch]="status" class="container">
+<div [ngSwitch]="selectStatus$ | async" class="container">
   <ng-template ngSwitchCase="loading"><loader></loader></ng-template>
   <ng-template ngSwitchCase="error">
-    <p>Something went wrong. Try later</p>
+    <p class="error-message">Something went wrong. Try later</p>
+  </ng-template>
+  <ng-template ngSwitchCase="notSelect">
+    <p class="error-message">Select flight</p>
   </ng-template>
   <ng-template ngSwitchCase="success">
-    <section class="flights">
+    <section *ngIf="flights$ | async as flights" class="flights">
       <flight
         *ngFor="let flight of flights; let i = index"
         [flight]="flight"

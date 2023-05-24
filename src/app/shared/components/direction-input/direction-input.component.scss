@@ -2,7 +2,6 @@
 
 .direction__input {
   display: block;
-  background: $secondary90;
 }
 
 .direction__text {
@@ -17,6 +16,7 @@
 .direction__input .mat-mdc-text-field-wrapper {
   border-radius: 4px;
   border: 0.5px solid rgba(116, 118, 122, 0.6);
+  background: $secondary90;
 }
 
 .errorInput .mat-mdc-text-field-wrapper {
@@ -52,19 +52,22 @@
 
 .direction__options .mat-mdc-option {
   padding: 5px 16px;
+  height: max-content;
 }
 
 .direction__title {
   margin: 0 !important; //angular material class
   font-weight: 400;
   font-size: 16px;
-  line-height: 14px;
+  line-height: 16px;
   color: $neutral0;
 }
 
 .direction__subtitle {
+  display: block;
+  margin-top: 5px;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 14px;
   color: $neutral30;
 }
 

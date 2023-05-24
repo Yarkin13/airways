@@ -1,28 +1,39 @@
-import { PassengerType } from './booking.model';
-import { IFlightInfo } from './flight-info.model';
+import { IEmptyFlight, IFlightInfo } from './flight-info.model';
 
 export interface IFlightData {
+  status: string;
   from: string;
   to: string;
+  fromKey: string;
+  toKey: string;
   type: string;
   dateTo: string;
   dateBack: null | string;
-  passengers: PassengerType[];
+  adult: number;
+  child: number;
+  infant: number;
   flightTo: null | IFlightInfo;
   flightBack: null | IFlightInfo;
+  flights: Array<IFlightInfo | IEmptyFlight>[]
 }
 
 export interface ISetFlightProps {
   from: string;
   to: string;
+  fromKey: string;
+  toKey: string;
   type: string;
-  passengers: PassengerType[];
+  adult: number;
+  child: number;
+  infant: number;
   dateTo: string;
   dateBack: null | string;
 }
 
 export interface IBookingFlight {
-  passengers: PassengerType[];
+  adult: number;
+  child: number;
+  infant: number;
   flightTo: IFlightInfo;
   flightBack: IFlightInfo | null;
 }
