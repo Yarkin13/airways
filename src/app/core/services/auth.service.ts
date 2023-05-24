@@ -118,7 +118,6 @@ export class AuthService {
       this.modal.openAuthModal();
       return false;
     }
-    console.log('true');
     return true;
   }
 }
