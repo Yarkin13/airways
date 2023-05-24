@@ -5,7 +5,7 @@
   [ngClass]="{ errorInput: error }"
 >
   <mat-label>Dates</mat-label>
-  <mat-date-range-input [rangePicker]="rangePicker">
+  <mat-date-range-input [rangePicker]="rangePicker" [min]="today">
     <input
       matStartDate
       placeholder="Start date"
@@ -19,10 +19,12 @@
       (dateInput)="rangePickerChange()"
     />
   </mat-date-range-input>
-
-  <mat-hint *ngIf="rangePicker.opened">
+  <mat-hint *ngIf="rangePicker.opened; else errorMessage">
     {{ dateFormat }} – {{ dateFormat }}
   </mat-hint>
+  <ng-template #errorMessage>
+    <p *ngIf="error" class="flight-date__error">{{ error }}</p>
+  </ng-template>
   <mat-datepicker-toggle
     matIconSuffix
     [for]="rangePicker"
@@ -38,15 +40,25 @@
 </mat-form-field>
 
 <ng-template #OneWay>
-  <mat-form-field appearance="fill" class="flight-date">
+  <mat-form-field
+    appearance="fill"
+    class="flight-date"
+    [ngClass]="{ errorInput: error }"
+  >
     <mat-label>Date</mat-label>
     <input
       matInput
+      [min]="today"
       [formControl]="dateTo"
       [matDatepicker]="picker"
       (dateInput)="datePickerChange()"
     />
-    <mat-hint *ngIf="picker.opened">{{ dateFormat }}</mat-hint>
+    <mat-hint *ngIf="picker.opened; else errorMessage">
+      {{ dateFormat }}
+    </mat-hint>
+    <ng-template #errorMessage>
+      <p *ngIf="error" class="flight-date__error">{{ error }}</p>
+    </ng-template>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker>
       <mat-datepicker-actions>

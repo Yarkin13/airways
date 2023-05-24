@@ -1,0 +1,20 @@
+@use "src/styles.scss" as *;
+
+.edit-form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  padding: 20px;
+  margin-top: 17px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  background: $neutral100;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}

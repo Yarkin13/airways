@@ -3,6 +3,13 @@ import { IFlightData } from 'src/app/shared/models/flight-data.model';
 
 export const selectFlightData = createFeatureSelector<IFlightData>('flightData');
 
+export const selectFlights = createSelector(
+  selectFlightData,
+  (state: IFlightData) => state.flights
+);
+
+export const selectStatus = createSelector(selectFlightData, (state: IFlightData) => state.status);
+
 export const selectFlightTo = createSelector(
   selectFlightData,
   (state: IFlightData) => state.flightTo

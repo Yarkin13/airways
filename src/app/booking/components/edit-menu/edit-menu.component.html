@@ -1,0 +1,29 @@
+<form [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()" class="edit-form">
+  <direction-input
+    [flightSearchForm]="flightSearchForm"
+    label="From"
+    controlName="from"
+    placeholder="Choose departure point"
+    [error]="errors.from"
+  ></direction-input>
+  <direction-input
+    [flightSearchForm]="flightSearchForm"
+    label="Destination"
+    controlName="destination"
+    placeholder="Choose your destination"
+    [error]="errors.destination"
+  ></direction-input>
+
+  <dates
+    [flightSearchForm]="flightSearchForm"
+    flightType="roundTrip"
+    [error]="errors.date"
+  ></dates>
+  <passengers
+    [flightSearchForm]="flightSearchForm"
+    [error]="errors.passengers"
+  ></passengers>
+  <button type="submit" mat-flat-button color="primary" class="flight-btn">
+    Search
+  </button>
+</form>

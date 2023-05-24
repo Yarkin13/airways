@@ -17,9 +17,12 @@
   <mat-autocomplete
     #auto="matAutocomplete"
     class="direction__options"
-    (optionSelected)="onSelectionChange()"
+    (optionSelected)="onSelectionChange($event)"
   >
-    <mat-option *ngFor="let airport of airports" [value]="airport.name">
+    <mat-option
+      *ngFor="let airport of airports"
+      [value]="airport.name + '|' + airport.key"
+    >
       <p class="direction__title">{{ airport.name }} ({{ airport.key }})</p>
       <span class="direction__subtitle"
         >{{ airport.city }}, {{ airport.country }}</span

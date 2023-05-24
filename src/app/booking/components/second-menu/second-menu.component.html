@@ -1,18 +1,34 @@
-<div class="menu">
-  <div class="menu__container">
+<div class="menu container" *ngIf="flight$ | async as flight">
+  <div *ngIf="flight.from; else NotSelect" class="menu__container">
     <div class="flight-title__container">
-      <p class="flight-title">Dublin</p>
-      <img src="assets/booking/return-trip.svg" alt="return trip" />
-      <p class="flight-title">Warsaw Modlin</p>
+      <p class="flight-title">{{ flight.from }}</p>
+      <img
+        *ngIf="flight.type === 'roundTrip'; else oneWayImg"
+        src="assets/booking/return-trip.svg"
+        alt="return trip"
+      />
+      <ng-template #oneWayImg>
+        <img src="assets/booking/one-way-trip.svg" alt="one way trip" />
+      </ng-template>
+      <p class="flight-title">{{ flight.to }}</p>
     </div>
 
     <div class="flight-date__container">
-      <p>Return</p>
+      <p>{{ flight.type === "roundTrip" ? "Return" : "One Way" }}</p>
       <p class="dot-separator">•</p>
-      <p>1 Mar - 18 Mar</p>
+      <p *ngIf="flight.dateBack; else oneWayDate">
+        {{
+          (flight.dateTo | date : "dd MMM") +
+            " - " +
+            (flight.dateBack | date : "dd MMM")
+        }}
+      </p>
+      <ng-template #oneWayDate>
+        <p>{{ flight.dateTo | date : "dd MMM" }}</p>
+      </ng-template>
       <p class="dot-separator">•</p>
       <div class="person-count__container">
-        <p>3</p>
+        <p>{{ +flight.adult + +flight.child + +flight.infant }}</p>
         <img
           src="assets/booking/person-icon.svg"
           alt="avatar"
@@ -20,5 +36,32 @@
         />
       </div>
     </div>
+    <button
+      *ngIf="isFlightsPage"
+      mat-flat-button
+      class="flight__edit-btn"
+      (click)="editFlight()"
+    >
+      Edit
+    </button>
   </div>
+
+  <ng-template #NotSelect>
+    <div class="menu__container">
+      <p>Select flight</p>
+      <button
+        *ngIf="isFlightsPage"
+        mat-flat-button
+        class="flight__edit-btn"
+        (click)="editFlight()"
+      >
+        Select
+      </button>
+    </div>
+  </ng-template>
+
+  <app-edit-menu
+    *ngIf="showEditForm && isFlightsPage"
+    (hideForm)="hideEditForm()"
+  ></app-edit-menu>
 </div>

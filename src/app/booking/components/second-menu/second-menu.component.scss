@@ -1,25 +1,23 @@
 @use "src/styles.scss" as *;
 
-.menu {
-  height: 68px;
+:host {
+  display: block;
   background: $secondary100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 1px 4px -1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 
   p {
     margin: 0;
   }
 }
 
+.menu {
+  position: relative;
+  padding: 15px 0;
+}
+
 .menu__container {
-  box-sizing: border-box;
-  width: 1150px;
-  padding-left: 22px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 10px 40px;
 
@@ -31,6 +29,8 @@
 
 .flight-title__container {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 16px;
 
   .flight-title {
@@ -60,4 +60,13 @@
   .person-icon {
     padding-bottom: 2px;
   }
+}
+
+.flight__edit-btn {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+  background: $secondary90 !important; // angular material style
+  color: $primary !important; // angular material style
 }

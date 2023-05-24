@@ -4,7 +4,7 @@
     class="flight-title__icon"
     [ngClass]="{ backIcon: back }"
   ></mat-icon>
-  <p>{{ flight.form.name }} to {{ flight.to.name }}</p>
+  <p>{{ (flightInfo$ | async)?.from }} to {{ (flightInfo$ | async)?.to }}</p>
 </div>
 
 <p *ngIf="selectFlight$ | async as selectFlight; else notSelect">
@@ -16,5 +16,5 @@
 </p>
 
 <ng-template #notSelect>
-  <dates-slider [dates]="datesArray" [back]="back"></dates-slider>
+  <dates-slider [dates]="flight" [back]="back"></dates-slider>
 </ng-template>

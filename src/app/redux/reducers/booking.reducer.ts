@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Trip } from 'src/app/shared/models/shopping-cart.model';
-import { Flight } from 'src/app/shared/models/booking.model';
+import { Flight, PassengerType } from 'src/app/shared/models/booking.model';
 import { BookingActions } from '../actions/booking.actions';
 
 export const initialState: Trip = {
@@ -37,7 +37,7 @@ export const initialState: Trip = {
     countryCode: '',
     phone: '',
     email: '',
-  }
+  },
 };
 
 export const bookingReducer = createReducer(
@@ -45,7 +45,7 @@ export const bookingReducer = createReducer(
   on(BookingActions.setBookingInitialState, (state, trip): Trip => trip),
   on(BookingActions.reset, (): Trip => ({ ...initialState })),
   on(BookingActions.setFlight, (state, { flightData }): Trip => {
-    const { flightTo, flightBack, passengers } = flightData;
+    const { flightTo, flightBack, adult, child, infant } = flightData;
     const flight: Flight = {
       tripType: 'Round Trip',
       oneWay: {
@@ -78,9 +78,13 @@ export const bookingReducer = createReducer(
       };
     }
 
-    const passengersType = passengers.filter((p) => p.count > 0);
+    const passengers = [
+      { type: 'Adult', count: adult },
+      { type: 'Child', count: child },
+      { type: 'Infant', count: infant },
+    ].filter((p) => p.count > 0) as PassengerType[];
 
-    return { ...state, passengers: passengersType, flight };
+    return { ...state, passengers, flight };
   }),
   on(
     BookingActions.setPassengersInfo,
@@ -93,8 +97,5 @@ export const bookingReducer = createReducer(
     BookingActions.setContactDetails,
     (state, contactDetails): Trip => ({ ...state, contactDetails })
   ),
-  on(
-    BookingActions.removePassengersInfo,
-    (state): Trip => ({ ...state, passengersInfo: [] })
-  )
+  on(BookingActions.removePassengersInfo, (state): Trip => ({ ...state, passengersInfo: [] }))
 );

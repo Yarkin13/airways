@@ -1,6 +1,9 @@
 <div class="container">
   <div class="flight-search">
-    <flight-type (flightType)="changeFlightType($event)"></flight-type>
+    <flight-type
+      [type]="flightType"
+      (flightType)="changeFlightType($event)"
+    ></flight-type>
     <form [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()">
       <div class="direction__container">
         <direction-input

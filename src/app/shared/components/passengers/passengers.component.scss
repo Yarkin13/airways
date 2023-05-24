@@ -2,12 +2,12 @@
 
 .passengers__input {
   display: block;
-  background: $secondary90;
 }
 
 .passengers__input .mat-mdc-text-field-wrapper {
   border-radius: 4px;
   border: 0.5px solid rgba(116, 118, 122, 0.6);
+  background: $secondary90;
 }
 
 .errorInput .mat-mdc-text-field-wrapper {
