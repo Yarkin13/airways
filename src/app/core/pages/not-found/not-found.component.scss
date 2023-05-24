@@ -1,0 +1,54 @@
+@use "src/styles.scss" as *;
+
+:host {
+  margin-top: 156px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+
+  p {
+    margin: 0;
+  }
+}
+
+.notfound__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  .notfound__text404 {
+    color: $primary;
+    @extend %title-large;
+    font-size: 60px;
+    line-height: 60px;
+    font-weight: 700;
+  }
+
+  .notfound__text {
+    @extend %title-large;
+    color: $neutral0;
+  }
+
+  .notfound__subtitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .notfound__subtitle_text {
+    color: $primary;
+    opacity: 0.8;
+  }
+
+  .notfound__button {
+    @extend %button;
+    width: 208px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid $neutral60;
+  }
+}

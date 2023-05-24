@@ -7,6 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -61,6 +62,7 @@ import { flightReducer } from './redux/reducers/flight.reducer';
       multi: true,
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     JwtHelperService,
     HttpService
   ],
