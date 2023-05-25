@@ -25,7 +25,6 @@ export const selectCartDataInCur = createSelector(
   (cart, currency) => cart.map((trip) => ({
     ...trip,
     totalCost: (+trip.totalCost * trip.currencyExchange[currency as keyof CurrencyExchange])
-      .toFixed(2)
       .toString()
   }))
 );

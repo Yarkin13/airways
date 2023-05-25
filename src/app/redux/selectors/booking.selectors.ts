@@ -104,8 +104,8 @@ const selectPassengersFareByType = createSelector(
     }
     return {
       ...passenger,
-      fare: farePrice.toFixed(2).toString(),
-      charge: chargePrice.toFixed(2).toString(),
+      fare: farePrice.toString(),
+      charge: chargePrice.toString(),
     };
   })
 );
@@ -117,9 +117,9 @@ const selectPassengersFareByTypeInCur = createSelector(
   (passengersType, currency, currencyExchange) => passengersType.map((passenger) => ({
     ...passenger,
     fare: (+passenger.fare * currencyExchange[currency as keyof CurrencyExchange])
-      .toFixed(2).toString(),
+      .toString(),
     charge: (+passenger.charge * currencyExchange[currency as keyof CurrencyExchange])
-      .toFixed(2).toString(),
+      .toString(),
   }))
 );
 
@@ -127,7 +127,6 @@ const selectCurTripCost = createSelector(
   selectPassengersFareByType,
   (passengersType) => passengersType
     .reduce((acc, cur) => acc + Number(+cur.fare + +cur.charge) * cur.count, 0)
-    .toFixed(2)
     .toString()
 );
 
@@ -136,7 +135,7 @@ const selectCurTripCostInCur = createSelector(
   selectHeaderCurrency,
   selectCurrencyExchange,
   (cost, currency, currencyExchange) => (
-    +cost * currencyExchange[currency as keyof CurrencyExchange]).toFixed(2).toString()
+    +cost * currencyExchange[currency as keyof CurrencyExchange]).toString()
 );
 
 export const selectBookingTrip = createSelector(

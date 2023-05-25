@@ -16,7 +16,6 @@ export const selectUserOrdersInCur = createSelector(
   (orders, currency) => orders.map((order) => ({
     ...order,
     totalCost: (+order.totalCost * order.currencyExchange[currency as keyof CurrencyExchange])
-      .toFixed(2)
       .toString(),
   })),
 );
@@ -42,15 +41,12 @@ export const selectOrderByIdInCur = (id: string) => createSelector(
           ...passenger,
           fare: passenger.fare
           && (+passenger.fare * order.currencyExchange[currency as keyof CurrencyExchange])
-            .toFixed(2)
             .toString(),
           charge: passenger.charge
           && (+passenger.charge * order.currencyExchange[currency as keyof CurrencyExchange])
-            .toFixed(2)
             .toString(),
         })),
         totalCost: (+order.totalCost * order.currencyExchange[currency as keyof CurrencyExchange])
-          .toFixed(2)
           .toString(),
       });
     }

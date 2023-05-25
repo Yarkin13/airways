@@ -180,7 +180,6 @@ export class ShoppingCartComponent implements AfterViewInit {
               +trip.totalCost
               / trip.currencyExchange[this.headerCurrency as keyof CurrencyExchange]
             )
-              .toFixed(2)
               .toString(),
           }));
           this.store.dispatch(
