@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentModalComponent } from 'src/app/shared/components/payment-modal/payment-modal.component';
 import { MatSort } from '@angular/material/sort';
-import { Trip } from 'src/app/shared/models/shopping-cart.model';
+import { CurrencyExchange, Trip } from 'src/app/shared/models/shopping-cart.model';
 import {
   selectCartDataById,
   selectCartDataInCur,
@@ -23,9 +23,6 @@ import {
 import { CartActions } from 'src/app/redux/actions/cart.actions';
 import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import { BookingActions } from 'src/app/redux/actions/booking.actions';
-import {
-  CURRENCY_EXCHANGE
-} from 'src/app/shared/constants/currency';
 import { MenuComponent } from './menu/menu.component';
 import { PromoInputComponent } from './promo-input/promo-input.component';
 import { DiscountService } from '../../services/discount.service';
@@ -181,7 +178,7 @@ export class ShoppingCartComponent implements AfterViewInit {
             discount: this.discount,
             totalCost: (
               +trip.totalCost
-              / CURRENCY_EXCHANGE[this.headerCurrency]
+              / trip.currencyExchange[this.headerCurrency as keyof CurrencyExchange]
             )
               .toFixed(2)
               .toString(),

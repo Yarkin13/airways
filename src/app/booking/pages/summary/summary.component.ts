@@ -19,7 +19,7 @@ import {
   PassengerType,
 } from 'src/app/shared/models/booking.model';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
-import { Trip } from 'src/app/shared/models/shopping-cart.model';
+import { CurrencyExchange, Trip } from 'src/app/shared/models/shopping-cart.model';
 import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import {
   selectOrderById,
@@ -62,6 +62,7 @@ export class SummaryComponent {
   tripIdEdit = '';
   contactDetails: ContactDetails;
   isReturnWay = true;
+  currencyExchange: CurrencyExchange;
 
   constructor(
     public router: Router,
@@ -120,6 +121,7 @@ export class SummaryComponent {
             this.passengersFareByType = value.passengers;
             this.totalCost = value.totalCost;
             this.contactDetails = value.contactDetails;
+            this.currencyExchange = value.currencyExchange;
           });
         this.store
           .select(selectBookingTripInCur)
@@ -148,6 +150,7 @@ export class SummaryComponent {
       passengersInfo: this.passengersInfo,
       totalCost: this.totalCost,
       contactDetails: this.contactDetails,
+      currencyExchange: this.currencyExchange,
     };
     this.store.dispatch(CartActions.addToCart(currentTrip));
     this.snackBar.open('Item was successfully added to your cart!', '', {
@@ -187,18 +190,20 @@ export class SummaryComponent {
             passengersInfo: this.passengersInfo,
             totalCost: this.totalCost,
             contactDetails: this.contactDetails,
+            currencyExchange: this.currencyExchange,
           };
           this.store.dispatch(
             UserOrdersActions.addToOrders({ orders: [currentTrip] })
           );
-          this.router.navigateByUrl('/booking/main');
           this.store.dispatch(BookingActions.reset());
+          this.router.navigateByUrl('/booking/main');
         }
       });
   }
 
-  redirectToUserAccount() {
+  handleReturnToUserAccount() {
     this.router.navigateByUrl('/user/account');
+    this.store.dispatch(BookingActions.reset());
   }
 
   handleCancelEdit() {

@@ -1,6 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CURRENCY_EXCHANGE } from 'src/app/shared/constants/currency';
-import { Trip } from 'src/app/shared/models/shopping-cart.model';
+import { CurrencyExchange, Trip } from 'src/app/shared/models/shopping-cart.model';
 import { selectHeaderCurrency } from './header-data.selectors';
 
 const selectBookingData = createFeatureSelector<Trip>('bookingData');
@@ -8,6 +7,11 @@ const selectBookingData = createFeatureSelector<Trip>('bookingData');
 const selectPassengersType = createSelector(selectBookingData, (state: Trip) => state.passengers);
 
 const selectFlightPrice = createSelector(selectBookingData, (state: Trip) => state.flight.price);
+
+const selectCurrencyExchange = createSelector(
+  selectBookingData,
+  (state: Trip) => state.currencyExchange
+);
 
 const selectFlightSeatOneWay = createSelector(
   selectBookingData,
@@ -109,10 +113,13 @@ const selectPassengersFareByType = createSelector(
 const selectPassengersFareByTypeInCur = createSelector(
   selectPassengersFareByType,
   selectHeaderCurrency,
-  (passengersType, currency) => passengersType.map((passenger) => ({
+  selectCurrencyExchange,
+  (passengersType, currency, currencyExchange) => passengersType.map((passenger) => ({
     ...passenger,
-    fare: (+passenger.fare * CURRENCY_EXCHANGE[currency]).toFixed(2).toString(),
-    charge: (+passenger.charge * CURRENCY_EXCHANGE[currency]).toFixed(2).toString(),
+    fare: (+passenger.fare * currencyExchange[currency as keyof CurrencyExchange])
+      .toFixed(2).toString(),
+    charge: (+passenger.charge * currencyExchange[currency as keyof CurrencyExchange])
+      .toFixed(2).toString(),
   }))
 );
 
@@ -127,7 +134,9 @@ const selectCurTripCost = createSelector(
 const selectCurTripCostInCur = createSelector(
   selectCurTripCost,
   selectHeaderCurrency,
-  (cost, currency) => (+cost * CURRENCY_EXCHANGE[currency]).toFixed(2).toString()
+  selectCurrencyExchange,
+  (cost, currency, currencyExchange) => (
+    +cost * currencyExchange[currency as keyof CurrencyExchange]).toFixed(2).toString()
 );
 
 export const selectBookingTrip = createSelector(

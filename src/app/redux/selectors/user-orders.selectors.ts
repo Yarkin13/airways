@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CURRENCY_EXCHANGE } from 'src/app/shared/constants/currency';
+import { CurrencyExchange } from 'src/app/shared/models/shopping-cart.model';
 import { UserOrdersData } from '../state.models';
 import { selectHeaderCurrency } from './header-data.selectors';
 
@@ -15,7 +15,7 @@ export const selectUserOrdersInCur = createSelector(
   selectHeaderCurrency,
   (orders, currency) => orders.map((order) => ({
     ...order,
-    totalCost: (+order.totalCost * CURRENCY_EXCHANGE[currency])
+    totalCost: (+order.totalCost * order.currencyExchange[currency as keyof CurrencyExchange])
       .toFixed(2)
       .toString(),
   })),
@@ -40,14 +40,16 @@ export const selectOrderByIdInCur = (id: string) => createSelector(
         ...order,
         passengers: order.passengers.map((passenger) => ({
           ...passenger,
-          fare: passenger.fare && (+passenger.fare * CURRENCY_EXCHANGE[currency])
+          fare: passenger.fare
+          && (+passenger.fare * order.currencyExchange[currency as keyof CurrencyExchange])
             .toFixed(2)
             .toString(),
-          charge: passenger.charge && (+passenger.charge * CURRENCY_EXCHANGE[currency])
+          charge: passenger.charge
+          && (+passenger.charge * order.currencyExchange[currency as keyof CurrencyExchange])
             .toFixed(2)
             .toString(),
         })),
-        totalCost: (+order.totalCost * CURRENCY_EXCHANGE[currency])
+        totalCost: (+order.totalCost * order.currencyExchange[currency as keyof CurrencyExchange])
           .toFixed(2)
           .toString(),
       });

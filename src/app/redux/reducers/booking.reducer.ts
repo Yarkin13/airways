@@ -38,6 +38,12 @@ export const initialState: Trip = {
     phone: '',
     email: '',
   },
+  currencyExchange: {
+    EUR: 1,
+    USD: 1,
+    RUB: 1,
+    PLN: 1,
+  },
 };
 
 export const bookingReducer = createReducer(
@@ -84,7 +90,23 @@ export const bookingReducer = createReducer(
       { type: 'Infant', count: infant },
     ].filter((p) => p.count > 0) as PassengerType[];
 
-    return { ...state, passengers, flight };
+    const currencyExchange = {
+      EUR: 1,
+      USD: flightBack
+        ? (flightTo.price['usd'] + flightBack.price['usd'])
+          / (flightTo.price['eur'] + flightBack.price['eur'])
+        : flightTo.price['usd'] / flightTo.price['eur'],
+      RUB: flightBack
+        ? (flightTo.price['rub'] + flightBack.price['rub'])
+          / (flightTo.price['eur'] + flightBack.price['eur'])
+        : flightTo.price['rub'] / flightTo.price['eur'],
+      PLN: flightBack
+        ? (flightTo.price['pln'] + flightBack.price['pln'])
+          / (flightTo.price['eur'] + flightBack.price['eur'])
+        : flightTo.price['pln'] / flightTo.price['eur'],
+    };
+
+    return { ...state, passengers, flight, currencyExchange };
   }),
   on(
     BookingActions.setPassengersInfo,
