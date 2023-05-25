@@ -12,11 +12,15 @@
       </div>
       <div class="row fare-row">
         <p class="fare-text">fare</p>
-        <p class="fare-amount">{{ currency + passenger.fare }}</p>
+        <p class="fare-amount">
+          {{ currency + (+passenger.fare!).toFixed(2) }}
+        </p>
       </div>
       <div class="row fare-row">
         <p class="charge-text">Tax & Service Charge</p>
-        <p class="charge-amount">{{ currency + passenger.charge }}</p>
+        <p class="charge-amount">
+          {{ currency + (+passenger.charge!).toFixed(2) }}
+        </p>
       </div>
     </div>
   </div>
@@ -24,6 +28,6 @@
 
   <div class="card-footer">
     <p class="total-text">TOTAL:</p>
-    <p class="total-amount">{{ currency + total }}</p>
+    <p class="total-amount">{{ currency + (+total).toFixed(2) }}</p>
   </div>
 </div>

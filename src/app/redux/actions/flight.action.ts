@@ -29,3 +29,4 @@ export const setFlightBack = createAction(
 export const deleteFlightTo = createAction('[Flight selection page] Delete flight to');
 export const deleteFlightBack = createAction('[Flight selection page] Delete flight back');
 export const deleteFlight = createAction('[Flight selection page] Delete flight');
+export const resetFlight = createAction('[Flight selection page] Reset flight');

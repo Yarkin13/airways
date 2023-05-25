@@ -19,7 +19,7 @@ import {
   PassengerType,
 } from 'src/app/shared/models/booking.model';
 import { CartActions } from 'src/app/redux/actions/cart.actions';
-import { Trip } from 'src/app/shared/models/shopping-cart.model';
+import { CurrencyExchange, Trip } from 'src/app/shared/models/shopping-cart.model';
 import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import {
   selectOrderById,
@@ -27,6 +27,7 @@ import {
 } from 'src/app/redux/selectors/user-orders.selectors';
 import { BookingActions } from 'src/app/redux/actions/booking.actions';
 import { v4 as uuidv4 } from 'uuid';
+import { resetFlight } from 'src/app/redux/actions/flight.action';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -62,6 +63,7 @@ export class SummaryComponent {
   tripIdEdit = '';
   contactDetails: ContactDetails;
   isReturnWay = true;
+  currencyExchange: CurrencyExchange;
 
   constructor(
     public router: Router,
@@ -120,6 +122,7 @@ export class SummaryComponent {
             this.passengersFareByType = value.passengers;
             this.totalCost = value.totalCost;
             this.contactDetails = value.contactDetails;
+            this.currencyExchange = value.currencyExchange;
           });
         this.store
           .select(selectBookingTripInCur)
@@ -148,6 +151,7 @@ export class SummaryComponent {
       passengersInfo: this.passengersInfo,
       totalCost: this.totalCost,
       contactDetails: this.contactDetails,
+      currencyExchange: this.currencyExchange,
     };
     this.store.dispatch(CartActions.addToCart(currentTrip));
     this.snackBar.open('Item was successfully added to your cart!', '', {
@@ -166,6 +170,7 @@ export class SummaryComponent {
     setTimeout(() => {
       this.router.navigateByUrl('/booking/main');
       this.store.dispatch(BookingActions.reset());
+      this.store.dispatch(resetFlight());
     }, 2500);
   }
 
@@ -187,18 +192,21 @@ export class SummaryComponent {
             passengersInfo: this.passengersInfo,
             totalCost: this.totalCost,
             contactDetails: this.contactDetails,
+            currencyExchange: this.currencyExchange,
           };
           this.store.dispatch(
             UserOrdersActions.addToOrders({ orders: [currentTrip] })
           );
-          this.router.navigateByUrl('/booking/main');
           this.store.dispatch(BookingActions.reset());
+          this.store.dispatch(resetFlight());
+          this.router.navigateByUrl('/booking/main');
         }
       });
   }
 
-  redirectToUserAccount() {
+  handleReturnToUserAccount() {
     this.router.navigateByUrl('/user/account');
+    this.store.dispatch(BookingActions.reset());
   }
 
   handleCancelEdit() {
@@ -213,5 +221,6 @@ export class SummaryComponent {
       })
     );
     this.router.navigateByUrl('/user/cart');
+    this.store.dispatch(BookingActions.reset());
   }
 }

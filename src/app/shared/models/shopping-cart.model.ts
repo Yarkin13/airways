@@ -13,4 +13,12 @@ export interface Trip {
   totalCost: string;
   discount?: string;
   contactDetails: ContactDetails;
+  currencyExchange: CurrencyExchange;
+}
+
+export interface CurrencyExchange {
+  EUR: number;
+  USD: number;
+  RUB: number;
+  PLN: number;
 }
