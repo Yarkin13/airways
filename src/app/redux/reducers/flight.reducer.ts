@@ -9,6 +9,7 @@ import {
   setFlightBack,
   setFlightTo,
   setPassengersInfo,
+  resetFlight,
 } from '../actions/flight.action';
 
 export const initialState: IFlightData = {
@@ -48,5 +49,6 @@ export const flightReducer = createReducer(
   on(setFlightBack, (state, { flight }): IFlightData => ({ ...state, flightBack: flight })),
   on(deleteFlightTo, (state): IFlightData => ({ ...state, flightTo: null })),
   on(deleteFlightBack, (state): IFlightData => ({ ...state, flightBack: null })),
-  on(deleteFlight, (state): IFlightData => ({ ...state, flightTo: null, flightBack: null }))
+  on(deleteFlight, (state): IFlightData => ({ ...state, flightTo: null, flightBack: null })),
+  on(resetFlight, (): IFlightData => ({ ...initialState })),
 );

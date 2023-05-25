@@ -27,6 +27,7 @@ import {
 } from 'src/app/redux/selectors/user-orders.selectors';
 import { BookingActions } from 'src/app/redux/actions/booking.actions';
 import { v4 as uuidv4 } from 'uuid';
+import { resetFlight } from 'src/app/redux/actions/flight.action';
 import { FareComponent } from './fare/fare.component';
 import { OrderComponent } from './order/order.component';
 import { PaymentModalComponent } from '../../../shared/components/payment-modal/payment-modal.component';
@@ -169,6 +170,7 @@ export class SummaryComponent {
     setTimeout(() => {
       this.router.navigateByUrl('/booking/main');
       this.store.dispatch(BookingActions.reset());
+      this.store.dispatch(resetFlight());
     }, 2500);
   }
 
@@ -196,6 +198,7 @@ export class SummaryComponent {
             UserOrdersActions.addToOrders({ orders: [currentTrip] })
           );
           this.store.dispatch(BookingActions.reset());
+          this.store.dispatch(resetFlight());
           this.router.navigateByUrl('/booking/main');
         }
       });
@@ -218,5 +221,6 @@ export class SummaryComponent {
       })
     );
     this.router.navigateByUrl('/user/cart');
+    this.store.dispatch(BookingActions.reset());
   }
 }
