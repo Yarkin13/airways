@@ -45,7 +45,7 @@ export class HeaderComponent {
       if (value === '/booking/main') {
         this.isMainPage = true;
         this.isUserPage = false;
-      } else if (value === '/user/account' || value === '/user/cart') {
+      } else if (value === '/user/account' || value === '/user/cart' || value === '/404') {
         this.isMainPage = false;
         this.isUserPage = true;
       } else {

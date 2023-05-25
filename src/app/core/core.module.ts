@@ -12,7 +12,6 @@ import { SingUpFormComponent } from './components/auth/sing-up-form/sing-up-form
 import { LogInFormComponent } from './components/auth/log-in-form/log-in-form.component';
 import { TooltipListPipe } from './pipes/tooltip-list.pipe';
 import { StepperComponent } from './components/header/stepper/stepper.component';
-import { PageSwapComponent } from './components/footer/TO-BE-DELETED/page-swap.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { PageSwapComponent } from './components/footer/TO-BE-DELETED/page-swap.c
     LogInFormComponent,
     TooltipListPipe,
     StepperComponent,
-    PageSwapComponent,
   ],
   imports: [CommonModule, SharedModule, RouterModule, MaterialModule],
   exports: [HeaderComponent, FooterComponent],
