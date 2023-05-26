@@ -119,9 +119,3 @@
     --mdc-snackbar-supporting-text-color: $neutral100;
   }
 }
-
-::ng-deep .snackBarRedirect {
-  @extend %subtitle-small;
-  border-radius: 4px;
-  text-align: center;
-}

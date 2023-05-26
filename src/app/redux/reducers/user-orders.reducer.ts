@@ -12,4 +12,5 @@ export const userOrdersReducer = createReducer(
     UserOrdersActions.addToOrders,
     (state, { orders }): UserOrdersData => ({ ...state, orders: [...state.orders, ...orders] })
   ),
+  on(UserOrdersActions.reset, (): UserOrdersData => ({ ...initialState }))
 );

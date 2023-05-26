@@ -93,6 +93,6 @@ export class UserAccountComponent implements AfterViewInit {
     if (total && disc) {
       return `${(+total * (1 - 0.01 * +disc)).toFixed(2)}*`;
     }
-    return total;
+    return (+total).toFixed(2).toString();
   }
 }

@@ -155,23 +155,16 @@ export class SummaryComponent {
     };
     this.store.dispatch(CartActions.addToCart(currentTrip));
     this.snackBar.open('Item was successfully added to your cart!', '', {
-      duration: 1500,
+      duration: 1000,
       panelClass: ['snackBar'],
       verticalPosition: 'top',
     });
     this.btnDisabled = true;
     setTimeout(() => {
-      this.snackBar.open('Redirecting to main page...', '', {
-        duration: 1000,
-        panelClass: ['snackBarRedirect'],
-        verticalPosition: 'top',
-      });
-    }, 1500);
-    setTimeout(() => {
       this.router.navigateByUrl('/booking/main');
       this.store.dispatch(BookingActions.reset());
       this.store.dispatch(resetFlight());
-    }, 2500);
+    }, 1000);
   }
 
   handlePayment() {
@@ -179,7 +172,7 @@ export class SummaryComponent {
       .open(PaymentModalComponent, {
         width: '400px',
         data: {
-          total: this.currency + this.totalCostInCur,
+          total: this.currency + (+this.totalCostInCur).toFixed(2),
         },
       })
       .afterClosed()

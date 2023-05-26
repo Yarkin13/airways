@@ -114,7 +114,6 @@ export class AuthService {
 
   canActivate() {
     if (!this.checkExpiredToken()) {
-      this.router.navigate(['./']);
       this.modal.openAuthModal();
       return false;
     }
