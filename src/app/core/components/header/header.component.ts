@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/avoid-dispatching-multiple-actions-sequentially */
 import { Component, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUrl } from 'src/app/redux/selectors/router.selectors';
@@ -7,6 +8,10 @@ import { selectUserInfo } from 'src/app/redux/selectors/user.selectors';
 import { removeUser } from 'src/app/redux/actions/user-data.actions';
 import { selectCartCount } from 'src/app/redux/selectors/cart.selectors';
 import { Router } from '@angular/router';
+import { resetFlight } from 'src/app/redux/actions/flight.action';
+import { BookingActions } from 'src/app/redux/actions/booking.actions';
+import { CartActions } from 'src/app/redux/actions/cart.actions';
+import { UserOrdersActions } from 'src/app/redux/actions/user-orders.actions';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { UserRegisterData } from '../../models/user.model';
@@ -90,6 +95,11 @@ export class HeaderComponent {
   logout() {
     this.auth.logout();
     this.store.dispatch(removeUser());
+    this.router.navigateByUrl('/');
+    this.store.dispatch(BookingActions.reset());
+    this.store.dispatch(resetFlight());
+    this.store.dispatch(CartActions.reset());
+    this.store.dispatch(UserOrdersActions.reset());
   }
 
   redirectToAccount() {

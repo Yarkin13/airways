@@ -27,5 +27,6 @@ export const cartReducer = createReducer(
       }
       return state;
     }
-  )
+  ),
+  on(CartActions.reset, (): Array<Trip> => [])
 );
