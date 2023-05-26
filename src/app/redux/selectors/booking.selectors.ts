@@ -25,7 +25,7 @@ const selectPassengersInfo = createSelector(
     // Generate seat logic
     const seatsReturnWay = state.flight.returnWay ? state.flight.returnWay.seats : undefined;
     const getSeatArray = (totalSeats: number, passengersCount: number) => {
-      const maxRows = totalSeats / 6;
+      const maxRows = Math.ceil(totalSeats / 6);
       let randomRow = Math.floor(Math.random() * maxRows - 1) + 1;
       const seatsArray = ['A', 'B', 'C', 'D', 'E', 'F'];
       const resultSeatArr: Array<string> = [];
