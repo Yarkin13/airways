@@ -14,6 +14,7 @@ import { FlightComponent } from './pages/flight-selection/flight/flight.componen
 import { DatesSliderComponent } from './pages/flight-selection/dates-slider/dates-slider.component';
 import { DatesSliderTabComponent } from './pages/flight-selection/dates-slider-tab/dates-slider-tab.component';
 import { DatesSliderContentComponent } from './pages/flight-selection/dates-slider-content/dates-slider-content.component';
+import { MatTabScrollToCenterDirective } from './pages/flight-selection/scrolling.directive';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DatesSliderContentComponent } from './pages/flight-selection/dates-slid
     DatesSliderComponent,
     DatesSliderTabComponent,
     DatesSliderContentComponent,
+    MatTabScrollToCenterDirective,
   ],
   imports: [CommonModule, BookingRoutingModule, SharedModule, MaterialModule],
 })

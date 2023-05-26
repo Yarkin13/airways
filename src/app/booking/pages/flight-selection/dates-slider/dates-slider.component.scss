@@ -34,3 +34,35 @@
     right: 0;
   }
 }
+
+@mixin media-query-for-mobile {
+  @media (max-width: 768px) and (min-width: 1px) {
+    @content;
+  }
+}
+
+mat-tab-group {
+  .mat-mdc-tab-header {
+    .mat-mdc-tab-label-container {
+      left: 0px;
+      width: 100%;
+      .mat-mdc-tab-list {
+        overflow-x: hidden;
+        transform: none !important;
+        .mat-mdc-tab-labels {
+          @include media-query-for-mobile {
+            justify-content: unset !important;
+          }
+          .mat-mdc-tab-label {
+            padding: 1.25% !important;
+            margin: 0px !important;
+            text-transform: uppercase;
+            color: $black;
+            font-weight: 600;
+            min-width: 140px !important;
+          }
+        }
+      }
+    }
+  }
+}
