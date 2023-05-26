@@ -37,7 +37,13 @@
     @extend %title-xsmall;
     font-weight: 500;
     color: $black;
+    text-align: center;
   }
+}
+.error-message {
+  @extend %title-xsmall;
+  font-weight: 500;
+  color: $black;
 }
 
 .flight-date__container {
@@ -69,4 +75,6 @@
   letter-spacing: 0.1px;
   background: $secondary90 !important; // angular material style
   color: $primary !important; // angular material style
+  z-index: 0;
 }
+

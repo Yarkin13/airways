@@ -28,8 +28,10 @@
     "@ngrx/router-store": "^15.4.0",
     "@ngrx/store": "^15.4.0",
     "@ngrx/store-devtools": "^15.4.0",
+    "element-scroll-polyfill": "^1.0.1",
     "moment": "^2.29.4",
     "rxjs": "~7.5.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "tslib": "^2.3.0",
     "uuid": "^9.0.0",
     "zone.js": "~0.12.0"
@@ -45,6 +47,7 @@
     "@angular/compiler-cli": "^15.0.0",
     "@ngrx/eslint-plugin": "^15.4.0",
     "@types/jasmine": "~4.3.0",
+    "@types/smoothscroll-polyfill": "^0.3.1",
     "@types/uuid": "^9.0.1",
     "@typescript-eslint/eslint-plugin": "5.48.2",
     "@typescript-eslint/parser": "5.48.2",

@@ -7,16 +7,6 @@
 
 .booking__wrapper {
   padding: 40px 0 40px;
-  margin-top: 156px;
-
-  @media (max-width: $desktop-ms) {
-    margin-top: 184px;
-  }
-
-  @media (max-width: $desktop-xs) {
-    margin-top: 240px;
-  }
-
   display: flex;
   width: 100%;
   align-items: center;

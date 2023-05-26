@@ -51,7 +51,8 @@ export class HeaderComponent {
       } else {
         this.isMainPage = false;
         this.isUserPage = false;
-        this.currentStep = STEPS[value] || STEPS['default'];
+        const step = value && value.includes('/booking/flights') ? '/booking/flights' : value;
+        this.currentStep = STEPS[step] || STEPS['default'];
       }
     });
     this.store
