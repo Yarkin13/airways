@@ -179,7 +179,7 @@ export class SummaryComponent {
       .open(PaymentModalComponent, {
         width: '400px',
         data: {
-          total: this.currency + this.totalCostInCur,
+          total: this.currency + (+this.totalCostInCur).toFixed(2),
         },
       })
       .afterClosed()
