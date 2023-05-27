@@ -47,14 +47,9 @@
   </div>
 
   <ng-template #NotSelect>
-    <div class="menu__container">
+    <div *ngIf="isFlightsPage" class="menu__container">
       <p class="error-message">Select flight</p>
-      <button
-        *ngIf="isFlightsPage"
-        mat-flat-button
-        class="flight__edit-btn"
-        (click)="editFlight()"
-      >
+      <button mat-flat-button class="flight__edit-btn" (click)="editFlight()">
         Select
       </button>
     </div>
