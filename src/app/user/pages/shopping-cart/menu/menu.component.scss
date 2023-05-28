@@ -1,0 +1,9 @@
+@use "src/styles.scss" as *;
+
+.menu__icon {
+  color: $neutral30;
+}
+
+.menu__text-red {
+  color: $error;
+}

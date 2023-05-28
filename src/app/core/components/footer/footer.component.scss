@@ -1,0 +1,63 @@
+@use "src/styles.scss" as *;
+
+:host {
+  background: $neutral80;
+}
+
+.footer {
+  height: 92px;
+  width: 100%;
+  flex: 0 0 auto;
+  border-top: 1px solid $secondary40;
+  display: flex;
+  justify-content: center;
+}
+
+.footer__container {
+  width: 1040px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+
+  @media (max-width: $desktop-s) {
+    padding: 0 10px;
+  }
+
+  @media (max-width: 646px) {
+    justify-content: center;
+  }
+
+  @media (max-width: 413px) {
+    flex-direction: column-reverse;
+    row-gap: 16px;
+  }
+
+  .copyright {
+    color: $primary;
+    margin: 0;
+    @extend %body-medium;
+  }
+
+  .payment {
+    display: flex;
+    gap: 24px;
+    user-select: none;
+
+    .payment__text {
+      margin: 0;
+      @extend %body-medium;
+      color: $black;
+
+      @media (max-width: 413px) {
+        display: none;
+      }
+    }
+
+    .payment__icons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+  }
+}

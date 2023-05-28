@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="flight-search">
+    <flight-type
+      [type]="flightType"
+      (flightType)="changeFlightType($event)"
+    ></flight-type>
+    <form [formGroup]="flightSearchForm" (ngSubmit)="onSubmit()">
+      <div class="direction__container">
+        <direction-input
+          [flightSearchForm]="flightSearchForm"
+          label="From"
+          controlName="from"
+          placeholder="Choose departure point"
+          [error]="errors.from"
+        ></direction-input>
+        <direction-input
+          [flightSearchForm]="flightSearchForm"
+          label="Destination"
+          controlName="destination"
+          placeholder="Choose your destination"
+          [error]="errors.destination"
+        ></direction-input>
+        <reverses-button
+          [flightSearchForm]="flightSearchForm"
+        ></reverses-button>
+      </div>
+      <div class="dates-container">
+        <dates
+          [flightSearchForm]="flightSearchForm"
+          [flightType]="flightType"
+          [error]="errors.date"
+        ></dates>
+        <passengers
+          [flightSearchForm]="flightSearchForm"
+          [error]="errors.passengers"
+        ></passengers>
+      </div>
+      <button type="submit" mat-flat-button color="primary" class="flight-btn">
+        Search
+      </button>
+    </form>
+  </div>
+</div>
+<div class="background"></div>

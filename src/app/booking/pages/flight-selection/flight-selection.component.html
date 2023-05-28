@@ -1,0 +1,29 @@
+<div [ngSwitch]="selectStatus$ | async" class="container">
+  <ng-template ngSwitchCase="loading"><loader></loader></ng-template>
+  <ng-template ngSwitchCase="error">
+    <p class="error-message">Something went wrong. Try later</p>
+  </ng-template>
+  <ng-template ngSwitchCase="notSelect">
+    <p class="error-message">Select flight</p>
+  </ng-template>
+  <ng-template ngSwitchCase="success">
+    <section *ngIf="flights$ | async as flights" class="flights">
+      <flight
+        *ngFor="let flight of flights; let i = index"
+        [flight]="flight"
+        [back]="!!i"
+      ></flight>
+      <div class="flight-selection__btns">
+        <button mat-button (click)="backClick()" color="primary">Back</button>
+        <button
+          mat-flat-button
+          [disabled]="selectReady$ | async"
+          (click)="continueClick()"
+          color="primary"
+        >
+          Continue
+        </button>
+      </div>
+    </section>
+  </ng-template>
+</div>

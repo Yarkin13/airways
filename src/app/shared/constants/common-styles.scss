@@ -1,0 +1,199 @@
+// Usage example:
+// 1. Make use/import to your scss file: @use 'src/styles.scss' as *;
+// 2. Use as:
+// .form__error {
+//   @extend %label-small;
+//   color: $error;
+// }
+
+// BREAKPOINTS
+$mobile-s: 320px;
+$mobile-m: 375px;
+$mobile-l: 540px;
+$mobile-xl: 768px;
+$desktop-s: 1024px;
+$desktop-m: 1280px;
+$desktop-l: 1440px;
+$desktop-xl: 1920px;
+
+$mobile-lm: 443.5px;
+$mobile-xll: 557.5px;
+$mobile-ll: 590px;
+$desktop-xs: 936px;
+$desktop-ms: 1050px;
+
+// COLORS
+$primary: #11397e;
+
+$secondary0: #0090bd;
+$secondary10: #7abfd4;
+$secondary40: #d0d9df;
+$secondary50: #e1e5eb;
+$secondary60: #e9edf1;
+$secondary80: #f1f3f6;
+$secondary90: #f4f6f9;
+$secondary100: #fafafa;
+
+$highlight-gradient: linear-gradient(108.75deg, #0090bd 59.91%, #073590 95.36%);
+$highlight-green0: #7f8906;
+$highlight-green30: rgba(127, 137, 6, 0.3);
+$highlight-yellow0: #f1c933;
+$highlight-yellow30: rgba(241, 201, 51, 0.3);
+$red30: rgba(179, 38, 30, 0.3);
+
+$error: #b3261e;
+
+$neutral0: #1c1b1f;
+$neutral10: #49454f;
+$neutral20: #454a53;
+$neutral30: #74767a;
+$neutral40: rgba(116, 118, 122, 0.6);
+$neutral50: rgba(0, 0, 0, 0.25);
+$neutral60: #cecece;
+$neutral70: rgba(116, 118, 122, 0.2);
+$neutral80: #f5f5f5;
+$neutral90: rgba(241, 243, 246, 0.15);
+$neutral100: #ffffff;
+
+$black: #000000;
+
+$shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+
+// TYPOGRAPHY
+
+%roboto-normal {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+}
+
+%roboto-medium {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+}
+
+%roboto-bold {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+}
+
+// title
+%title-large {
+  @extend %roboto-bold;
+  font-size: 24px;
+  line-height: 28px;
+}
+
+%title-medium {
+  @extend %roboto-normal;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+%title-small {
+  @extend %roboto-normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+%title-xsmall {
+  @extend %roboto-normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+}
+
+// subtitle
+%subtitle-large {
+  @extend %roboto-normal;
+  font-size: 30px;
+  line-height: 36px;
+}
+
+%subtitle-medium {
+  @extend %roboto-normal;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+%subtitle-small {
+  @extend %roboto-normal;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+// label
+%label-large {
+  @extend %roboto-normal;
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+%label-medium {
+  @extend %roboto-medium;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+
+%label-small {
+  @extend %roboto-normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+%badge-label {
+  @extend %roboto-medium;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.5px;
+}
+
+// body
+%body-xlarge {
+  @extend %roboto-normal;
+  font-size: 20px;
+  line-height: 32px;
+  letter-spacing: 0.5px;
+}
+
+%body-large {
+  @extend %roboto-normal;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+}
+
+%body-medium {
+  @extend %roboto-normal;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+%body-small {
+  @extend %roboto-normal;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+%body-xsmall {
+  @extend %roboto-normal;
+  font-size: 8px;
+  line-height: 20px;
+}
+
+// button
+%button {
+  @extend %roboto-medium;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}

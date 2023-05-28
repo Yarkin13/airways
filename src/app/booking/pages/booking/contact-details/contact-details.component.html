@@ -1,0 +1,53 @@
+<div class="contacts__wrapper">
+  <form
+    class="contacts__form"
+    [formGroup]="contactDetailsForm"
+    (submit)="onSubmit()"
+  >
+    <mat-form-field
+      class="contacts__input"
+      [ngClass]="{
+        'contacts__input--error': !countryCode?.valid && countryCode?.touched,
+        hideTipWrapper: countryCode?.valid || !countryCode?.touched
+      }"
+    >
+      <mat-label>Country code</mat-label>
+      <mat-select formControlName="countryCode">
+        <mat-option *ngFor="let item of countryCodes" [value]="item.code">{{
+          item.name + ' (' + item.dial_code + ')'
+        }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="countryCode?.invalid"
+        >Please select a country code</mat-error
+      >
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-form-field
+      class="contacts__input"
+      [ngClass]="{
+        'contacts__input--error': !phone?.valid && phone?.touched,
+        hideTipWrapper: phone?.valid || !phone?.touched
+      }"
+    >
+      <mat-label>Mobile phone number</mat-label>
+      <input matInput formControlName="phone" type="number" />
+      <mat-error *ngIf="phone?.invalid">{{ getErrorMessagePhone() }}</mat-error>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-form-field
+      class="contacts__input"
+      [ngClass]="{
+        'contacts__input--error': !email?.valid && email?.touched,
+        hideTipWrapper: email?.valid || !email?.touched
+      }"
+    >
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <mat-error *ngIf="email?.invalid">{{ getErrorMessageEmail() }}</mat-error>
+    </mat-form-field>
+  </form>
+</div>

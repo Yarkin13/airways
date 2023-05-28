@@ -1,0 +1,72 @@
+<mat-form-field
+  *ngIf="flightType === 'roundTrip'; else OneWay"
+  appearance="fill"
+  class="flight-date"
+  [ngClass]="{ errorInput: error }"
+>
+  <mat-label>Dates</mat-label>
+  <mat-date-range-input [rangePicker]="rangePicker" [min]="today">
+    <input
+      matStartDate
+      placeholder="Start date"
+      [formControl]="dateTo"
+      (dateInput)="rangePickerChange()"
+    />
+    <input
+      matEndDate
+      placeholder="End date"
+      [formControl]="dateBack"
+      (dateInput)="rangePickerChange()"
+    />
+  </mat-date-range-input>
+  <mat-hint *ngIf="rangePicker.opened; else errorMessage">
+    {{ dateFormat }} – {{ dateFormat }}
+  </mat-hint>
+  <ng-template #errorMessage>
+    <p *ngIf="error" class="flight-date__error">{{ error }}</p>
+  </ng-template>
+  <mat-datepicker-toggle
+    matIconSuffix
+    [for]="rangePicker"
+  ></mat-datepicker-toggle>
+  <mat-date-range-picker #rangePicker panelClass="flight-date-picker">
+    <mat-date-range-picker-actions>
+      <button mat-button color="primary" matDateRangePickerCancel>
+        Cancel
+      </button>
+      <button mat-button color="primary" matDateRangePickerApply>OK</button>
+    </mat-date-range-picker-actions>
+  </mat-date-range-picker>
+</mat-form-field>
+
+<ng-template #OneWay>
+  <mat-form-field
+    appearance="fill"
+    class="flight-date"
+    [ngClass]="{ errorInput: error }"
+  >
+    <mat-label>Date</mat-label>
+    <input
+      matInput
+      [min]="today"
+      [formControl]="dateTo"
+      [matDatepicker]="picker"
+      (dateInput)="datePickerChange()"
+    />
+    <mat-hint *ngIf="picker.opened; else errorMessage">
+      {{ dateFormat }}
+    </mat-hint>
+    <ng-template #errorMessage>
+      <p *ngIf="error" class="flight-date__error">{{ error }}</p>
+    </ng-template>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker>
+      <mat-datepicker-actions>
+        <button mat-button color="primary" matDateRangePickerCancel>
+          Cancel
+        </button>
+        <button mat-button color="primary" matDateRangePickerApply>OK</button>
+      </mat-datepicker-actions>
+    </mat-datepicker>
+  </mat-form-field>
+</ng-template>

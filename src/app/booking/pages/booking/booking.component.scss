@@ -1,0 +1,129 @@
+@use 'src/styles.scss' as *;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.booking__wrapper {
+  padding: 40px 0 40px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.passengers__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1150px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 22px;
+
+  @media (max-width: $desktop-s) {
+    padding: 10px;
+  }
+}
+
+.passengers__title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.passengers__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.passengers__title-text {
+  color: $primary;
+  @extend %title-large;
+}
+
+.passengers__title-icon {
+  display: flex;
+  align-items: center;
+  color: $primary;
+}
+
+.passengers__description {
+  color: $neutral10;
+  @extend %body-large;
+}
+
+.contacts__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1150px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 22px;
+
+  @media (max-width: $desktop-s) {
+    padding: 10px;
+  }
+}
+
+.contacts__title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contacts__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.contacts__title-text {
+  color: $primary;
+  @extend %title-large;
+}
+
+.contacts__title-icon {
+  display: flex;
+  align-items: center;
+  color: $primary;
+}
+
+.contacts__description {
+  color: $neutral10;
+  @extend %body-large;
+}
+
+.buttons__layout {
+  display: flex;
+
+  max-width: 1150px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 22px;
+  justify-content: center;
+
+  @media (min-width: $mobile-xl) {
+    justify-content: flex-end;
+  }
+
+  @media (max-width: $desktop-s) {
+    padding: 10px;
+  }
+}
+
+.button {
+  height: 60px;
+  @extend %button;
+  width: 126px;
+}
+
+.passengers__passengers-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

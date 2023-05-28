@@ -1,0 +1,20 @@
+<div class="flight-title">
+  <mat-icon
+    fontIcon="flight"
+    class="flight-title__icon"
+    [ngClass]="{ backIcon: back }"
+  ></mat-icon>
+  <p>{{ (flightInfo$ | async)?.from }} to {{ (flightInfo$ | async)?.to }}</p>
+</div>
+
+<p *ngIf="selectFlight$ | async as selectFlight; else notSelect">
+  <dates-slider-content
+    [date]="selectFlight"
+    [back]="back"
+    [isSelect]="true"
+  ></dates-slider-content>
+</p>
+
+<ng-template #notSelect>
+  <dates-slider [dates]="flight" [back]="back"></dates-slider>
+</ng-template>

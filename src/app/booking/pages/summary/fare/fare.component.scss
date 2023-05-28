@@ -1,0 +1,72 @@
+@use "src/styles.scss" as *;
+:host {
+  width: 100%;
+  max-width: 552px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.fare {
+  box-sizing: border-box;
+  background: $neutral100;
+  border: 1px solid $secondary50;
+  box-shadow: $shadow;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 72px 16px 40px;
+    gap: 16px;
+
+    @media (max-width: $mobile-l) {
+      padding: 20px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      @extend %body-large;
+      color: $black;
+    }
+
+    .fare-type-row {
+      font-weight: 700;
+    }
+
+    .fare-row {
+      padding-left: 40px;
+
+      @media (max-width: $mobile-l) {
+        padding-left: 0;
+      }
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 72px 20px 40px;
+
+    @media (max-width: $mobile-l) {
+      padding: 20px;
+    }
+
+    .total-text {
+      @extend %title-medium;
+      font-weight: 700;
+      color: $black;
+    }
+
+    .total-amount {
+      @extend %title-medium;
+      font-weight: 700;
+      color: $primary;
+    }
+  }
+}

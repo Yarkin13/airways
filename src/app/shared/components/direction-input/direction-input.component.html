@@ -1,0 +1,32 @@
+<mat-form-field
+  appearance="fill"
+  class="direction__input"
+  [ngClass]="{ errorInput: error }"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="direction"
+    [matAutocomplete]="auto"
+    class="direction__text"
+    size="{{ direction.value.length || 10 }}"
+  />
+  <span class="direction__span">{{ inputKey }}</span>
+
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    class="direction__options"
+    (optionSelected)="onSelectionChange($event)"
+  >
+    <mat-option
+      *ngFor="let airport of airports"
+      [value]="airport.name + '|' + airport.key"
+    >
+      <p class="direction__title">{{ airport.name }} ({{ airport.key }})</p>
+      <span class="direction__subtitle"
+        >{{ airport.city }}, {{ airport.country }}</span
+      >
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

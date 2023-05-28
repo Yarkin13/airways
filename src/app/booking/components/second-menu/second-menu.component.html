@@ -1,0 +1,62 @@
+<div class="menu container" *ngIf="flight$ | async as flight">
+  <div *ngIf="flight.from; else NotSelect" class="menu__container">
+    <div class="flight-title__container">
+      <p class="flight-title">{{ flight.from }}</p>
+      <img
+        *ngIf="flight.type === 'roundTrip'; else oneWayImg"
+        src="assets/booking/return-trip.svg"
+        alt="return trip"
+      />
+      <ng-template #oneWayImg>
+        <img src="assets/booking/one-way-trip.svg" alt="one way trip" />
+      </ng-template>
+      <p class="flight-title">{{ flight.to }}</p>
+    </div>
+
+    <div class="flight-date__container">
+      <p>{{ flight.type === "roundTrip" ? "Return" : "One Way" }}</p>
+      <p class="dot-separator">•</p>
+      <p *ngIf="flight.dateBack; else oneWayDate">
+        {{
+          (flight.dateTo | date : "dd MMM") +
+            " - " +
+            (flight.dateBack | date : "dd MMM")
+        }}
+      </p>
+      <ng-template #oneWayDate>
+        <p>{{ flight.dateTo | date : "dd MMM" }}</p>
+      </ng-template>
+      <p class="dot-separator">•</p>
+      <div class="person-count__container">
+        <p>{{ +flight.adult + +flight.child + +flight.infant }}</p>
+        <img
+          src="assets/booking/person-icon.svg"
+          alt="avatar"
+          class="person-icon"
+        />
+      </div>
+    </div>
+    <button
+      *ngIf="isFlightsPage"
+      mat-flat-button
+      class="flight__edit-btn"
+      (click)="editFlight()"
+    >
+      Edit
+    </button>
+  </div>
+
+  <ng-template #NotSelect>
+    <div *ngIf="isFlightsPage" class="menu__container">
+      <p class="error-message">Select flight</p>
+      <button mat-flat-button class="flight__edit-btn" (click)="editFlight()">
+        Select
+      </button>
+    </div>
+  </ng-template>
+
+  <app-edit-menu
+    *ngIf="showEditForm && isFlightsPage"
+    (hideForm)="hideEditForm()"
+  ></app-edit-menu>
+</div>

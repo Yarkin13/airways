@@ -1,0 +1,16 @@
+<mat-radio-group
+  color="primary"
+  class="flight-type"
+  value="{{ type }}"
+  (change)="toggleFlightType($event)"
+>
+  <label class="flight-type__label">
+    <mat-radio-button value="roundTrip"></mat-radio-button>
+    Round Trip
+  </label>
+
+  <label class="flight-type__label">
+    <mat-radio-button value="oneWay"></mat-radio-button>
+    One Way
+  </label>
+</mat-radio-group>

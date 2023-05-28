@@ -1,0 +1,93 @@
+@use "src/styles.scss" as *;
+
+.passengers__input {
+  display: block;
+}
+
+.passengers__input .mat-mdc-text-field-wrapper {
+  border-radius: 4px;
+  border: 0.5px solid rgba(116, 118, 122, 0.6);
+  background: $secondary90;
+}
+
+.errorInput .mat-mdc-text-field-wrapper {
+  border-color: red;
+}
+
+.passengers__input .mdc-text-field--focused {
+  border: 0.5px solid $primary;
+}
+
+.passengers__input .mdc-line-ripple {
+  display: none;
+}
+
+.passengers__options {
+  display: flex;
+  padding: 14px 16px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.passengers__detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.passengers__title {
+  margin: 0 !important; //angular material style
+  font-size: 16px;
+  color: $primary;
+}
+
+.disabledTitle {
+  color: $neutral0;
+}
+
+.passengers__subtitle {
+  font-size: 14px;
+  color: $neutral30;
+}
+
+.passengers__count {
+  display: flex;
+  align-items: center;
+}
+
+.passengers__count-btn {
+  width: min-content;
+  height: min-content;
+  padding: 5px;
+  font-size: 16px;
+  color: $neutral30;
+  cursor: pointer;
+}
+
+.disabledBtn {
+  color: $neutral30;
+  cursor: default;
+}
+
+.passengers__count-input {
+  width: 20px;
+  outline: none;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  color: $primary;
+  cursor: default;
+}
+
+.disabledInput {
+  opacity: 0.5;
+}
+
+.none-option {
+  height: 0;
+  min-height: 0;
+}
+
+.passengers__input .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}

@@ -1,0 +1,65 @@
+@use 'src/styles.scss' as *;
+
+.contacts__wrapper {
+  background-color: $neutral100;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 22px;
+  box-shadow: $shadow;
+
+  @media (min-width: $desktop-s) {
+    padding: 32px 44px;
+  }
+}
+
+.contacts__form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: $mobile-xl) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.contacts__input {
+  width: 100%;
+
+  ::ng-deep .mdc-line-ripple::before,
+  ::ng-deep .mdc-line-ripple::after {
+    content: none !important; // disable default border to inputs
+  }
+
+  ::ng-deep .mat-mdc-text-field-wrapper {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+
+  ::ng-deep .mdc-text-field {
+    border-radius: 4px !important;
+    border: 0.5px solid $neutral60;
+    background: $secondary90;
+  }
+
+  ::ng-deep .mat-icon {
+    color: $neutral10;
+  }
+}
+
+.contacts__input--error {
+  ::ng-deep .mdc-text-field {
+    border: 0.5px solid $error;
+  }
+
+  ::ng-deep .mat-icon {
+    color: $error;
+  }
+}
+
+.hideTipWrapper {
+  ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+}

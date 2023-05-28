@@ -1,0 +1,37 @@
+@use "src/styles.scss" as *;
+
+.flight-date {
+  display: block;
+  max-width: 311px;
+  width: 100%;
+}
+
+.flight-date .mat-mdc-text-field-wrapper {
+  border-radius: 4px;
+  border: 0.5px solid rgba(116, 118, 122, 0.6);
+  background: $secondary90;
+}
+
+.errorInput .mat-mdc-text-field-wrapper {
+  border-color: red;
+}
+
+.flight-date__error {
+  color: #f44336;
+}
+
+.flight-date .mdc-text-field--focused {
+  border: 0.5px solid $primary;
+}
+
+.flight-date .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.flight-date .mdc-line-ripple {
+  display: none;
+}
+
+.flight-date-picker .mat-calendar-controls {
+  margin-top: 0 !important; //angular material style
+}

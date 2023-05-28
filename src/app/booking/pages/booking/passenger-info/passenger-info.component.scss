@@ -1,0 +1,154 @@
+@use 'src/styles.scss' as *;
+
+.passenger__wrapper {
+  background-color: $neutral100;
+  border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 16px 22px;
+  box-shadow: $shadow;
+
+  @media (min-width: $desktop-s) {
+    padding: 32px 44px;
+  }
+}
+
+.passenger__title {
+  color: $primary;
+  @extend %title-large;
+}
+
+.passenger__input {
+  width: 100%;
+
+  ::ng-deep .mat-icon {
+    color: $neutral10;
+  }
+
+  ::ng-deep .mdc-line-ripple::before,
+  ::ng-deep .mdc-line-ripple::after {
+    content: none !important; // disable default border to inputs
+  }
+
+  ::ng-deep .mdc-text-field {
+    border-radius: 4px !important;
+    border: 0.5px solid $neutral60;
+    background: $secondary90;
+  }
+}
+
+.passenger__input--error {
+  ::ng-deep .mdc-text-field {
+    border: 0.5px solid $error;
+  }
+
+  ::ng-deep .mat-icon {
+    color: $error;
+  }
+}
+
+.passenger__info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: $mobile-l) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: $desktop-s) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.passenger__tabs {
+  ::ng-deep .mat-mdc-tab-labels {
+    border: 1px solid $neutral30;
+    margin-right: 0;
+  }
+
+  ::ng-deep .mdc-tab--active {
+    &:first-child,
+    &:last-child {
+      border: none !important;
+    }
+  }
+
+  ::ng-deep .mat-mdc-tab {
+    height: 56px;
+    width: 50%;
+
+    &:first-child {
+      border-right: 1px solid $neutral30 !important;
+      border-radius: 4px 0 0 4px;
+    }
+  }
+
+  ::ng-deep .mat-icon {
+    margin-right: 8px;
+  }
+
+  ::ng-deep .mdc-tab-indicator__content--underline {
+    border: none;
+  }
+
+  ::ng-deep .mat-mdc-tab-labels {
+    border: 0.5px solid $neutral60;
+    border-radius: 4px;
+  }
+
+  ::ng-deep .mat-mdc-tab {
+    border-radius: 4px;
+  }
+}
+
+::ng-deep .mdc-tooltip__surface {
+  background: $neutral100 !important;
+  box-shadow: $shadow !important;
+  border-radius: 8px;
+  color: $black !important;
+  white-space: break-spaces;
+  text-align: left;
+  padding: 16px 24px !important;
+  @extend %label-small;
+}
+
+::ng-deep .mdc-switch__track {
+  height: 20px !important;
+  border-radius: 100px !important;
+}
+
+.passenger__toggle {
+  display: flex;
+  align-self: center;
+  margin-left: 10px;
+}
+
+.passenger__toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.passenger__toggle-text {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+
+  @extend %label-small;
+}
+
+.button {
+  height: 60px;
+  @extend %button;
+}
+
+.button-back {
+  width: 126px;
+}
+
+.button-buy {
+  width: 126px;
+}

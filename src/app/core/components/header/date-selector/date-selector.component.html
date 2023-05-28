@@ -1,0 +1,13 @@
+<mat-form-field class="form-field-date" appearance="fill">
+  <mat-select
+    class="select-date"
+    [value]="dateSelected$ | async"
+    (selectionChange)="handleDateChange($event)"
+    [ngClass]="{ colorDark: !isMainPage || isOpaque}"
+  >
+    <mat-option value="MM/DD/YYYY">MM/DD/YYYY</mat-option>
+    <mat-option value="DD/MM/YYYY">DD/MM/YYYY</mat-option>
+    <mat-option value="YYYY/DD/MM">YYYY/DD/MM</mat-option>
+    <mat-option value="YYYY/MM/DD">YYYY/MM/DD</mat-option>
+  </mat-select>
+</mat-form-field>

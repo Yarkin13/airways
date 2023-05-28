@@ -1,0 +1,141 @@
+<div class="passenger__wrapper">
+  <div class="passenger__title">{{ passengerIdx }}. {{ passengerType }}</div>
+  <form class="passenger__info" [formGroup]="bookingForm" (submit)="onSubmit()">
+    <mat-form-field
+      class="passenger__input"
+      [ngClass]="{
+        'passenger__input--error': !firstName?.valid && firstName?.touched,
+        hideTipWrapper: firstName?.valid || !firstName?.touched
+      }"
+    >
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName" />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        matTooltip="Add name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+      >
+        <mat-icon
+          [color]="!firstName?.valid && firstName?.touched ? 'warn' : ''"
+          >info</mat-icon
+        >
+      </button>
+      <mat-error *ngIf="firstName?.invalid">{{
+        getErrorMessageFirstName()
+      }}</mat-error>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-form-field
+      class="passenger__input"
+      [ngClass]="{
+        'passenger__input--error': !lastName?.valid && lastName?.touched,
+        hideTipWrapper: lastName?.valid || !lastName?.touched
+      }"
+    >
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName" />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        matTooltip="Add name as it is written on their documents (passport or ID). Do not use any accents or special characters. Do not use a nickname."
+      >
+        <mat-icon [color]="!lastName?.valid && lastName?.touched ? 'warn' : ''"
+          >info</mat-icon
+        >
+      </button>
+      <mat-error *ngIf="lastName?.invalid">{{
+        getErrorMessageLastName()
+      }}</mat-error>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-tab-group
+      animationDuration="0ms"
+      class="passenger__tabs"
+      (selectedTabChange)="selectedTabChangeGender($event)"
+    >
+      <mat-tab label="Male"
+        ><ng-template mat-tab-label>
+          <mat-icon>{{ gender === 'Male' ? 'done' : '' }}</mat-icon>
+          Male
+        </ng-template></mat-tab
+      >
+      <mat-tab label="Female"
+        ><ng-template mat-tab-label>
+          <mat-icon>{{ gender === 'Female' ? 'done' : '' }}</mat-icon>
+          Female
+        </ng-template></mat-tab
+      >
+    </mat-tab-group>
+
+    <!--  -->
+
+    <mat-form-field
+      class="passenger__input"
+      [ngClass]="{
+        'passenger__input--error':
+          !dateBirthDay?.valid && dateBirthDay?.touched,
+        hideTipWrapper: dateBirthDay?.valid || !dateBirthDay?.touched
+      }"
+    >
+      <mat-label>Date of birth</mat-label>
+      <input
+        formControlName="dateBirthDay"
+        matInput
+        [matDatepicker]="picker"
+        [max]="maxDate"
+        [min]="minDate"
+      />
+      <mat-error *ngIf="dateBirthDay?.invalid">
+        {{ getErrorMessageBirthday() }}
+      </mat-error>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!--  -->
+
+    <mat-form-field
+      *ngIf="needCheckedInBaggage"
+      class="passenger__input"
+      [ngClass]="{
+        'passenger__input--error':
+          !baggageWeight?.valid && baggageWeight?.touched,
+        hideTipWrapper: baggageWeight?.valid || !baggageWeight?.touched
+      }"
+    >
+      <mat-label>Baggage weight kg</mat-label>
+      <input matInput formControlName="baggageWeight" type="number" />
+      <button mat-icon-button matSuffix type="button"></button>
+      <mat-error *ngIf="baggageWeight?.invalid"
+        >Can register from 10 to 50 kg</mat-error
+      >
+    </mat-form-field>
+  </form>
+  <div class="passenger__toggle-wrapper">
+    <mat-slide-toggle
+      color="primary"
+      [(ngModel)]="needCheckedInBaggage"
+      *ngIf="availableCheckedInBaggage"
+      ><div class="passenger__toggle">
+        <mat-icon class="passenger__toggle-icon">shopping_basket</mat-icon>
+        <div class="passenger__toggle-text">Need checked-in baggage?</div>
+      </div></mat-slide-toggle
+    >
+
+    <mat-slide-toggle color="primary" [(ngModel)]="needSpecAssist"
+      ><div class="passenger__toggle">
+        <mat-icon class="passenger__toggle-icon">accessible</mat-icon>
+        <div class="passenger__toggle-text">Need special assistance?</div>
+      </div></mat-slide-toggle
+    >
+  </div>
+</div>

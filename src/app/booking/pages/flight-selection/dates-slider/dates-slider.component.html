@@ -1,0 +1,15 @@
+<mat-tab-group class="slider" scrollToCenter selectedIndex="5">
+  <mat-tab
+    *ngFor="let date of dates; let i = index"
+    disabled="{{ !date.price }}"
+  >
+    <ng-template mat-tab-label>
+      <dates-slider-tab [date]="date"></dates-slider-tab>
+    </ng-template>
+    <dates-slider-content
+      *ngIf="date.price"
+      [date]="date"
+      [back]="back"
+    ></dates-slider-content>
+  </mat-tab>
+</mat-tab-group>

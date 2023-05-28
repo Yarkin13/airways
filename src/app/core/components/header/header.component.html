@@ -1,0 +1,81 @@
+<header class="header" [ngClass]="{ light: !isMainPage || isOpaque }">
+  <div
+    class="header__container"
+    [ngClass]="{ media: !isMainPage && !isUserPage }"
+  >
+    <a routerLink="/booking/main" class="logo-link">
+      <img src="assets/header/logo.svg" alt="airways logo" />
+    </a>
+    <div class="menu" [ngClass]="{ smallGap: !isMainPage && !isUserPage }">
+      <p class="menu__text" *ngIf="isMainPage">Book flights</p>
+
+      <app-stepper
+        *ngIf="!isMainPage && !isUserPage"
+        [currentStep]="currentStep"
+      ></app-stepper>
+      <app-date-selector
+        [isMainPage]="isMainPage"
+        [isOpaque]="isOpaque"
+      ></app-date-selector>
+      <app-currency-selector
+        [isMainPage]="isMainPage"
+        [isOpaque]="isOpaque"
+      ></app-currency-selector>
+
+      <div class="user">
+        <ng-template #signin>
+          <button
+            mat-flat-button
+            class="user__sign-in"
+            [ngClass]="{ colorDark: !isMainPage }"
+            (click)="modal.openAuthModal()"
+          >
+            <mat-icon>perm_identity</mat-icon>
+            Sign in
+          </button>
+        </ng-template>
+
+        <button
+          *ngIf="auth.userIsAuth$ | async; else signin"
+          mat-icon-button
+          class="user__acc"
+          [ngClass]="{ colorDark: !isMainPage }"
+          [matMenuTriggerFor]="menu"
+        >
+          <mat-icon class="icon">perm_identity</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <div class="user-menu__text-container">
+            <mat-icon>account_circle</mat-icon>
+            <span>{{ user.firstName }} {{ user.lastName }}</span>
+          </div>
+
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="redirectToAccount()">
+            <mat-icon>dialpad</mat-icon>
+            <span>My Account</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Sign out</span>
+          </button>
+        </mat-menu>
+
+        <div
+          [matBadge]="cartCount"
+          matBadgeSize="small"
+          [matBadgeHidden]="badgeHidden"
+          (click)="redirectToCart()"
+        >
+          <img
+            src="assets/header/cart.svg"
+            alt="shopping cart"
+            class="user__cart"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<ng-content *ngIf="!isMainPage && !isUserPage"></ng-content>

@@ -1,0 +1,46 @@
+<mat-form-field
+  appearance="fill"
+  class="passengers__input"
+  [formGroup]="flightSearchForm"
+  [ngClass]="{ errorInput: error }"
+>
+  <mat-label>Passengers</mat-label>
+  <mat-select value="{{ passengersValue ? 'showOption' : '' }}">
+    <div class="passengers__options">
+      <div *ngFor="let pas of passengersType" class="passengers__detail">
+        <div class="passengers__text">
+          <p
+            class="passengers__title"
+            [ngClass]="{ disabledTitle: passengersCount[pas.name] === 0 }"
+          >
+            {{ pas.name }}
+          </p>
+          <span class="passengers__subtitle">{{ pas.age }}</span>
+        </div>
+        <div class="passengers__count">
+          <mat-icon
+            fontIcon="remove"
+            class="passengers__count-btn"
+            [ngClass]="{ disabledBtn: passengersCount[pas.name] === 0 }"
+            (click)="decrease(pas.id)"
+          ></mat-icon>
+          <input
+            [readonly]="true"
+            formControlName="{{ pas.id }}"
+            class="passengers__count-input"
+            [ngClass]="{ disabledInput: passengersCount[pas.name] === 0 }"
+          />
+          <mat-icon
+            fontIcon="add"
+            class="passengers__count-btn"
+            (click)="increase(pas.id)"
+          >
+          </mat-icon>
+        </div>
+      </div>
+    </div>
+    <mat-option class="none-option" value="showOption">
+      {{ passengersValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

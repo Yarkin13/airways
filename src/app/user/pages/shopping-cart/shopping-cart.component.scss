@@ -1,0 +1,217 @@
+@use "src/styles.scss" as *;
+
+:host {
+  display: flex;
+  width: 100%;
+  max-width: 1128px;
+  margin: 0 auto;
+  padding-left: 22px;
+  box-sizing: border-box;
+
+  @media (max-width: $desktop-s) {
+    padding: 0 10px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.shopping-cart__container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+  background-color: $neutral100;
+  box-shadow: $shadow;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding-bottom: 5px;
+
+  @media (max-width: $mobile-ll) {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    overflow-x: scroll;
+  }
+}
+
+.title__container {
+  padding: 33px 0 27px 31px;
+
+  .title {
+    color: $primary;
+    @extend %title-large;
+    font-weight: 700;
+
+    @media (max-width: $mobile-xl) {
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.empty-cart__container{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  padding-top: 60px;
+  padding-bottom: 120px;
+
+  .empty-cart__text {
+    @extend %title-medium;
+    font-weight: 500;
+  }
+
+  .empty-cart__button {
+    @extend %button;
+    width: 208px;
+    height: 40px;
+  }
+}
+
+.table {
+  padding: 0 16px;
+
+  @media (max-width: $mobile-xl) {
+    padding: 0 8px;
+  }
+
+  .mat-column-select {
+    padding-right: 8px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 0 4px;
+    }
+  }
+
+  .mat-column-passengers,
+  .mat-column-number,
+  .mat-column-flight,
+  .mat-column-tripType,
+  .mat-column-dateTime,
+  .mat-column-price {
+    padding: 20px 14px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 15px 8px;
+    }
+  }
+
+  .mat-column-number {
+    color: $secondary0;
+  }
+
+  .mat-column-price {
+    color: $highlight-green0;
+  }
+
+  .table__header th {
+    background: $neutral80;
+    @extend %subtitle-medium;
+    font-weight: 700;
+    font-size: 18px;
+    color: $black;
+    user-select: none;
+  }
+
+  .table__row td {
+    @extend %body-xlarge;
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .table__footer-text {
+    @extend %subtitle-medium;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: right;
+  }
+
+  .table__footer td,
+  .table__footer-second td {
+    padding: 38px 14px 38px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 20px 8px;
+    }
+  }
+
+  .table__footer-second td {
+    padding: 38px 14px 20px;
+
+    @media (max-width: $mobile-xl) {
+      padding: 20px 8px 10px;
+    }
+  }
+
+  .table__footer td {
+    border-top: 1px solid $secondary50;
+    border-bottom: 1px solid $secondary50;
+  }
+
+  .table__footer-price {
+    @extend %subtitle-large;
+    font-weight: 700;
+    font-size: 26px;
+    background: linear-gradient(90deg, #11397e 0%, #005abc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .selected__text {
+    @extend %body-large;
+    color: $neutral30;
+  }
+
+  .table__footer-second .payment__btn-cell,
+  .table__footer-second .selected__btn-cell {
+    padding: 15px 0 20px;
+  }
+
+  .payment__btn {
+    height: 60px;
+    @extend %button;
+    width: 126px;
+  }
+
+  .table__cell-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .new-trip__btn {
+    color: $primary;
+    @extend %button;
+    background: $secondary90;
+    height: 28px;
+    padding: 0 8px;
+  }
+
+  @media (max-width: $mobile-xl) {
+    .table__row td,
+    .table__header th,
+    .selected__text,
+    .table__footer-text, 
+    .new-trip__btn {
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: 0.25px;
+    }
+
+    .table__footer-price {
+      font-size: 20px;
+      line-height: 20px;
+    }
+
+    .title {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+    }
+  }
+}

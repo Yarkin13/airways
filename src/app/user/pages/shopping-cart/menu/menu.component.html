@@ -1,0 +1,18 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+  (click)="$event.stopPropagation()"
+>
+  <mat-icon class="menu__icon">more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu" yPosition="below">
+  <button mat-menu-item (click)="onEdit()">
+    <mat-icon>edit</mat-icon>
+    <span>Edit</span>
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="onDelete()">
+    <mat-icon class="menu__text-red">delete_outline</mat-icon>
+    <span class="menu__text-red">Delete</span>
+  </button>
+</mat-menu>

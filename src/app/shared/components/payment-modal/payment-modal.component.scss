@@ -1,0 +1,25 @@
+@use "src/styles.scss" as *;
+
+p {
+  margin: 0;
+}
+
+.amount__container {
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .amount__text {
+    display: flex;
+    justify-content: space-between;
+    @extend %body-large;
+  }
+}
+
+.buttons__container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 0 24px 24px;
+}
